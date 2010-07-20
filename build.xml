@@ -38,13 +38,18 @@
 		Manages dependencies for the Quizzical system.
 	</description>
 
+	<!-- Locations of project directories -->
 	<property name="packages" location="packages" />
 	<property name="build" location="build" />
 	<property name="source" location="source" />
 
+	<!-- Versions of dependencies -->
+	<property name="v_ci" value="1.7.2" /> 		<!-- CodeIgniter -->
+	<property name="v_dwoo" value="1-1-1" />	<!-- Dwoo Templates -->
+
 	<target name="fetch">
 		<!-- Dwoo Templates -->
-		<get src="http://dwoo.org/download/dwoo-v1-1-1/download/0"
+		<get src="http://dwoo.org/download/dwoo-v${v_dwoo}/download/0"
 			 dest="${packages}/dwoo.tar.gz" />
 
 		<gunzip src="${packages}/dwoo.tar.gz"
@@ -52,7 +57,7 @@
 		<untar src="${packages}/dwoo.tar" dest="${packages}/dwoo" />
 
 		<!-- CodeIgniter -->
-		<get src="http://codeigniter.com/download.php"
+		<get src="http://www.codeigniter.com/download_files/CodeIgniter_${v_ci}.zip"
 			 dest="${packages}/codeigniter.zip" />
 
 		<unzip src="${packages}/codeigniter.zip"
@@ -70,7 +75,7 @@
 	<target name="build">
 		<!-- CodeIgniter -->
 		<copy todir="${build}">
-			<fileset dir="${packages}/codeigniter/CodeIgniter_1.7.2">
+			<fileset dir="${packages}/codeigniter/CodeIgniter_${v_ci}">
 				<include name="index.php" />
 				<include name="license.txt" />
 				<include name="system/**/*" />
