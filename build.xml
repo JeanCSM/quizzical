@@ -68,12 +68,6 @@
 	</target>
 
 	<target name="build">
-		<copy todir="${build}">
-			<fileset dir="${source}"
-				 includes="**/*"
-				 excludes="README.txt" />
-		</copy>
-
 		<!-- CodeIgniter -->
 		<copy todir="${build}">
 			<fileset dir="${packages}/codeigniter/CodeIgniter_1.7.2">
@@ -96,6 +90,13 @@
 				<include name="config/**" />
 				<include name="libraries/**" />
 			</fileset>
+		</copy>
+
+		<!-- Quizzical -->
+		<copy todir="${build}">
+			<fileset dir="${source}"
+				 includes="**/*"
+				 excludes="README.txt" />
 		</copy>
 	</target>
 
