@@ -1,0 +1,540 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Quizzical.
+ *
+ * The Initial Developer of the Original Code is Jonathan Wilde.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+/*
+ * TEXT
+ * Defines the styles for font styles for the page
+ */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #666;
+	line-height: 120%;
+}
+
+a {
+	text-decoration: none;
+	color: #3F6A8B;
+	font-weight: bold;
+}
+
+h1, h2, h3 {
+	margin: 0 0 20px 0;
+}
+
+h1, h1 a {
+	font-size: 25px;
+	color: #3F6A8B;
+	text-shadow: 0px 1px 0px #fff;
+	font-weight: normal;
+}
+
+h2, h2 a {
+	font-size: 20px;
+	font-weight: normal;
+	color: #333;
+}
+
+h3, h3 a {
+	font-size: 18px;
+	font-weight: normal;
+	color: #3F6A8B;
+}
+
+p {
+	color: #666;
+	line-height: 150%;
+	margin-bottom: 10px;
+}
+
+.align-left {
+	float: left;
+}
+
+.align-right {
+	float: right;
+}
+
+table {
+	width: 100%;
+	margin-bottom:  20px;
+}
+
+	table td {
+		padding: 10px;
+	}
+
+	table th {
+		padding: 6px 10px;
+		border-bottom: 1px solid #6FA5FF;
+		text-align: left;
+		color: #3F6A8B;
+		font-size: 15px;
+		font-weight: normal;
+	}
+
+		table tbody tr:nth-child(even) td {
+			background: #E0ECFF;
+		}
+
+/*
+ * FORMS
+ * Defines styling for forms and their related components, such as
+ * informational messages.
+ */
+
+.message, .error, .warning {
+	font-size: 15px;
+	padding: 17px;
+	margin: 0 0 30px 0;
+}
+
+.message {
+	color: #3F6A8B;
+	background: #E0ECFF;
+	border: 1px solid #F4F8FF;
+	outline: 1px solid #ABCAFF;
+}
+
+.error {
+	color: #7E0E0E;
+	background: #FFCECE;
+	border: 1px solid #FFDDDD;
+	outline: 1px solid #E47676;
+}
+
+label {
+	font-size: 12px;
+	color: #3F6A8B;
+	width: 65px;
+	float: left;
+	text-align: right;
+	margin: 0 20px 0 0;
+	padding: 10px 0 0;
+	line-height: 120%;
+}
+
+	label.two {
+		margin-top: -7px;
+	}
+
+br {
+	clear: left;
+}
+
+input.text, textarea, .field-text, select {
+	padding: 7px;
+	background: #E0ECFF url(../images/qz-input.png) repeat-x top center;
+	border: 1px solid #A5C9FF;
+	width: 250px;
+	margin: 0 0 15px 0;
+}
+
+	.field-text {
+		background: transparent none;
+		border: 0;
+		margin: 0;
+		padding: 8px 0 0;
+		font-weight: bold;
+	}
+
+	input.text:focus, textarea:focus {
+		border-color: #6FA5FF;
+	}
+
+	.text-aside {
+		width: 200px !important;
+	}
+
+		textarea.text-aside {
+			height: 150px;
+		}
+
+	.text-small {
+		width: 30px !important;
+	}
+
+	.extra {
+		margin: 0 0 0 80px !important;
+		display: block;
+	}
+
+.button {
+	outline: 1px solid #81B0FF;
+	border: 1px solid #BED7FF;
+	background: #C0D7FF url(../images/qz-button.png) repeat-x bottom center;
+	font-weight: bold;
+	color: #3F6A8B;
+	text-shadow: 0px 1px 0px #fff;
+	padding: 5px 15px;
+	margin: 10px 0;
+	display: block;
+}
+
+	.button:active {
+		background: #A9CAFF none;
+	}
+
+input.checkbox {
+	margin: 0 0 15px;
+}
+
+label.checkbox {
+	padding: 0;
+}
+
+span.details {
+	color: #999999;
+	display: block;
+	margin: -5px 0 15px 85px;
+}
+
+/*
+ * SITE
+ * Defines skin for the general site components
+ */
+
+.header {
+	border-bottom: 1px solid #6FA5FF;
+	background: #C3D9FF url(../images/qz-header.png) repeat-x bottom center;
+	padding: 24px 0;
+	margin: 0 0 30px 0;
+}
+
+	.header h1 {
+		margin: 0;
+		float: left;
+	}
+
+.user-bar {
+	float: right;
+}
+
+	.user-bar li {
+		float: left;
+		list-style: none;
+		margin: 0 0 0 25px;
+	}
+
+		.user-bar li a {
+			color: #3F6A8B;
+			text-shadow: 0px 1px 0px #fff;
+			font-weight: normal;
+			font-size: 15px;
+		}
+
+.aside {
+	border: 1px solid #ABCAFF;
+	width: 173px;
+}
+
+	.aside h4 {
+		color: #3F6A8B;
+		text-shadow: 0px 1px 0px #fff;
+		font-weight: normal;
+		font-size: 15px;
+		border: 1px solid #CDE0FF;
+		outline: 1px solid #83B1FF;
+		padding: 6px 10px;
+		background: #ABCBFF url(../images/qz-module-header.png) repeat-x top center;
+	}
+
+	.aside .aside-content {
+		background: #E0ECFF;
+	}
+
+		.aside .aside-content p {
+			margin: 0;
+		}
+
+		.aside .aside-row {
+			padding: 10px;
+		}
+
+			.aside .aside-row:nth-child(even) {
+				background: #CEE0FF;
+			}
+
+		.aside .more {
+			text-align: center;
+		}
+
+			.aside .more a {
+				font-weight: normal;
+				text-shadow: 0px 1px 0px #fff;
+			}
+
+	.aside p {
+		padding: 10px;
+	}
+
+.footer {
+	font-size: 12px;
+	color: #999;
+	padding: 30px 0;
+}
+
+/*
+ * ADMIN
+ * Defines styling for the admin section of the site.
+ */
+
+.add {
+	float: right;
+}
+
+	.add a {
+		margin: -5px 0 0;
+	}
+
+.navigation {
+	background: #fff url(../images/qz-admin-nav-bg.png) repeat-x center top;
+	margin: 0 0 10px 0;
+}
+
+	.navigation li {
+		list-style-type: none;
+		float: left;
+		margin: 0 0 20px 0;
+	}
+
+		.navigation li a {
+			padding: 5px 15px;
+			display: block;
+			font-weight: bold;
+			color: #3F6A8B;
+			text-shadow: 0px 1px 0px #fff;
+		}
+
+			.navigation li.selected a {
+				background: #DBE9FF url(../images/qz-section-selected-bg.png) repeat-x bottom center;
+				border: 1px solid #D9E7FF;
+				outline: 1px solid #96BDFF;
+			}
+
+		.navigation li .pointer {
+			height: 9px;
+			display: block;
+		}
+
+			.navigation li.selected .pointer {
+				background: transparent url(../images/qz-section-selected-arrow.png) no-repeat center top;
+				position: relative;
+				top: -1px;
+			}
+
+#editor {
+	margin-bottom: 20px;
+}
+
+	.add-question {
+		background: transparent url(../images/add.png) no-repeat left center;
+		padding: 0 0 0 20px;
+	}
+
+	.question {
+		padding: 0 0 20px 0;
+		margin: 4px 0 20px 20px;
+		border-bottom: 1px solid #A5C9FF;
+		list-style: decimal;
+		line-height: 180%;
+	}
+
+		.question:last-child {
+			border: 0 none;
+		}
+
+		.question > p {
+			margin-bottom: 10px;
+		}
+
+		.edit, .delete {
+			float: right;
+			margin: 0 0 0 20px;
+			text-transform: lowercase;
+			opacity: 0.4;
+		}
+
+			*:hover > .edit, *:hover > .delete {
+				opacity: 1;
+			}
+
+		.question .choices {
+			padding: 0 0 0 20px;
+			list-style: none;
+		}
+
+			.question .choices .answer {
+				list-style-image: url(../images/tick.png);
+			}
+
+tr .action a, .field-text a {
+	text-transform: lowercase;
+	opacity: 0.4;
+}
+
+	tr:hover .action a, tr .action a:hover, .field-text:hover a, .field-text a:hover {
+		opacity: 1;
+	}
+
+tr .action {
+	text-align: center;
+}
+
+.submit-or-cancel, .save-or-delete {
+	position: relative;
+	top: 17px;
+	display: block;
+}
+
+	.submit-or-cancel input, .save-or-delete input {
+		float: left;
+		position: relative;
+		top: -17px;
+		margin-right: 10px;
+	}
+
+.quiz-summary {
+	padding: 15px 0 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #A5C9FF;
+}
+
+	.quiz-summary:last-child {
+		border: 0 none;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.quiz-date {
+		color: #999;
+		font-size: 18px;
+	}
+
+/*
+ * QUIZ
+ * Defines the styling for the take a quiz and quiz results pages.
+ */
+
+.score {
+	font-size: 60px;
+	margin-top: 55px;
+	color: #BFD6FF;
+}
+
+.results-choices {
+	padding-left: 20px;
+	list-style: none;
+}
+
+	.results-choices li.result-correct {
+		list-style-image: url(../images/tick.png);
+		color: #2C8F39;
+	}
+
+	.results-choices li.result-incorrect {
+		list-style-image: url(../images/cross.png);
+		color: #8F2C2C;
+	}
+
+.take-it-button {
+	float: right;
+	margin-top: 3px;
+}
+
+.confirm-overlay {
+	background: #000;
+	opacity: 0.56;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+}
+
+.confirm {
+	background: #fff;
+	width: 450px;
+	height: 350px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -175px 0 0 -225px;
+	display: none;
+}
+
+	.confirm > * {
+		margin-left: 20px;
+		margin-right: 20px;
+		line-height: 120%;
+	}
+
+	.confirm h2 {
+		padding-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.confirm h3 {
+		color: #1B2E3D;
+		font-size: 15px;
+	}
+
+	.confirm .confirm-incomplete {
+		height: 150px;
+		margin-bottom: 20px;
+		background: #E0ECFF;
+		border: 1px solid #ABCAFF;
+		overflow: auto;
+	}
+
+		.confirm .confirm-incomplete .incomplete-row  {
+			padding: 10px 15px;
+		}
+
+			.confirm .confirm-incomplete .incomplete-row:nth-child(even) {
+				background: #fff;
+			}
+
+	.confirm .go-back-or-submit a {
+		float: left;
+		padding: 5px 15px;
+		margin: 0;
+		display: block;
+	}
+
+.login-now a {
+	float: left;
+}
