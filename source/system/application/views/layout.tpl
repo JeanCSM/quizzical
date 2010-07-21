@@ -55,7 +55,20 @@
 			<div class="grid_12">
 				<h1><a href="{$url_base}">{$title_site}</a></h1>
 
-				{$user}
+				{block "nav"}
+				<ul class="user-bar">
+					{if powers_can('view_admin_section')}
+					<li><a href="{$url_base}admin">Admin</a></li>
+					{/if}
+
+					{if $is_authenticated}
+					<li><a href="{$url_base}account">Account</a></li>
+					<li><a href="{$url_base}account/logout">Log Out</a></li>
+					{else}
+					<li><a href="{$url_base}account/login">Log In</a></li>
+					{/if}
+				</ul>
+				{/block}
 
 				<div class="clear">&nbsp;</div>
 			</div>
