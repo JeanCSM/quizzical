@@ -86,7 +86,7 @@
 
 	<div class="footer container_12">
 		<div class="grid_12">
-			Powered by Quizzical v2.5.
+			Powered by Quizzical v{$version}.
 		</div>
 		<div class="clear">&nbsp;</div>
 	</div>
