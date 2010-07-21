@@ -40,14 +40,14 @@
 	<h2>Quizzes to Take</h2>
 
 	{foreach $quizzes quiz}
-	<h3><a href="{$site_url}quiz/take/{$quiz.id}">
+	<h3><a href="{$site_url}/quiz/take/{$quiz.id}">
 		{$quiz.title|escape}
 	</a></h3>
 
 	<p>{$quiz.summary|escape|nl2br}</p>
 
 	<div class="take-it-button">
-		<a href="{$site_url}quiz/take/{$quiz.id}">Take It</a>
+		<a href="{$site_url}/quiz/take/{$quiz.id}">Take It</a>
 	</div>
 
 	<p>
@@ -75,7 +75,7 @@
 		<div class="aside-content">
 			{foreach $results result}
 			<div class="aside-row">
-				<a href="{$site_url}quiz/result/{$result.id}">
+				<a href="{$site_url}/quiz/result/{$result.id}">
 					{$result.title} &mdash;
 					{percentage($result.correct, $result.total)}%
 				</a>
@@ -86,7 +86,7 @@
 
 			{if isset($results)}
 			<div class="aside-row more">
-				<a href="{$site_url}quiz/results">See Full List</a>
+				<a href="{$site_url}/quiz/results">See Full List</a>
 			</div>
 			{/if}
 		</div>

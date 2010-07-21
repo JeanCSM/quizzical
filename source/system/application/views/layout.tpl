@@ -63,14 +63,14 @@
 				{block "nav"}
 				<ul class="user-bar">
 					{if allowed_to('view_admin_section')}
-					<li><a href="{$site_url}admin">Admin</a></li>
+					<li><a href="{$site_url}/admin">Admin</a></li>
 					{/if}
 
 					{if $is_logged_in}
-					<li><a href="{$site_url}account">Account</a></li>
-					<li><a href="{$site_url}account/logout">Log Out</a></li>
+					<li><a href="{$site_url}/account">Account</a></li>
+					<li><a href="{$site_url}/account/logout">Log Out</a></li>
 					{else}
-					<li><a href="{$site_url}account/login">Log In</a></li>
+					<li><a href="{$site_url}/account/login">Log In</a></li>
 					{/if}
 				</ul>
 				{/block}

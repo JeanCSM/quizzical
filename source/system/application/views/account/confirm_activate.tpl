@@ -47,7 +47,7 @@
 	</div>
 
 	<div class="login-now">
-		<a href="{$site_url}account/login" class="button">Log In</a>
+		<a href="{$site_url}/account/login" class="button">Log In</a>
 	</div>
 	{else}
 	<h2>Sorry!</h2>
