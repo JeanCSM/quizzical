@@ -45,7 +45,12 @@
 	{/if}
 
 	{block "styles"}
-
+	<link rel="stylesheet" type="text/css"
+		 href="{$base_url}assets/styles/reset.css" />
+	<link rel="stylesheet" type="text/css"
+		 href="{$base_url}assets/styles/grid.css" />
+	<link rel="stylesheet" type="text/css"
+		 href="{$base_url}assets/styles/skin.css" />
 	{/block}
 </head>
 
@@ -61,7 +66,7 @@
 					<li><a href="{$site_url}admin">Admin</a></li>
 					{/if}
 
-					{if $is_authenticated}
+					{if $is_logged_in}
 					<li><a href="{$site_url}account">Account</a></li>
 					<li><a href="{$site_url}account/logout">Log Out</a></li>
 					{else}
