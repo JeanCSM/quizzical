@@ -1,4 +1,6 @@
-{* ***** BEGIN LICENSE BLOCK *****
+<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+
+/* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
  * The contents of this file are subject to the Mozilla Public License Version
@@ -14,7 +16,7 @@
  * The Original Code is Quizzical.
  *
  * The Initial Developer of the Original Code is Jonathan Wilde.
- * Portions created by the Initial Developer are Copyright (C) 2009 - 2010
+ * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -31,24 +33,12 @@
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
- * ***** END LICENSE BLOCK ***** *}
+ * ***** END LICENSE BLOCK ***** */
 
-<form method="post" action="{$site_url}account/register">
-	<label for="name" class="two">First &amp; Last Name</label>
-	<input type="text" class="text" name="name" value="{form_value('name')}" />
-	<br />
+function Dwoo_Plugin_form_value (Dwoo $dwoo, $name, $default='') {
+	return set_value($name, $default);
+}
 
-	<label for="email">Email</label>
-	<input type="text" class="text" name="email" value="{form_value('name')}" />
-	<br />
-
-	<label for="password">Password</label>
-	<input type="password" class="text" name="password" />
-	<br />
-
-	<label for="password" class="two">Password (Again)</label>
-	<input type="password" class="text" name="password_again" />
-	<br />
-
-	<input type="submit" class="button" value="Register" />
-</form>
+function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $power) {
+	return false; // TODO: hook this in to the powers library
+}
