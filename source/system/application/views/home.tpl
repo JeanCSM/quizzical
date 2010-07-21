@@ -47,12 +47,12 @@
 
 <div class="login grid_6">
 	<h3>Log In</h3>
-	{include('account/login_form')}
+	{include('account/form_login.tpl')}
 </div>
 
 <div class="logout grid_6">
 	<h3>Register</h3>
-	{include('account/register_form')}
+	{include('account/form_register.tpl')}
 </div>
 <div class="clear">&nbsp;</div>
 {/block}
