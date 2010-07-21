@@ -118,7 +118,7 @@
 		</copy>
 
 		<!-- Quizzical -->
-		<copy todir="${build}">
+		<copy todir="${build}" overwrite="true">
 			<fileset dir="${source}"
 				 includes="**/*"
 				 excludes="README.txt" />
