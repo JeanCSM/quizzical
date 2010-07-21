@@ -33,6 +33,9 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
+{extends "layout.tpl"}
+
+{block "content"}
 <div class="grid_12">
 	<div class="message">
 		<strong>Quizzical</strong> is Spartan Robotics's automated
@@ -52,3 +55,4 @@
 	{include('account/register_form')}
 </div>
 <div class="clear">&nbsp;</div>
+{/block}
