@@ -41,6 +41,13 @@ class MY_Controller extends Controller {
 
 		// Assign core variables relating to this installation of
 		// Quizzical and its properties
-		$this->Dwootemplate->assign('version', 2.5);
+		$this->dwootemplate->assign('version', 2.5);
+		$this->dwootemplate->assign('site_title', 'Quizzical');
+
+		$this->dwootemplate->assign('base_url',
+			$this->config->item('base_url'));
+
+		$this->dwootemplate->assign('is_logged_in',
+			$this->ion_auth->logged_in());
 	}
 }
