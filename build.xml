@@ -79,6 +79,8 @@
 				<include name="index.php" />
 				<include name="license.txt" />
 				<include name="system/**/*" />
+				<exclude name="system/application/controllers/welcome.php" />
+				<exclude name="system/application/views/welcome_message.php" />
 			</fileset>
 		</copy>
 
