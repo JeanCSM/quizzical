@@ -136,7 +136,7 @@ class Users_schema_0001 {
         // Register our first user as an administrator
         $offset = rand(0, 21);
         $password = substr(md5(microtime() + rand(0, 5000)), $offset, $offset + 10);
-        $this->CI->redux_auth_model->register('admin', $password, 'admin');
+        $this->CI->ion_auth_model->register('admin', $password, 'admin@example.com');
 
         // Set the admin account to be in the admin group
         $this->db->where('username', 'admin');
@@ -145,10 +145,10 @@ class Users_schema_0001 {
         // Pass the information about the administrator account back to the
         // page so that it can be displayed as a message
         $message = "An administrator account with the username set to
-            <code>admin</code>, the email set to <code>admin</code>, and the
-            password set to <code>{$password}</code> has been created.  <strong>
-            Remember the password and then change these values immediately.
-            </strong>";
+            <code>admin</code>, the email set to <code>admin@example.com
+			</code>, and the password set to <code>{$password}</code>
+			has been created.  <strong>Remember the password and then
+			change these values immediately.</strong>";
         array_push($this->CI->messages, $message);
     }
 
