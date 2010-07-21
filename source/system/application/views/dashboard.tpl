@@ -40,14 +40,14 @@
 	<h2>Quizzes to Take</h2>
 
 	{foreach $quizzes quiz}
-	<h3><a href="{$url_base}quiz/take/{$quiz.id}">
+	<h3><a href="{$site_url}quiz/take/{$quiz.id}">
 		{$quiz.title|escape}
 	</a></h3>
 
 	<p>{$quiz.summary|escape|nl2br}</p>
 
 	<div class="take-it-button">
-		<a href="{$url_base}quiz/take/{$quiz.id}">Take It</a>
+		<a href="{$site_url}quiz/take/{$quiz.id}">Take It</a>
 	</div>
 
 	<p>
@@ -57,7 +57,7 @@
 		You've taken it {$quiz.user_tries}
 		time{tif $quiz.user_tries != 1 ?: "s"}.
 
-		You're allowed to take it {$quiz->tries}
+		You're allowed to take it {$quiz.tries}
 		time{tif $quiz.user_tries != 1 ?: "s"}
 		{/if}
 	</p>
@@ -75,7 +75,7 @@
 		<div class="aside-content">
 			{foreach $results result}
 			<div class="aside-row">
-				<a href="{$url_base}quiz/result/{$result.id}">
+				<a href="{$site_url}quiz/result/{$result.id}">
 					{$result.title} &mdash;
 					{percentage($result.correct, $result.total)}%
 				</a>
@@ -86,7 +86,7 @@
 
 			{if isset($results)}
 			<div class="aside-row more">
-				<a href="{$url_base}quiz/results">See Full List</a>
+				<a href="{$site_url}quiz/results">See Full List</a>
 			</div>
 			{/if}
 		</div>

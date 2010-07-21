@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" action="{$url_base}account/login">
+<form method="post" action="{$site_url}account/login">
 	<label for="email">Email</label>
 	<input type="text" class="text" name="email" />
 	<br />

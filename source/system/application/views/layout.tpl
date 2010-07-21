@@ -38,10 +38,10 @@
 
 <html>
 <head>
-	{if $title_page}
-	<title>{$title_page} ~ {$title_site}</title>
+	{if $page_title}
+	<title>{$page_title} ~ {$site_title}</title>
 	{else}
-	<title>{$title_site}</title>
+	<title>{$site_title}</title>
 	{/if}
 
 	{block "styles"}
@@ -53,19 +53,19 @@
 	<div class="header">
 		<div class="container_12">
 			<div class="grid_12">
-				<h1><a href="{$url_base}">{$title_site}</a></h1>
+				<h1><a href="{$site_url}">{$site_title}</a></h1>
 
 				{block "nav"}
 				<ul class="user-bar">
-					{if powers_can('view_admin_section')}
-					<li><a href="{$url_base}admin">Admin</a></li>
+					{if allowed_to('view_admin_section')}
+					<li><a href="{$site_url}admin">Admin</a></li>
 					{/if}
 
 					{if $is_authenticated}
-					<li><a href="{$url_base}account">Account</a></li>
-					<li><a href="{$url_base}account/logout">Log Out</a></li>
+					<li><a href="{$site_url}account">Account</a></li>
+					<li><a href="{$site_url}account/logout">Log Out</a></li>
 					{else}
-					<li><a href="{$url_base}account/login">Log In</a></li>
+					<li><a href="{$site_url}account/login">Log In</a></li>
 					{/if}
 				</ul>
 				{/block}
@@ -75,12 +75,6 @@
 			<div class="clear">&nbsp;</div>
 		</div>
 	</div>
-
-	{if $notice}
-	<div class="notice container_12">
-		<p>{$notice}</p>
-	</div>
-	{/if}
 
 	{block "subnav"}{/block}
 

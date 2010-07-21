@@ -41,7 +41,7 @@
 
 	{validation_errors('<div class="error">', '</div>')}
 
-	<form method="post" action="{$url_current}">
+	<form method="post" action="{$current_url}">
 		<label>Name</label>
 		<input type="text" class="text" name="name"
 			   value="{$user.username|form_escape}" />

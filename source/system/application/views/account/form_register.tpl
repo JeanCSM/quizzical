@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" action="{$url_base}account/register">
+<form method="post" action="{$site_url}account/register">
 	<label for="name" class="two">First &amp; Last Name</label>
 	<input type="text" class="text" name="name" value="{$value_name}" />
 	<br />
