@@ -38,7 +38,11 @@
 
 <html>
 <head>
-	<title>{block "title"}{$site}{/block}</title>
+	{if $title_page}
+	<title>{$title_page} ~ {$title_site}</title>
+	{else}
+	<title>{$title_site}</title>
+	{/if}
 
 	{block "styles"}
 
@@ -49,7 +53,7 @@
 	<div class="header">
 		<div class="container_12">
 			<div class="grid_12">
-				<h1><a href="{$url_base}">{$site}</a></h1>
+				<h1><a href="{$url_base}">{$title_site}</a></h1>
 
 				{$user}
 
