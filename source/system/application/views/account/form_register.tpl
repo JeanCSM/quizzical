@@ -35,11 +35,11 @@
 
 <form method="post" action="{$site_url}/account/register">
 	<label for="name" class="two">First &amp; Last Name</label>
-	<input type="text" class="text" name="name" value="{form_value('name')}" />
+	<input type="text" class="text" name="name" value="{set_value('name')}" />
 	<br />
 
 	<label for="email">Email</label>
-	<input type="text" class="text" name="email" value="{form_value('name')}" />
+	<input type="text" class="text" name="email" value="{set_value('email')}" />
 	<br />
 
 	<label for="password">Password</label>
