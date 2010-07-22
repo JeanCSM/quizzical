@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "layout.tpl"}
+{extends "../layout.tpl"}
 
 {block "content"}
 <div class="prefix_3 suffix_3 grid_6">
