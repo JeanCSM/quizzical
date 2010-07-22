@@ -37,7 +37,7 @@
 
 // Determines whether the migrate UI from the Migration controller
 // should be displayed
-$config['schema_ui_enabled'] = true;
+$config['schema_ui_enabled'] = false;
 
 // ---- Static schema version
 // If the schema version type is set to `static`, the version used for
