@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-class Settings_schema_0002 {
+class Settings_schema_0001 {
     var $CI;
     var $forge;
     var $db;
@@ -58,7 +58,7 @@ class Settings_schema_0002 {
         // Add in a setting row for the schema version
         $this->db->insert('settings', array(
             'name' => 'schema_version',
-            'value' => 2
+            'value' => 1
         ));
     }
 
