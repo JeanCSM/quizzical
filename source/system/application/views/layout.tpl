@@ -50,7 +50,9 @@
 	<link rel="stylesheet" type="text/css"
 		 href="{$base_url}assets/styles/grid.css" />
 	<link rel="stylesheet" type="text/css"
-		 href="{$base_url}assets/styles/skin.css" />
+		 href="{$base_url}assets/styles/core.css" />
+	<link rel="stylesheet" type="text/css"
+		 href="{$base_url}assets/styles/application.css" />
 	{/block}
 </head>
 
