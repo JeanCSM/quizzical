@@ -52,6 +52,7 @@ class Install extends Controller {
 		$this->load->library('form_validation');
 		$this->load->library('Schema');
 		$this->load->model('Users_model');
+		$this->load->model('Settings_model');
 		$this->load->helper('url');
 
 		$this->dwootemplate->assign('current_url', current_url());
@@ -90,6 +91,10 @@ class Install extends Controller {
 			);
 
 			// Add the title setting to the database
+			$this->Settings_model->create(
+				'site_title',
+				$this->input->post('title')
+			);
 
 
 			echo 'yay';
