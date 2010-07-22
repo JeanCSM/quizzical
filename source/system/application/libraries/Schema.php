@@ -64,6 +64,11 @@ class Schema {
 			case 'static':
 				return $this->details['version'];
 			case 'key':
+				if (!$this->CI->db->table_exists(
+						$this->details['table_name'])) {
+					return 0;
+				}
+
 				$result = $this->CI->db->get_where(
 					$this->details['table_name'],
 					array(
@@ -203,16 +208,20 @@ class Schema {
             if ($operation == "upgrade") {
                 // Upgrade the schema using our schema modification class
                 $schema_class->up();
-
-                // Update the version number
-                $this->update($version);
             } elseif ($operation == "downgrade") {
                 // Downgrade the schema using our schema modification class
                 $schema_class->down();
-
-                // Update the version number
-                $this->update($version - 1);
             }
         }
+
+		// Depending on our operation, run the appropriate command from the
+		// schema class file to make the proper changes to the database
+		if ($operation == "upgrade") {
+			// Update the version number
+			$this->update($version);
+		} elseif ($operation == "downgrade") {
+			// Update the version number
+			$this->update($version - 1);
+		}
     }
 }
