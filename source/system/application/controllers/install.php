@@ -96,8 +96,9 @@ class Install extends Controller {
 				$this->input->post('title')
 			);
 
-
-			echo 'yay';
+			// Display a page telling the user that the installation is
+			// complete and all they have to do is log in
+			$this->dwootemplate->display('install/confirm_install.tpl');
 		}
 	}
 }
