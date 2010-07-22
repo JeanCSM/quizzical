@@ -37,26 +37,42 @@
 
 {block "content"}
 <p>
-	All of your database configuration settings seem to check out!  Now,
-	we just need to get some initial information about your quiz site
-	and then install Quizzical into your database.
+	All of your database configuration settings seem to check out!
+	Now, we just need to get some initial information about your quiz
+	site and then install Quizzical into your database.
 </p>
+
+{validation_errors('<div class="error">', '</div>')}
 
 <form method="post" action="{$current_url}">
 	<fieldset>
-		<legend>Site Info</legend>
+		<legend>Site Information</legend>
 
 		<label>Title</label>
-		<input type="text" class="text" name="title" />
+		<input type="text" class="text" name="title" value="{set_value('title')}" />
 		<br />
 	</fieldset>
 
 	<fieldset>
 		<legend>Administrator</legend>
 
-		{include('../account/form_register.tpl')}
+		<label for="name" class="two">First &amp; Last Name</label>
+		<input type="text" class="text" name="name" value="{set_value('name')}" />
+		<br />
+
+		<label for="email">Email</label>
+		<input type="text" class="text" name="email" value="{set_value('email')}" />
+		<br />
+
+		<label for="password">Password</label>
+		<input type="password" class="text" name="password" />
+		<br />
+
+		<label for="password" class="two">Password (Again)</label>
+		<input type="password" class="text" name="password_again" />
+		<br />
 	</fieldset>
 
-	<input type="submit" value="Install" />
+	<input type="submit" class="button" value="Install" />
 </form>
 {/block}
