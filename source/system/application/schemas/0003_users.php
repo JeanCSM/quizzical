@@ -50,12 +50,38 @@ class Users_schema_0003 {
     function up () {
         // Add additional columns to the users table to support the new
 		// features that were added in Ion Auth
-        $this->forge->add_field('salt varchar(40) default NULL');
-		$this->forge->add_field('remember_code varchar(40) default NULL');
-		$this->forge->add_field('created_on int(11) unsigned not NULL');
-		$this->forge->add_field('last_login int(11) unsigned default NULL');
-		$this->forge->add_field('active tinyint(1) unsigned default NULL');
-        $this->forge->add_column('users');
+		$fields = array(
+			'salt' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 40,
+				'null' => true
+			),
+			'remember_code' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 40,
+				'null' => true
+			),
+			'created_on' => array(
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
+				'null' => false,
+			),
+			'last_login' => array(
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => true,
+				'null' => true
+			),
+			'active' => array(
+				'type' => 'TINYINT',
+				'constraint' => 1,
+				'unsigned' => true,
+				'null' => true
+			)
+		);
+
+        $this->forge->add_column('users', $fields);
     }
 
     function down () {
