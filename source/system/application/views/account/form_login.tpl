@@ -35,7 +35,7 @@
 
 <form method="post" action="{$site_url}/account/login">
 	<label for="email">Email</label>
-	<input type="text" class="text" name="email" />
+	<input type="text" class="text" name="email" value="{set_value('email')}" />
 	<br />
 
 	<label for="password">Password</label>
