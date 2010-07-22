@@ -37,23 +37,27 @@
 
 // Determines whether the migrate UI from the Migration controller
 // should be displayed
-$config['schema_ui_enabled'] = false;
+$config['schema_ui_enabled'] = true;
 
 // ---- Static schema version
 // If the schema version type is set to `static`, the version used for
 // the current schema will be the `schema_version` configuration item
 
-//$config['schema_version_type'] = 'static';
-//$config['schema_version'] = 1;
+/*
+$config['schema_version_type'] = 'static';
+$config['schema_version_details'] = array(
+	'version' => 1
+);
+*/
 
 // ---- Key-based schema version
 // If the schema version type is set to `key`, the version used will be taken
 // from a key-value database table
 
 $config['schema_version_type'] = 'key';
-$config['schema_version_key'] = 'schema_version';
-$config['schema_version_table'] = 'settings';
-$config['schema_version_columns'] = array(
-    'key' => 'name',
-    'value' => 'value'
+$config['schema_version_details'] = array(
+	'table_name' => 'settings',
+	'key_column_name' => 'name',
+	'value_column_name' => 'value',
+	'key_column_value' => 'schema_version'
 );
