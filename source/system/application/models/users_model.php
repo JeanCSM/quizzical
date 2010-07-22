@@ -36,13 +36,13 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Users_model extends Model {
-	function create ($name, $email, $password, $group_name, $email=true) {
+	function create ($name, $email, $password, $group_name, $notify=true) {
 		preg_match('/(?P<first_name>\w+) (?P<last_name>[\w ]+)/', $name, $names);
 
 		$meta['first_name'] = $names['first_name'];
 		$meta['last_name'] = $names['last_name'];
 
-		if ($email) {
+		if ($notify) {
 			$this->ion_auth->register($name, $password, $email, $meta, $group_name);
 		} else {
 			$this->ion_auth_model->register($name, $password, $email, $meta, $group_name);
