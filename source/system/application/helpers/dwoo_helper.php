@@ -35,8 +35,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-function Dwoo_Plugin_form_value (Dwoo $dwoo, $name, $default='') {
-	return set_value($name, $default);
 }
 
 function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $power) {
