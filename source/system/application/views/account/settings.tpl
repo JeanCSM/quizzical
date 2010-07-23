@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "layout.tpl"}
+{extends "../layout.tpl"}
 
 {block "content"}
 <div class="grid_6 prefix_3 suffix_3">
@@ -44,15 +44,15 @@
 	<form method="post" action="{$current_url}">
 		<label>Name</label>
 		<input type="text" class="text" name="name"
-			   value="{$user.username|form_escape}" />
+			   value="{$user.username|form_prep}" />
 		<br />
 
 		<label>Email</label>
 		<input type="text" class="text" name="email"
-			   value="{$user.username|form_escape}" />
+			   value="{$user.username|form_prep}" />
 		<br />
 
-		{if powers_can('view_user_ip')}
+		{if allowed_to('view_user_ip')}
 		<label>Location</label>
 		<div class="field-text">
 			{$user.ip_address}
@@ -64,7 +64,7 @@
 		<br />
 		{/if}
 
-		{if powers_can('edit_user') && $profile.id != $user.id}
+		{if allowed_to('edit_user') && $profile.id != $user.id}
 		<label>Group</label>
 		<select name="group">
 			{foreach $groups group}
