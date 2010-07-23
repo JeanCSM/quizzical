@@ -35,6 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+function Dwoo_Plugin_percentage (Dwoo $dwoo, $correct, $total) {
+	return round(($correct / $total) * 100);
 }
 
 function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $power) {
