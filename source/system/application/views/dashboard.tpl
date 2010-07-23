@@ -84,7 +84,7 @@
 			<p>You haven't taken any quizzes yet.</p>
 			{/foreach}
 
-			{if isset($results)}
+			{if $results_count}
 			<div class="aside-row more">
 				<a href="{$site_url}/quiz/results">See Full List</a>
 			</div>
