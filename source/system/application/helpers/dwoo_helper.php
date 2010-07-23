@@ -40,5 +40,6 @@ function Dwoo_Plugin_percentage (Dwoo $dwoo, $correct, $total) {
 }
 
 function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $power) {
-	return false; // TODO: hook this in to the powers library
+	$CI =& get_instance();
+	return $CI->powers->i_can($power);
 }
