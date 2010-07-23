@@ -50,7 +50,7 @@ class Account extends MY_Controller {
 		}
 	}
 
-	private function attempt_login ($password, $email_field) {
+	function attempt_login ($password, $email_field) {
 		$email = $this->input->post($email_field);
 
 		if ($this->ion_auth->login($email, $password)) {
