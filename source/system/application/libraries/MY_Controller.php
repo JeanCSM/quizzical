@@ -53,6 +53,7 @@ class MY_Controller extends Controller {
 		// installation of Quizzical
 		$this->dwootemplate->assign('base_url',
 			$this->config->item('base_url'));
+		$this->dwootemplate->assign('current_url', current_url());
 
 		// Assign variables that relate to the currently logged in user
 		$this->dwootemplate->assign('is_logged_in',
