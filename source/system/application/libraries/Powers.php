@@ -89,4 +89,5 @@ class Powers {
 		else
 			array_push($this->powers, $power);
 	}
+	
 }
