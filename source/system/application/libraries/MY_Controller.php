@@ -41,15 +41,20 @@ class MY_Controller extends Controller {
 	function __construct () {
 		parent::Controller();
 
+		// Load and cache information related to the currently logged in user
 		$this->profile = $this->ion_auth->profile();
+
 		// Assign core variables relating to this installation of
 		// Quizzical and its properties
 		$this->dwootemplate->assign('version', 2.5);
 		$this->dwootemplate->assign('site_title', 'Quizzical');
 
+		// Assign variables for the various useful urls related to this
+		// installation of Quizzical
 		$this->dwootemplate->assign('base_url',
 			$this->config->item('base_url'));
 
+		// Assign variables that relate to the currently logged in user
 		$this->dwootemplate->assign('is_logged_in',
 			$this->ion_auth->logged_in());
 		$this->dwootemplate->assign('profile', $this->profile);
