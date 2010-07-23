@@ -36,9 +36,12 @@
  * ***** END LICENSE BLOCK ***** */
 
 class MY_Controller extends Controller {
+	public $profile = false;
+	
 	function __construct () {
 		parent::Controller();
 
+		$this->profile = $this->ion_auth->profile();
 		// Assign core variables relating to this installation of
 		// Quizzical and its properties
 		$this->dwootemplate->assign('version', 2.5);
@@ -49,5 +52,6 @@ class MY_Controller extends Controller {
 
 		$this->dwootemplate->assign('is_logged_in',
 			$this->ion_auth->logged_in());
+		$this->dwootemplate->assign('profile', $this->profile);
 	}
 }
