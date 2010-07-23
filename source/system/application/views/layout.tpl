@@ -69,7 +69,7 @@
 					{/if}
 
 					{if $is_logged_in}
-					<li><a href="{$site_url}/account">Account</a></li>
+					<li><a href="{$site_url}/account/details">Account</a></li>
 					<li><a href="{$site_url}/account/logout">Log Out</a></li>
 					{else}
 					<li><a href="{$site_url}/account/login">Log In</a></li>
