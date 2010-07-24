@@ -70,4 +70,14 @@ class Users_model extends Model {
 		$this->ion_auth_model->update_user($id, $changes);
 	}
 	
+	function get_identity_where_id ($id) {
+		$identity = $this->config->item('identity', 'ion_auth');
+		
+		$this->db->select($identity);
+		$this->db->where('id', $id);
+		$result = $this->db->get('users');
+		
+		return ($result->num_rows() > 0) ? $result->row() : false;
+	}
+	
 }
