@@ -64,7 +64,7 @@
 		<br />
 		{/if}
 
-		{if allowed_to('edit_user') && $profile.id != $user.id}
+		{if $profile->id != $user->id}
 		<label>Group</label>
 		<select name="group">
 			{foreach $groups group}
