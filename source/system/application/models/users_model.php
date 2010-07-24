@@ -54,4 +54,20 @@ class Users_model extends Model {
 			$this->ion_auth_model->register($name, $password, $email, $meta, $group_name);
 		}
 	}
+	
+	function update ($id, $name, $email, $group_id=false) {
+		$names = $this->__split_name($name);
+		
+		$changes['first_name'] = $names['first_name'];
+		$changes['last_name'] = $names['last_name'];
+		$changes['username'] = $name;
+		$changes['email'] = $email;
+		
+		if ($group_id != false) {
+			$changes['group_id'] = $group_id;
+		}
+		
+		$this->ion_auth_model->update_user($id, $changes);
+	}
+	
 }
