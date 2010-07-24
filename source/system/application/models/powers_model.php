@@ -37,18 +37,6 @@
 
 class powers_model extends Model {
 
-    function get_group_id ($identity_column, $identity) {
-        // We're only going to grab the group_id column where the
-        // identity matches the identity column
-        $this->db->select("group_id");
-        $this->db->where($identity_column, $identity);
-
-        // Get the group id from the database
-        $result = $this->db->get("users");
-        $row = $result->row();
-        return $row->group_id;
-    }
-
     function get_group_powers ($group_id) {
         // Grab all of the powers that match the group_id
         $powers = $this->db->get_where("powers", array(
