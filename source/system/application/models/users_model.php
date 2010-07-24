@@ -36,8 +36,14 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Users_model extends Model {
-	function create ($name, $email, $password, $group_name, $notify=true) {
+	
+	function __split_name ($name) {
 		preg_match('/(?P<first_name>\w+) (?P<last_name>[\w ]+)/', $name, $names);
+		return $names;
+	}
+	
+	function create ($name, $email, $password, $group_name, $notify=true) {
+		$names = $this->__split_name($name);
 
 		$meta['first_name'] = $names['first_name'];
 		$meta['last_name'] = $names['last_name'];
