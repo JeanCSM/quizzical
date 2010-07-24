@@ -69,5 +69,63 @@ class Account extends MY_Controller {
 		// Redirect the user back to the homepage
 		redirect();
 	}
+	
+	function details ($id = -1) {
+		$this->load->model('Users_model');
+		$this->load->model('Groups_model');
+		$this->load->library('form_validation');
+		
+		// Define our configuration for the form_validation library in CI
+		$this->form_validation->set_rules('name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('group', 'Group', 'trim|integer');
+		
+		// Try to grab the profile information for the user specified in the
+		// URL path; if that profile doesn't exist, display a 404 error page
+		if ($id == -1) {
+			$profile = $this->profile;
+			$id = $this->profile->id;
+		} else {
+			$identity = $this->Users_model->get_identity_where_id($id);
+			
+			if (!$id) {
+				show_404();
+				return;
+			}
+			
+			$profile = $this->ion_auth->profile($identity);
+		}
+		
+		// If the user has the appropriate credentials to see the profile page,
+		// check to see if any edits were submitted (and then try to apply
+		// them), then display the user editing page; otherwise, show an access
+		// denied page
+		if (($this->powers->i_can('view_all_users') &&
+			$this->powers->i_can('edit_user')) ||
+			$id == $this->profile->id) {
+			
+			if ($this->form_validation->run()) {
+				$this->Users_model->update(
+					$id,
+					$this->input->post('name'),
+					$this->input->post('email'),
+					($id != $this->profile->id) ? $this->input->post('group') : false
+				);
+			}
+			
+			$this->dwootemplate->assign('user', $profile);
+			$this->dwootemplate->assign('groups', $this->Groups_model->get()->result());
+			$this->dwootemplate->display('account/settings.tpl');
+		} else if ($this->profile) {
+			show_error('Your account doesn\'t have the appropriate permissions
+				to view that user\'s profile page.  If you think that you should
+				have access, please contact the administrator.', 403);
+		} else {
+			show_error('You need to be logged in in order to be allowed to see
+				this page on the website.  This page also requires special user
+				account permissions--even if you log in you may not be able to
+				view this page.', 403);
+		}
+	}
 
 }
