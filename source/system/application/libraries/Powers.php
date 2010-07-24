@@ -50,22 +50,18 @@ class Powers {
 		// Load the power model
 		$this->CI->load->model("powers_model");
 
-		// Grab the current user
-        $id_column = $this->CI->config->item("identity");
-        $this->user = $this->CI->session->userdata($id_column);
-
-		// Check to see whether the user is logged in or not
-        if ($this->user != false) {
-            // If so, load information about the user from the database
-            $this->group = $this->CI->powers_model->get_group_id($id_column, $this->user);
-
-            // Load information about the user's group's powers
-            $this->my_powers = $this->CI->powers_model->get_group_powers($this->group);
-        } else {
-            // Load information about the powers that users that aren't
+		// Get information about the user from the database
+		$this->user = $this->CI->ion_auth->profile();
+		
+		// Determine whether the user is logged in or not
+		if (!$this->user) {
+			// Load information about the powers that users that aren't
             // logged in have
             $this->my_powers = $this->CI->powers_model->get_group_powers(-1);
-        }
+		} else {
+			// Load information about the powers of the current user's group
+			$this->my_powers = $this->CI->powers_model->get_group_powers($this->user->group_id);
+		}
 	}
 
 	public function i_can ($power, $redirect = false) {
