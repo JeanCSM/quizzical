@@ -44,20 +44,20 @@
 	<form method="post" action="{$current_url}">
 		<label>Name</label>
 		<input type="text" class="text" name="name"
-			   value="{$user.username|form_prep}" />
+			   value="{$user->username|form_prep}" />
 		<br />
 
 		<label>Email</label>
 		<input type="text" class="text" name="email"
-			   value="{$user.username|form_prep}" />
+			   value="{$user->email|form_prep}" />
 		<br />
 
 		{if allowed_to('view_user_ip')}
 		<label>Location</label>
 		<div class="field-text">
-			{$user.ip_address}
+			{$user->ip_address}
 			&mdash;
-			<a href="http://ws.arin.net/whois/?queryinput={$user.ip_address}">
+			<a href="http://ws.arin.net/whois/?queryinput={$user->ip_address}">
 				Details
 			</a>
 		</div>
@@ -68,14 +68,14 @@
 		<label>Group</label>
 		<select name="group">
 			{foreach $groups group}
-			<option value="{$group.id}"
-				{tif $group.id == $user.group_id ?: 'selected="selected"'}
-				>{$group.name|capitalize}</option>
+			<option value="{$group->id}"
+				{tif $group->id == $user->group_id ? 'selected="selected"'}
+				>{$group->name|capitalize}</option>
 			{/foreach}
 		</select>
 		{else}
 		<label>Group</label>
-		<div class="field-text">{$user.group_name|capitalize}</div>
+		<div class="field-text">{$user->group|capitalize}</div>
 		<span class="extra">You can't edit your own group.</span>
 		{/if}
 
