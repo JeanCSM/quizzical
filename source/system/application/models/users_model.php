@@ -55,12 +55,14 @@ class Users_model extends Model {
 		}
 	}
 	
-	function update ($id, $name, $email, $group_id=false) {
-		$names = $this->__split_name($name);
+	function update ($id, $name=false, $email, $group_id=false) {
+		if ($name != false) {
+			$names = $this->__split_name($name);
+			$changes['first_name'] = $names['first_name'];
+			$changes['last_name'] = $names['last_name'];
+			$changes['username'] = $name;
+		}
 		
-		$changes['first_name'] = $names['first_name'];
-		$changes['last_name'] = $names['last_name'];
-		$changes['username'] = $name;
 		$changes['email'] = $email;
 		
 		if ($group_id != false) {
