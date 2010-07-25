@@ -46,7 +46,7 @@ class Account extends MY_Controller {
 		if (!$this->form_validation->run()) {
 			$this->dwootemplate->display('account/login.tpl');
 		} else {
-			redirect();
+			redirect($this->input->post('redirect', true));
 		}
 	}
 

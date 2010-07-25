@@ -47,6 +47,8 @@ function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $action, $item, $user=null) {
 function show_access_denied () {
 	$CI =& get_instance();
 	
+	$CI->dwootemplate->assign('redirect', current_url());
+	
 	if ($CI->ion_auth->logged_in()) {
 		$CI->dwootemplate->display('errors/access_denied.tpl');
 	} else {

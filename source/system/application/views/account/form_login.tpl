@@ -41,6 +41,8 @@
 	<label for="password">Password</label>
 	<input type="password" class="text" name="password" />
 	<br />
+	
+	<input type="hidden" name="redirect" value="{$redirect|default:''}" />
 
 	<input type="submit" class="button" value="Log In" />
 </form>
