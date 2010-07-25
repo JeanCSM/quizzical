@@ -76,7 +76,11 @@
 		{else}
 		<label>Group</label>
 		<div class="field-text">{$user->group|capitalize}</div>
-		<span class="extra">You can't edit your own group.</span>
+		<span class="extra">
+			You are not allowed to edit your own group.  If you need more access
+			privileges to various parts of the application, please contact an
+			administrator.
+		</span>
 		{/if}
 
 		<input type="submit" class="button" value="Save Changes" />
