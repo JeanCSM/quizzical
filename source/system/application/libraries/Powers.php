@@ -68,11 +68,6 @@ class Powers {
 		// Determine if the user has the specified power
 		$can = array_search($power, $this->my_powers) !== false;
 
-		// If we're supposed to redirect the user to the login page if
-		// they're not logged in, do so
-		if (!$this->user && $redirect == true)
-			redirect("accounts/login");
-
 		// Return whether the user has the specified power
 		return $can;
 	}
