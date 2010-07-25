@@ -41,4 +41,8 @@ class Quizzes_model extends Model {
 		return $this->db->get_where('quizzes', array('published' => true));
 	}
 	
+	function get () {
+		return $this->db->get('quizzes');
+	}
+	
 }
