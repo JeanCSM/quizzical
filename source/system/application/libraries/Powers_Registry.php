@@ -46,7 +46,7 @@ class Powers_Registry {
     
     public function get ($action, $item) {
         // Find the power by the parameters and properties specified
-        foreach ($power as $powers) {
+        foreach ($powers as $power) {
             if ($power->action == $action &&
                 $power->item == $item) {
                 return $power;
