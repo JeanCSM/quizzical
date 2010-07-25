@@ -76,9 +76,9 @@ class Account extends MY_Controller {
 		$this->load->library('form_validation');
 		
 		// Define our configuration for the form_validation library in CI
-		$this->form_validation->set_rules('name', 'Name', 'trim|required');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('group', 'Group', 'trim|integer');
+		$this->form_validation->set_rules('name', 'Name', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('group', 'Group', 'integer');
 		
 		// Try to grab the profile information for the user specified in the
 		// URL path; if that profile doesn't exist, display a 404 error page
