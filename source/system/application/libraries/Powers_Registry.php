@@ -61,8 +61,9 @@ class Powers_Registry {
 class Power {
     public $action;
     public $item;
-    public $own = true;
+    public $own = false;
     public $title;
     public $description;
     public $parent;
+    public $applies_to = false;
 }
