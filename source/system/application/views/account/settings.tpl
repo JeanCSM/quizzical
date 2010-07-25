@@ -103,7 +103,11 @@
 			<input type="submit" class="button" value="Save Changes" />
 		</div>
 		
+		<div class="grid_3 suffix_3">
+			<a href="{$site_url}/account/send/delete/[token]" class="delete account">
+				Delete Account</a>
 		</div>
+	</div>
 </form>
 
 {/block}
