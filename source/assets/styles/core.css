@@ -159,7 +159,7 @@ input.text, textarea, .field-text, select {
 	background: #E0ECFF url(../images/qz-input.png) repeat-x top center;
 	border: 1px solid #A5C9FF;
 	width: 250px;
-	margin: 0 0 15px 0;
+	margin: 0 0 20px 0;
 }
 
 	.field-text {
@@ -183,12 +183,14 @@ input.text, textarea, .field-text, select {
 		}
 
 	.text-small {
-		width: 30px !important;
+		width: 20px !important;
 	}
 
 	.extra {
-		margin: 0 0 15px 80px !important;
+		margin: 0 0 30px 85px !important;
 		display: block;
+		
+		color: #999;
 	}
 
 .button {
@@ -199,7 +201,7 @@ input.text, textarea, .field-text, select {
 	color: #3F6A8B;
 	text-shadow: 0px 1px 0px #fff;
 	padding: 5px 15px;
-	margin: 10px 0;
+	margin: 20px 0;
 	display: block;
 }
 
