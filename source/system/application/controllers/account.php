@@ -117,15 +117,8 @@ class Account extends MY_Controller {
 			$this->dwootemplate->assign('user', $profile);
 			$this->dwootemplate->assign('groups', $this->Groups_model->get()->result());
 			$this->dwootemplate->display('account/settings.tpl');
-		} else if ($this->profile) {
-			show_error('Your account doesn\'t have the appropriate permissions
-				to view that page.  If you think that you should have access,
-				please contact the administrator.', 403);
 		} else {
-			show_error('You need to be logged in in order to be allowed to see
-				this page on the website.  This page also requires special user
-				account permissions--even if you log in you may not be able to
-				view this page.', 403);
+			show_access_denied();
 		}
 	}
 
