@@ -43,3 +43,13 @@ function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $action, $item, $user=null) {
 	$CI =& get_instance();
 	return $CI->powers->i_can($action, $item, $user);
 }
+
+function show_access_denied () {
+	$CI =& get_instance();
+	
+	if ($CI->ion_auth->logged_in()) {
+		$CI->dwootemplate->display('errors/access_denied.tpl');
+	} else {
+		$CI->dwootemplate->display('errors/access_denied_anonymous.tpl');
+	}
+}
