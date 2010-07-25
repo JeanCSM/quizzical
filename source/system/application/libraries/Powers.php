@@ -63,8 +63,15 @@ class Powers {
 			$this->my_powers = $this->CI->powers_model->get_group_powers($this->user->group_id);
 		}
 	}
+	
+	public function __generate_power ($action, $item, $own) {
+		return ($own) ? "{$action}_own_{$item}" : "{$action}_{$item}";
+	}
 
-	public function i_can ($power, $redirect = false) {
+	public function i_can ($action, $item, $user = null) {
+		// Generate the power name from the use
+		$power = $this->__generate_power($action, $item, $user == $this->user);
+		
 		// Determine if the user has the specified power
 		$can = array_search($power, $this->my_powers) !== false;
 
@@ -72,7 +79,10 @@ class Powers {
 		return $can;
 	}
 
-	public function register ($power) {
+	public function register ($action, $item, $own=false) {
+		// Generate the power name from the use
+		$power = $this->__generate_power($action, $item, $own);
+		
 		// If the powers are provided as an array, merge them in;
 		// otherwise, push the power onto the end of the array
 		if (is_array($power))
