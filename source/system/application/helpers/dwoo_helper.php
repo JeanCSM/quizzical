@@ -52,4 +52,9 @@ function show_access_denied () {
 	} else {
 		$CI->dwootemplate->display('errors/access_denied_anonymous.tpl');
 	}
+	
+	// We're going to use an undocumented method to stop all CodeIgniter
+	// execution and flush the output buffer
+	$CI->output->_display();
+	exit();
 }
