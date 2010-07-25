@@ -42,10 +42,19 @@
 	{validation_errors('<div class="error">', '</div>')}
 
 	<form method="post" action="{$current_url}">
+		{if allowed_to('edit_user_name')}
 		<label>Name</label>
 		<input type="text" class="text" name="name"
 			   value="{$user->username|form_prep}" />
 		<br />
+		{else}
+		<label>Name</label>
+		<div class="field-text">{$user->username}</div>
+		<span class="extra">
+			You are not allowed to change your own name.  If you need your name
+			to be changed, please contact an administrator.
+		</span>
+		{/if}
 
 		<label>Email</label>
 		<input type="text" class="text" name="email"
