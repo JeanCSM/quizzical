@@ -69,8 +69,17 @@ class Powers {
 	}
 
 	public function i_can ($action, $item, $user = null) {
+		if ($user == $this->user) {
+			return $this->have_power($action, $item, true) ||
+				$this->have_power($action, $item, false);
+		} else {
+			return $this->have_power($action, $item, false);
+		}
+	}
+	
+	public function have_power ($action, $item, $own=false) {
 		// Generate the power name from the use
-		$power = $this->__generate_power($action, $item, $user == $this->user);
+		$power = $this->__generate_power($action, $item, $own);
 		
 		// Determine if the user has the specified power
 		$can = array_search($power, $this->my_powers) !== false;
