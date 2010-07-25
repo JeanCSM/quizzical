@@ -64,7 +64,7 @@ class Powers {
 		}
 	}
 	
-	public function __generate_power ($action, $item, $own) {
+	public static function __generate_power ($action, $item, $own) {
 		return ($own) ? "{$action}_own_{$item}" : "{$action}_{$item}";
 	}
 
@@ -79,7 +79,7 @@ class Powers {
 	
 	public function have_power ($action, $item, $own=false) {
 		// Generate the power name from the use
-		$power = $this->__generate_power($action, $item, $own);
+		$power = self::__generate_power($action, $item, $own);
 		
 		// Determine if the user has the specified power
 		$can = array_search($power, $this->my_powers) !== false;
@@ -90,7 +90,7 @@ class Powers {
 
 	public function register ($action, $item, $own=false) {
 		// Generate the power name from the use
-		$power = $this->__generate_power($action, $item, $own);
+		$power = self::__generate_power($action, $item, $own);
 		
 		// If the powers are provided as an array, merge them in;
 		// otherwise, push the power onto the end of the array
