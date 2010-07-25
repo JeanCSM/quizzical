@@ -44,12 +44,11 @@ class Powers_Registry {
         array_push($powers, $power);
     }
     
-    public function get ($action, $item, $own=false) {
+    public function get ($action, $item) {
         // Find the power by the parameters and properties specified
         foreach ($power as $powers) {
             if ($power->action == $action &&
-                $power->item == $item &&
-                $power->own == $own) {
+                $power->item == $item) {
                 return $power;
             }
         }
@@ -61,7 +60,6 @@ class Powers_Registry {
 class Power {
     public $action;
     public $item;
-    public $own = false;
     public $title;
     public $description;
     public $parent;
