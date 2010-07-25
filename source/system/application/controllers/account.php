@@ -107,9 +107,11 @@ class Account extends MY_Controller {
 			if ($this->form_validation->run()) {
 				$this->Users_model->update(
 					$id,
-					$this->input->post('name'),
-					$this->input->post('email'),
-					($id != $this->profile->id) ? $this->input->post('group') : false
+					$this->input->post('name', true),
+					$this->input->post('email', true),
+					($id != $this->profile->id &&
+					 $this->powers->i_can('edit_user_group')) ?
+						$this->input->post('group', true) : false
 				);
 			}
 			
