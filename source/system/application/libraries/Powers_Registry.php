@@ -61,7 +61,7 @@ class Power {
     public $action;
     public $item;
     public $title;
+    public $depends;
     public $description;
-    public $parent;
     public $applies_to = false;
 }
