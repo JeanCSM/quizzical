@@ -42,26 +42,39 @@
 	
 		{validation_errors('<div class="error">', '</div>')}
 		
-		{if allowed_to('edit_user_name')}
-		<label>Name</label>
-		<input type="text" class="text" name="name"
-			   value="{$user->username|form_prep}" />
-		<br />
-		{else}
-		<label>Name</label>
-		<div class="field-text">{$user->username}</div>
-		<span class="extra">
-			You are not allowed to change your own name.  If you need your name
-			to be changed, please contact an administrator.
-		</span>
+		{if allowed_to('view', 'user_name', $user)}
+			{if allowed_to('edit', 'user_name', $user)}
+			<label>Name</label>
+			<input type="text" class="text" name="name"
+				   value="{$user->username|form_prep}" />
+			<br />
+			{else}
+			<label>Name</label>
+			<div class="field-text">{$user->username}</div>
+			<span class="extra">
+				You are not allowed to change your own name.  If you need your name
+				to be changed, please contact an administrator.
+			</span>
+			{/if}
+		{/if}
+		
+		{if allowed_to('view', 'user_email', $user)}
+			{if allowed_to('edit', 'user_email', $user)}
+			<label>Email</label>
+			<input type="text" class="text" name="email"
+				   value="{$user->email|form_prep}" />
+			<br />
+			{else}
+			<label>Email</label>
+			<div class="field-text">{$user->email}</div>
+			<span class="extra">
+				You are not allowed to change your own email address.  If you need
+				your email address to be changed, please contact an administrator.
+			</span>
+			{/if}
 		{/if}
 
-		<label>Email</label>
-		<input type="text" class="text" name="email"
-			   value="{$user->email|form_prep}" />
-		<br />
-
-		{if allowed_to('view_user_ip')}
+		{if allowed_to('view', 'user_ip', $user)}
 		<label>Location</label>
 		<div class="field-text">
 			{$user->ip_address}
@@ -73,27 +86,30 @@
 		<br />
 		{/if}
 
-		{if $profile->id != $user->id && allowed_to('edit_user_group')}
-		<label>Group</label>
-		<select name="group">
-			{foreach $groups group}
-			<option value="{$group->id}"
-				{tif $group->id == $user->group_id ? 'selected="selected"'}
-				>{$group->name|capitalize}</option>
-			{/foreach}
-		</select>
-		{else}
-		<label>Group</label>
-		<div class="field-text">{$user->group|capitalize}</div>
-		<span class="extra">
-			You are not allowed to edit your own group.  If you need more access
-			privileges to various parts of the application, please contact an
-			administrator.
-		</span>
+		{if allowed_to('view', 'user_group', $user)}
+			{if allowed_to('edit', 'user_group', $user)}
+			<label>Group</label>
+			<select name="group">
+				{foreach $groups group}
+				<option value="{$group->id}"
+					{tif $group->id == $user->group_id ? 'selected="selected"'}
+					>{$group->name|capitalize}</option>
+				{/foreach}
+			</select>
+			{else}
+			<label>Group</label>
+			<div class="field-text">{$user->group|capitalize}</div>
+			<span class="extra">
+				You are not allowed to edit your own group.  If you need more access
+				privileges to various parts of the application, please contact an
+				administrator.
+			</span>
+			{/if}
 		{/if}
 	</div>
 
 	<div class="grid_3">
+		{if allowed_to('edit', 'user_password', $user)}
 		<div class="aside">
 			<h4>Reset Password</h4>
 			<div class="aside-content">
@@ -106,19 +122,24 @@
 				</div>
 			</div>
 		</div>
+		{/if}
 	</div>
 	
 	<div class="clear">&nbsp;</div>
 	
 	<div class="save-or-delete">
+		{if allowed_to('edit', 'user', $user)}
 		<div class="grid_6">
 			<input type="submit" class="button" value="Save Changes" />
 		</div>
+		{/if}
 		
+		{if allowed_to('delete', 'user', $user)}
 		<div class="grid_3 suffix_3">
 			<a href="{$site_url}/account/send/delete/[token]" class="delete account">
 				Delete Account</a>
 		</div>
+		{/if}
 	</div>
 </form>
 

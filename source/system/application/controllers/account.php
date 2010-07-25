@@ -100,18 +100,16 @@ class Account extends MY_Controller {
 		// check to see if any edits were submitted (and then try to apply
 		// them), then display the user editing page; otherwise, show an access
 		// denied page
-		if (($this->powers->i_can('view_all_users') &&
-			$this->powers->i_can('edit_user')) ||
-			$id == $this->profile->id) {
-			
+		if ($this->powers->i_can('view', 'user', $profile) ||
+			$this->powers->i_can('edit', 'user', $profile)) {
 			if ($this->form_validation->run()) {
 				$this->Users_model->update(
 					$id,
-					($this->powers->i_can('edit_user_group')) ?
+					($this->powers->i_can('edit', 'user_name', $profile)) ?
 						$this->input->post('name', true) : false,
-					$this->input->post('email', true),
-					($id != $this->profile->id &&
-					 $this->powers->i_can('edit_user_group')) ?
+					($this->powers->i_can('edit', 'user_email', $profile)) ?
+						$this->input->post('email', true) : false,
+					($this->powers->i_can('edit', 'user_group', $profile)) ?
 						$this->input->post('group', true) : false
 				);
 			}
@@ -121,8 +119,8 @@ class Account extends MY_Controller {
 			$this->dwootemplate->display('account/settings.tpl');
 		} else if ($this->profile) {
 			show_error('Your account doesn\'t have the appropriate permissions
-				to view that user\'s profile page.  If you think that you should
-				have access, please contact the administrator.', 403);
+				to view that page.  If you think that you should have access,
+				please contact the administrator.', 403);
 		} else {
 			show_error('You need to be logged in in order to be allowed to see
 				this page on the website.  This page also requires special user
