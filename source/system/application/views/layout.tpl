@@ -64,7 +64,7 @@
 
 				{block "nav"}
 				<ul class="user-bar">
-					{if allowed_to('view_admin_section')}
+					{if allowed_to('view', 'admin_section')}
 					<li><a href="{$site_url}/admin">Admin</a></li>
 					{/if}
 
