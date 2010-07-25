@@ -100,9 +100,9 @@ class Account extends MY_Controller {
 		// check to see if any edits were submitted (and then try to apply
 		// them), then display the user editing page; otherwise, show an access
 		// denied page
-		if ($this->powers->i_can('view', 'user', $profile) ||
-			$this->powers->i_can('edit', 'user', $profile)) {
-			if ($this->form_validation->run()) {
+		if ($this->powers->i_can('view', 'user', $profile)) {
+			if ($this->form_validation->run() &&
+				$this->powers->i_can('edit', 'user', $profile)) {
 				$this->Users_model->update(
 					$id,
 					($this->powers->i_can('edit', 'user_name', $profile)) ?
