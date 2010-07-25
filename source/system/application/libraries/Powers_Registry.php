@@ -39,12 +39,6 @@ class Powers_Registry {
     private $powers = array();
     private $CI = false;
     
-    public function __construct () {
-        // Make sure we have loaded the Powers library into CodeIgniter
-        $this->CI =& get_instance();
-        $this->CI->load->library('Powers');
-    }
-    
     public function register ($power) {
         // Add the power object into the private array
         array_push($powers, $power);
