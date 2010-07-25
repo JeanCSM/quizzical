@@ -39,7 +39,7 @@ function Dwoo_Plugin_percentage (Dwoo $dwoo, $correct, $total) {
 	return round(($correct / $total) * 100);
 }
 
-function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $power) {
+function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $action, $item, $user=null) {
 	$CI =& get_instance();
-	return $CI->powers->i_can($power);
+	return $CI->powers->i_can($action, $item, $user);
 }
