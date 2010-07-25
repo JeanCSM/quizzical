@@ -94,6 +94,18 @@
 	</div>
 
 	<div class="grid_3">
+		<div class="aside">
+			<h4>Reset Password</h4>
+			<div class="aside-content">
+				<p class="aside-row">
+					We can send you an email with a <em>unique verification link</em>
+					to your password reset form.
+				</p>
+				<div class="aside-row more">
+					<a href="{$site_url}/account/send/reset/[token]">Send Reset Email</a>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<div class="clear">&nbsp;</div>
