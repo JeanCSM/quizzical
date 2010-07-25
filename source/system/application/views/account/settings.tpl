@@ -36,12 +36,12 @@
 {extends "../layout.tpl"}
 
 {block "content"}
-<div class="grid_6 prefix_3 suffix_3">
-	<h2>Account</h2>
-
-	{validation_errors('<div class="error">', '</div>')}
-
-	<form method="post" action="{$current_url}">
+<form method="post" action="{$current_url}">
+	<div class="grid_9">
+		<h2>Account</h2>
+	
+		{validation_errors('<div class="error">', '</div>')}
+		
 		{if allowed_to('edit_user_name')}
 		<label>Name</label>
 		<input type="text" class="text" name="name"
@@ -91,8 +91,19 @@
 			administrator.
 		</span>
 		{/if}
+	</div>
 
-		<input type="submit" class="button" value="Save Changes" />
-	</form>
-</div>
+	<div class="grid_3">
+	</div>
+	
+	<div class="clear">&nbsp;</div>
+	
+	<div class="save-or-delete">
+		<div class="grid_6">
+			<input type="submit" class="button" value="Save Changes" />
+		</div>
+		
+		</div>
+</form>
+
 {/block}
