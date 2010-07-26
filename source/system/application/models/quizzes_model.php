@@ -38,11 +38,16 @@
 class Quizzes_model extends Model {
 	
 	function get_where_published () {
-		return $this->db->get_where('quizzes', array('published' => true));
+		return $this->db->get_where(
+			'quizzes',
+			array(
+				'published' => true
+			)
+		)->result();
 	}
 	
 	function get () {
-		return $this->db->get('quizzes');
+		return $this->db->get('quizzes')->result();
 	}
 	
 }
