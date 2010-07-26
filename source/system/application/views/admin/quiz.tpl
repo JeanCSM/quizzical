@@ -81,7 +81,7 @@
 </div>
 
 <div class="grid_7">
-	{if isset($questions) && isset($quiz)}
+	{if isset($questions) && count($questions) > 0 && isset($quiz)}
 	<ol id="editor">
 		{foreach $questions question}
 		<li class="question">
