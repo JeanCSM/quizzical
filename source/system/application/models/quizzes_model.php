@@ -43,7 +43,7 @@ class Quizzes_model extends Model {
 			array(
 				'published' => true
 			)
-		)->result();
+		);
 	}
 	
 	function get_where_id ($id) {
@@ -52,11 +52,11 @@ class Quizzes_model extends Model {
 			array(
 				'id' => $id
 			)
-		)->row();
+		);
 	}
 	
 	function get () {
-		return $this->db->get('quizzes')->result();
+		return $this->db->get('quizzes');
 	}
 	
 	function create ($title, $summary, $published, $tries) {

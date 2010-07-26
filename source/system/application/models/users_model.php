@@ -77,9 +77,7 @@ class Users_model extends Model {
 		
 		$this->db->select($identity);
 		$this->db->where('id', $id);
-		$result = $this->db->get('users');
-		
-		return ($result->num_rows() > 0) ? $result->row() : false;
+		return $this->db->get('users');
 	}
 	
 }

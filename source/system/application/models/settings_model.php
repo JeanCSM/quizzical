@@ -36,6 +36,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Settings_model extends Model {
+	
 	function create ($name, $value) {
 		$this->db->insert(
 			'settings',
@@ -45,4 +46,5 @@ class Settings_model extends Model {
 			)
 		);
 	}
+	
 }

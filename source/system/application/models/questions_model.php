@@ -43,7 +43,7 @@ class Questions_model extends Model {
 			array(
 				'quiz' => $quiz_id
 			)
-		)->result();
+		);
 	}
 	
 }

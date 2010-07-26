@@ -44,7 +44,7 @@ class Answers_model extends Model {
 				'quiz' => $quiz_id,
 				'question' => $question_id
 			)
-		)->result();
+		);
 	}
 	
 }
