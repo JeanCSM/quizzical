@@ -57,7 +57,7 @@ class Admin extends MY_Controller {
 		$this->load->model('Quizzes_model');
 		
 		// Load all of the quizzes in the database and display the quizzes page
-		$this->dwootemplate->assign('quizzes', $this->Quizzes_model->get());
+		$this->dwootemplate->assign('quizzes', $this->Quizzes_model->get()->result());
 		$this->dwootemplate->assign('selected_section', 'quizzes');
 		$this->dwootemplate->display('admin/quizzes.tpl');
 	}
@@ -86,9 +86,9 @@ class Admin extends MY_Controller {
 			case 'update':
 				// Retrieve existing data regarding the quiz
 				$this->dwootemplate->assign('quiz',
-					$this->Quizzes_model->get_where_id($id));
+					$this->Quizzes_model->get_where_id($id)->row());
 				$this->dwootemplate->assign('questions',
-					$this->Questions_model->get_where_quiz($id));
+					$this->Questions_model->get_where_quiz($id)->result());
 				
 				// If validation passed, push the changes into the database
 				if ($this->form_validation->run()) {

@@ -88,12 +88,12 @@ class Account extends MY_Controller {
 		} else {
 			$identity = $this->Users_model->get_identity_where_id($id);
 			
-			if (!$id) {
+			if ($identity->num_rows() == 0) {
 				show_404();
 				return;
 			}
 			
-			$profile = $this->ion_auth->profile($identity);
+			$profile = $this->ion_auth->profile($identity->row()->identity);
 		}
 		
 		// If the user has the appropriate credentials to see the profile page,
