@@ -94,10 +94,10 @@ class Admin extends MY_Controller {
 				if ($this->form_validation->run()) {
 					$this->Quizzes_model->update(
 						$id,
-						$input->type->post('title', true),
-						$input->type->post('summary', true),
-						$input->type->post('published', true) != false,
-						$input->type->post('tries', true)
+						$this->input->post('title', true),
+						$this->input->post('summary', true),
+						$this->input->post('published', true) != false,
+						$this->input->post('tries', true)
 					);
 				}
 				
@@ -112,10 +112,10 @@ class Admin extends MY_Controller {
 					// and redirect the user over to a page to continue adding
 					// questions to that quiz
 					$this->Quizzes_model->create(
-						$input->type->post('title', true),
-						$input->type->post('summary', true),
-						$input->type->post('published', true) != false,
-						$input->type->post('tries', true)
+						$this->input->post('title', true),
+						$this->input->post('summary', true),
+						$this->input->post('published', true) != false,
+						$this->input->post('tries', true)
 					);
 					
 					redirect('admin/quiz/edit/'. $this->db->insert_id());
