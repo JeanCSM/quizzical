@@ -38,7 +38,7 @@
 class Questions_model extends Model {
 	
 	function get_where_quiz ($quiz_id) {
-		return $this->get_where(
+		return $this->db->get_where(
 			'questions',
 			array(
 				'quiz' => $quiz_id
