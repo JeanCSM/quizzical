@@ -73,7 +73,7 @@ class Admin extends MY_Controller {
 		// If the quiz is being created or edited, add validation rules; those
 		// two actions use the same form and thus use the same form validation
 		// rules in the same way
-		if ($action == 'update' || $action == 'edit') {
+		if ($action == 'edit' || $action == 'create') {
 			$this->form_validation->add_rules('title', 'Title', 'required');
 			$this->form_validation->add_rules('tries', 'Max Tries', 'integer');
 		}
@@ -83,7 +83,7 @@ class Admin extends MY_Controller {
 		$this->dwootemplate->assign('selected_section', 'quizzes');
 		
 		switch ($action) {
-			case 'update':
+			case 'edit':
 				// Retrieve existing data regarding the quiz
 				$this->dwootemplate->assign('quiz',
 					$this->Quizzes_model->get_where_id($id)->row());
