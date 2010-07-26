@@ -96,7 +96,7 @@ class Admin extends MY_Controller {
 						$id,
 						$input->type->post('title', true),
 						$input->type->post('summary', true),
-						$input->type->post('published', true),
+						$input->type->post('published', true) != false,
 						$input->type->post('tries', true)
 					);
 				}
@@ -114,7 +114,7 @@ class Admin extends MY_Controller {
 					$this->Quizzes_model->create(
 						$input->type->post('title', true),
 						$input->type->post('summary', true),
-						$input->type->post('published', true),
+						$input->type->post('published', true) != false,
 						$input->type->post('tries', true)
 					);
 					
