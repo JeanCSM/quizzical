@@ -59,4 +59,29 @@ class Quizzes_model extends Model {
 		return $this->db->get('quizzes')->result();
 	}
 	
+	function create ($title, $summary, $published, $tries) {
+		$this->db->insert(
+			'quizzes',
+			array(
+				'title' => $title,
+				'summary' => $summary,
+				'published' => $published,
+				'tries' => $tries
+			)
+		);
+	}
+	
+	function update ($id, $title, $summary, $published, $tries) {
+		$this->db->where(array('id' => $id));
+		$this->db->update(
+			'quizzes',
+			array(
+				'title' => $title,
+				'summary' => $summary,
+				'published' => $published,
+				'tries' => $tries
+			)
+		);
+	}
+	
 }
