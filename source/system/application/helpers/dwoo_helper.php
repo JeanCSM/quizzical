@@ -44,6 +44,10 @@ function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $action, $item, $user=null) {
 	return $CI->powers->i_can($action, $item, $user);
 }
 
+function Dwoo_Plugin_get_question_answers (Dwoo $dwoo, $quiz_id, $question_id) {
+	return array();
+}
+
 function show_access_denied () {
 	$CI =& get_instance();
 	
