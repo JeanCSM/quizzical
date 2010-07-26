@@ -66,7 +66,7 @@ class Quizzes_model extends Model {
 				'title' => $title,
 				'summary' => $summary,
 				'published' => $published,
-				'tries' => $tries
+				'tries' => ($tries == '') ? -1 : $tries
 			)
 		);
 	}
@@ -79,7 +79,7 @@ class Quizzes_model extends Model {
 				'title' => $title,
 				'summary' => $summary,
 				'published' => $published,
-				'tries' => $tries
+				'tries' => ($tries == '') ? -1 : $tries
 			)
 		);
 	}
