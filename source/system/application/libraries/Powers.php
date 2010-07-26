@@ -70,7 +70,7 @@ class Powers {
 
 	public function i_can ($action, $item, $user = null) {
 		// Give the first user full access to the website
-		if ($this->user->id == 1) {
+		if (is_object($this->user) && $this->user->id == 1) {
 			return true;
 		}
 		
