@@ -35,28 +35,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-class Quizzes_model extends Model {
+class Answers_model extends Model {
 	
-	function get_where_published () {
-		return $this->db->get_where(
-			'quizzes',
+	function get_where_quiz_and_question ($quiz_id, $question_id) {
+		return $this->get_where(
+			'answers',
 			array(
-				'published' => true
+				'quiz' => $quiz_id,
+				'question' => $question_id
 			)
 		)->result();
-	}
-	
-	function get_where_id ($id) {
-		return $this->db->get_where(
-			'quizzes',
-			array(
-				'id' => $id
-			)
-		)->row();
-	}
-	
-	function get () {
-		return $this->db->get('quizzes')->result();
 	}
 	
 }
