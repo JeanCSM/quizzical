@@ -74,8 +74,8 @@ class Admin extends MY_Controller {
 		// two actions use the same form and thus use the same form validation
 		// rules in the same way
 		if ($action == 'edit' || $action == 'create') {
-			$this->form_validation->add_rules('title', 'Title', 'required');
-			$this->form_validation->add_rules('tries', 'Max Tries', 'integer');
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
 		}
 		
 		// Make sure to set the selected section of the admin subnavigation to
