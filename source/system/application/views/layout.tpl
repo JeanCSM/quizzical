@@ -83,7 +83,30 @@
 		</div>
 	</div>
 
-	{block "subnav"}{/block}
+	{block "subnav"}
+	{if isset($sections)}
+	<div class="navigation">
+		<div class="container_12">
+			<div class="grid_12">
+				<ul>
+				{foreach $sections name method}
+					<li class="{tif $selected_section == $method ? 'selected'}">
+						<a href="{$site_url}/admin/{$method}">{$name}</a>
+						<span class="pointer">&nbsp;</span>
+					</li>
+				{/foreach}
+				</ul>
+			
+			<div class="clear">&nbsp;</div>
+			</div>
+		
+			<div class="clear">&nbsp;</div>
+		</div>
+	</div>
+
+	<div class="clear">&nbsp;</div>
+	{/if}
+	{/block}
 
 	<div class="content container_12">
 		{block "content"}{/block}
