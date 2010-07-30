@@ -84,11 +84,6 @@ class Admin extends MY_Controller {
 		
 		switch ($action) {
 			case 'edit':
-				// Retrieve existing data regarding the quiz
-				$this->dwootemplate->assign('quiz',
-					$this->Quizzes_model->get_where_id($id)->row());
-				$this->dwootemplate->assign('questions',
-					$this->Questions_model->get_where_quiz($id)->result());
 				
 				// If validation passed, push the changes into the database
 				if ($this->form_validation->run()) {
@@ -101,6 +96,11 @@ class Admin extends MY_Controller {
 					);
 				}
 				
+				// Retrieve existing data regarding the quiz
+				$this->dwootemplate->assign('quiz',
+					$this->Quizzes_model->get_where_id($id)->row());
+				$this->dwootemplate->assign('questions',
+					$this->Questions_model->get_where_quiz($id)->result());
 				// Display the quiz editing form so the user can make changes
 				$this->dwootemplate->assign('action', 'edit');
 				$this->dwootemplate->display('admin/quiz.tpl');
