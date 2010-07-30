@@ -74,6 +74,10 @@ class Admin extends MY_Controller {
 		// the "Quizzes" section
 		$this->dwootemplate->assign('selected_section', 'quizzes');
 		
+		// Set the form name for use with nonces
+		$form_name = "quiz_{$action}";
+		$this->dwootemplate->assign('form_name', $form_name);
+		
 		switch ($action) {
 			case 'edit':
 				$this->form_validation->set_rules('title', 'Title', 'required');
@@ -124,6 +128,41 @@ class Admin extends MY_Controller {
 					$this->dwootemplate->assign('action', 'create');
 					$this->dwootemplate->display('admin/quiz.tpl');
 				}
+				break;
+			case 'delete':
+				$this->form_validation->set_rules('token',
+					'Validation Token',
+					"required|valid_nonce[time][{$form_name}]"
+				);
+				
+				if ($this->form_validation->run()) {
+					// Delete the quiz from the database and redirect back to
+					// the quizzes page
+					$this->Quizzes_model->delete($id);
+					redirect('admin/quizzes');
+				} else {
+					// Retrieve existing data regarding the quiz and create
+					// a confirmation message for the quiz deletion
+					$quiz = $this->Quizzes_model->get_where_id($id)->row();
+					$message = "Are you sure that you would like to delete the
+					quiz, {$quiz->title}?  This cannot be undone.";
+					
+					// Display a confirmation page with that message
+					$this->dwootemplate->assign('message', $message);
+					$this->dwootemplate->display('admin/confirm.tpl');
+				}
+				break;
+		}
+	}
+	
+	function question ($action) {
+		$id = $this->uri->segment(4);
+		
+		switch ($action) {
+			case 'create':
+			case 'update':
+				break;
+			case 'delete':
 				break;
 		}
 	}

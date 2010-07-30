@@ -1,6 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
-
-/* ***** BEGIN LICENSE BLOCK *****
+{* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
  * The contents of this file are subject to the Mozilla Public License Version
@@ -16,7 +14,7 @@
  * The Original Code is Quizzical.
  *
  * The Initial Developer of the Original Code is Jonathan Wilde.
- * Portions created by the Initial Developer are Copyright (C) 2010
+ * Portions created by the Initial Developer are Copyright (C) 2009 - 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -33,59 +31,22 @@
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
- * ***** END LICENSE BLOCK ***** */
+ * ***** END LICENSE BLOCK ***** *}
+ 
+{extends "../layout.tpl"}
 
-class Quizzes_model extends Model {
-	
-	function get_where_published () {
-		return $this->db->get_where(
-			'quizzes',
-			array(
-				'published' => true
-			)
-		);
-	}
-	
-	function get_where_id ($id) {
-		return $this->db->get_where(
-			'quizzes',
-			array(
-				'id' => $id
-			)
-		);
-	}
-	
-	function get () {
-		return $this->db->get('quizzes');
-	}
-	
-	function create ($title, $summary, $published, $tries) {
-		$this->db->insert(
-			'quizzes',
-			array(
-				'title' => $title,
-				'summary' => $summary,
-				'published' => $published,
-				'tries' => ($tries == '') ? -1 : $tries
-			)
-		);
-	}
-	
-	function update ($id, $title, $summary, $published, $tries) {
-		$this->db->where(array('id' => $id));
-		$this->db->update(
-			'quizzes',
-			array(
-				'title' => $title,
-				'summary' => $summary,
-				'published' => $published,
-				'tries' => ($tries == '') ? -1 : $tries
-			)
-		);
-	}
-	
-	function delete ($id) {
-		$this->db->delete('quizzes', array('id' => $id));
-	}
-	
-}
+{block "content"}
+{validation_errors()}
+
+<div class="prefix_3 suffix_3 grid_6">
+	<h2>Are you sure?</h2>
+    <div class="message">
+        {$message}
+    </div>
+	<form method="post" action="{$current_url}" class="submit-or-cancel">
+		<input type="submit" class="button" value="Go Ahead" />
+		or <a href="{$site_url}admin">Cancel</a>
+	</form>
+	{nonce_fields($form_name)}
+</div>
+{/block}
