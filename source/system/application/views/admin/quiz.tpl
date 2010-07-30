@@ -51,9 +51,7 @@
 		<br />
 		
 		<label>Summary</label>
-		<textarea name="summary" class="text-aside">
-			{tif isset(quiz) ? $quiz->summary}
-		</textarea>
+		<textarea name="summary" class="text-aside">{tif isset(quiz) ? $quiz->summary}</textarea>
 		<br />
 		
 		<label class="checkbox">Public</label>
