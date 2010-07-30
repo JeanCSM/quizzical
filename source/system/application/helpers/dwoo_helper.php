@@ -52,6 +52,39 @@ function Dwoo_Plugin_unint_tries (Dwoo $dwoo, $raw) {
 	return ($raw == -1) ? '' : $raw;
 }
 
+function generate_nonce ($form, $time) {
+	$CI =& get_instance();
+	return md5($CI->config->item('encryption_key') .
+		   $time . $form . $CI->input->ip_address());
+}
+
+function validate_nonce ($nonce, $form, $time) {
+	return (time() - $time) < 1800 &&
+		   generate_nonce($form, $time) == $nonce;
+}
+
+function valid_nonce ($nonce, $form, $time_field) {
+	$CI =& get_instance();
+	$time = $CI->input->post($time_field);
+	
+	if (!validate_nonce($nonce, $form, $time)) {
+		$CI->form_validation->set_message('valid_nonce',
+			'The access validation token was not valid.  Did a potentially
+			malicious user redirect you here?');
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function nonce_fields ($form) {
+	$time = time();
+	$nonce = generate_nonce($form, $time);
+	
+	return "<input type=\"hidden\" name=\"token\" value=\"$nonce\" />" .
+		   "<input type=\"hidden\" name=\"time\" value=\"$time\" />";
+}
+
 function show_access_denied () {
 	$CI =& get_instance();
 	
