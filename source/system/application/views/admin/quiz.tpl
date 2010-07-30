@@ -63,7 +63,7 @@
 		
 		<label>Max. Tries</label>
 		<input type="text" class="text text-small" name="tries"
-			   value="{tif isset($quiz) ? $quiz->tries}" />
+			   value="{tif isset($quiz) ? unint_tries($quiz->tries)}" />
 		<span class="details">
 			Leave this blank to give the user unlimited tries.
 		</span>
