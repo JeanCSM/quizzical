@@ -50,7 +50,7 @@
 		</div>
 		
 		<div class="grid_10 omega">
-			<a class="edit" href="{$site_url}/admin/quiz/edit/{$quiz->id}"; ?>">
+			<a class="edit" href="{$site_url}/admin/quiz/edit/{$quiz->id}">
 				Edit
 			</a>
 			
