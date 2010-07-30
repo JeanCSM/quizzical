@@ -70,20 +70,14 @@ class Admin extends MY_Controller {
 		// Try to determine the id of the quiz being edited/deleted
 		$id = $this->uri->segment(4);
 		
-		// If the quiz is being created or edited, add validation rules; those
-		// two actions use the same form and thus use the same form validation
-		// rules in the same way
-		if ($action == 'edit' || $action == 'create') {
-			$this->form_validation->set_rules('title', 'Title', 'required');
-			$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
-		}
-		
 		// Make sure to set the selected section of the admin subnavigation to
 		// the "Quizzes" section
 		$this->dwootemplate->assign('selected_section', 'quizzes');
 		
 		switch ($action) {
 			case 'edit':
+				$this->form_validation->set_rules('title', 'Title', 'required');
+				$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
 				
 				// If validation passed, push the changes into the database
 				if ($this->form_validation->run()) {
@@ -101,12 +95,16 @@ class Admin extends MY_Controller {
 					$this->Quizzes_model->get_where_id($id)->row());
 				$this->dwootemplate->assign('questions',
 					$this->Questions_model->get_where_quiz($id)->result());
+				
 				// Display the quiz editing form so the user can make changes
 				$this->dwootemplate->assign('action', 'edit');
 				$this->dwootemplate->display('admin/quiz.tpl');
 				
 				break;
 			case 'create':
+				$this->form_validation->set_rules('title', 'Title', 'required');
+				$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
+				
 				if ($this->form_validation->run()) {
 					// If validation passed, push the new quiz into the database
 					// and redirect the user over to a page to continue adding
