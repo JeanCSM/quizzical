@@ -132,7 +132,7 @@ class Admin extends MY_Controller {
 			case 'delete':
 				$this->form_validation->set_rules('token',
 					'Validation Token',
-					"required|valid_nonce[time][{$form_name}]"
+					"required|callback_valid_nonce[time][{$form_name}]"
 				);
 				
 				if ($this->form_validation->run()) {
