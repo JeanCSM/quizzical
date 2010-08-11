@@ -1,0 +1,12 @@
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "modules/database"]
+	path = modules/database
+	url = git://github.com/kohana/database.git
+[submodule "modules/pagination"]
+	path = modules/pagination
+	url = http://github.com/kohana/pagination.git
+[submodule "modules/auth"]
+	path = modules/auth
+	url = http://github.com/kohana/auth.git
