@@ -47,6 +47,7 @@
 	<property name="v_ci" value="1.7.2" /> 		<!-- CodeIgniter -->
 	<property name="v_dwoo" value="1-1-1" />	<!-- Dwoo Templates -->
 	<property name="v_ion" value="13576c3" />	<!-- Ion Auth -->
+	<property name="v_csrf" value="cac8719" />		<!-- CI CSRF -->
 
 	<target name="fetch">
 		<!-- Dwoo Templates -->
@@ -62,6 +63,11 @@
 			 dest="${packages}/ion.zip" />
 
 		<unzip src="${packages}/ion.zip" dest="${packages}/ion" />
+
+	    <!-- CI CSRF -->
+		<get src="http://github.com/dhorrigan/codeigniter-csrf/zipball/${v_csrf}"
+			 dest="${packages}/csrf.zip" />
+		<unzip src="${packages}/csrf.zip" dest="${packages}/csrf" />
 
 		<!-- CodeIgniter -->
 		<get src="http://www.codeigniter.com/download_files/CodeIgniter_${v_ci}.zip"
@@ -114,6 +120,14 @@
 				<include name="libraries/**" />
 				<include name="models/**" />
 				<include name="views/**" />
+			</fileset>
+		</copy>
+		
+		<!-- CI CSRF -->
+		<copy todir="${build}/system/application">
+			<fileset dir="${packages}/csrf/dhorrigan-codeigniter-csrf-${v_csrf}">
+				<include name="helpers/**" />
+				<include name="libraries/**" />
 			</fileset>
 		</copy>
 
