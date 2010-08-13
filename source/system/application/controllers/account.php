@@ -50,10 +50,11 @@ class Account extends MY_Controller {
 			'Password',
 			'required|callback_attempt_login[email]');
 
-		if (!$this->form_validation->run()) {
 		// ---
 		// Try to log in
+		// Note: THIS IS NOT CSRF-VALIDATED
 		// ---
+		if ( ! $this->form_validation->run('', false))
 		{
 			$this->dwootemplate->display('account/login.tpl');
 		}
