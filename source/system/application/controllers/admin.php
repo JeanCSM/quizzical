@@ -130,16 +130,11 @@ class Admin extends MY_Controller {
 				}
 				break;
 			case 'delete':
-				$this->form_validation->set_rules('token',
-					'Validation Token',
-					"required|callback_valid_nonce[time][{$form_name}]"
-				);
-				
 				if ($this->form_validation->run()) {
 					// Delete the quiz from the database and redirect back to
 					// the quizzes page
-					$this->Quizzes_model->delete($id);
-					redirect('admin/quizzes');
+					//$this->Quizzes_model->delete($id);
+					//redirect('admin/quizzes');
 				} else {
 					// Retrieve existing data regarding the quiz and create
 					// a confirmation message for the quiz deletion
