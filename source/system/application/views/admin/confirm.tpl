@@ -46,7 +46,7 @@
 	<form method="post" action="{$current_url}" class="submit-or-cancel">
 		{nonce_fields($form_name)}
 		<input type="submit" class="button" value="Go Ahead" />
-		or <a href="{$site_url}admin">Cancel</a>
+		or <a href="{$site_url}/admin">Cancel</a>
 	</form>
 </div>
 {/block}
