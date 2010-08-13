@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,20 +36,28 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Quiz extends MY_Controller {
-
-	function index () {
+	function index ()
+	{
 		$this->load->model('Quizzes_model');
 		$this->load->model('Results_model');
 		
-		if (!$this->profile) {
+		if (!$this->profile)
+		{
+			// ---
 			// The user is not logged in--display the homepage that lets the
 			// user log in to their account or register
+			// ---
 			$this->dwootemplate->display('home.tpl');
-		} else {
+		}
+		else
+		{
+			// ---
 			// The user is logged in--load the list of quizzes and results and
 			// display a dashboard for the user
+			// ---
 			$quizzes = $this->Quizzes_model->get_where_published();
-			$results = $this->Results_model->get_where_user($this->profile->id, 3);
+			$results = $this->Results_model->get_where_user($this->profile->id,
+				3);
 			
 			$this->dwootemplate->assign('quizzes', $quizzes->result());
 			$this->dwootemplate->assign('results', $results->result());
@@ -58,5 +66,4 @@ class Quiz extends MY_Controller {
 			$this->dwootemplate->display('dashboard.tpl');
 		}
 	}
-	
 }

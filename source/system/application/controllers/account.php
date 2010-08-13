@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -131,7 +131,7 @@ class Account extends MY_Controller {
 		// ---
 		if ($this->powers->i_can('view', 'user', $profile))
 		{
-			if ($this->form_validation->run() &&
+			if ($this->form_validation->run() and
 				$this->powers->i_can('edit', 'user', $profile))
 			{
 				$this->Users_model->update($id,

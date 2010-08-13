@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,14 +36,15 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Install extends Controller {
-
-	function __construct () {
+	function __construct ()
+	{
 		parent::__construct();
 
-		if ($this->db->table_exists('users')) {
-			exit('Quizzical is already installed.  Delete the tables
-			related to Quizzical (or choose a different database prefix)
-			to reinstall Quizzical.');
+		if ($this->db->table_exists('users'))
+		{
+			exit('Quizzical is already installed.  Delete the tables '
+			   . 'related to Quizzical (or choose a different database prefix)'
+			   . 'to reinstall Quizzical.');
 		}
 	}
 
@@ -66,22 +67,45 @@ class Install extends Controller {
 		$pass_min = $this->config->item('min_password_length', 'ion_auth');
 		$pass_max = $this->config->item('max_password_length', 'ion_auth');
 
-		$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('name', 'First &amp; Last Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', "trim|required|matches[password_again]|min_length[$pass_min]|max_length[$pass_max]");
-		$this->form_validation->set_rules('password_again', 'Password (Again)', 'trim|required');
+		// ---
+		// Set validation rules
+		// ---
+		$this->form_validation->set_rules('title',
+			'Title',
+			'trim|required|xss_clean');
+		$this->form_validation->set_rules('name',
+			'First &amp; Last Name',
+			'trim|required|xss_clean');
+		$this->form_validation->set_rules('email',
+			'Email',
+			'trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('password',
+			'Password',
+			"trim|required|matches[password_again]|min_length[$pass_min]|"
+		  . "max_length[$pass_max]");
+		$this->form_validation->set_rules('password_again',
+			'Password (Again)',
+			'trim|required');
 
-		if (!$this->form_validation->run()) {
+		if (!$this->form_validation->run())
+		{
+			// ---
 			// The validation didn't pass--display the installer page
+			// ---
 			$this->dwootemplate->display('install/install.tpl');
-		} else {
+		}
+		else
+		{
+			// ---
 			// The validation passed--try to install the latest version
 			// of the schema into the database
+			// ---
 			$version = $this->schema->latest();
 			$this->schema->migrate($version);
 
+			// ---
 			// Add the administrator user account to the database
+			// ---
 			$this->Users_model->create(
 				$this->input->post('name'),
 				$this->input->post('email'),
@@ -90,14 +114,18 @@ class Install extends Controller {
 				false
 			);
 
+			// ---
 			// Add the title setting to the database
+			// ---
 			$this->Settings_model->create(
 				'site_title',
 				$this->input->post('title')
 			);
 
+			// ---
 			// Display a page telling the user that the installation is
 			// complete and all they have to do is log in
+			// ---
 			$this->dwootemplate->display('install/confirm_install.tpl');
 		}
 	}
