@@ -36,26 +36,43 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Account extends MY_Controller {
-
-	function login () {
+	function login ()
+	{
 		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'required|callback_attempt_login[email]');
+		
+		// ---
+		// Set up validation rules
+		// ---
+		$this->form_validation->set_rules('email',
+			'Email',
+			'required|valid_email');
+		$this->form_validation->set_rules('password',
+			'Password',
+			'required|callback_attempt_login[email]');
 
 		if (!$this->form_validation->run()) {
+		// ---
+		// Try to log in
+		// ---
+		{
 			$this->dwootemplate->display('account/login.tpl');
-		} else {
+		}
+		else
+		{
 			redirect($this->input->post('redirect', true));
 		}
 	}
 
-	function attempt_login ($password, $email_field) {
+	function attempt_login ($password, $email_field)
+	{
 		$email = $this->input->post($email_field);
 
-		if ($this->ion_auth->login($email, $password)) {
+		if ($this->ion_auth->login($email, $password))
+		{
 			return true;
-		} else {
+		}
+		else
+		{
 			$this->form_validation->set_message('attempt_login',
 				'The email and/or password that you entered were/was incorrect.');
 			return false;
@@ -70,25 +87,34 @@ class Account extends MY_Controller {
 		redirect();
 	}
 	
-	function details ($id = -1) {
+	function details ($id = -1)
+	{
 		$this->load->model('Users_model');
 		$this->load->model('Groups_model');
 		$this->load->library('form_validation');
 		
-		// Define our configuration for the form_validation library in CI
+		// ---
+		// Set up validation rules
+		// ---
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		$this->form_validation->set_rules('group', 'Group', 'integer');
 		
+		// ---
 		// Try to grab the profile information for the user specified in the
 		// URL path; if that profile doesn't exist, display a 404 error page
-		if ($id == -1) {
+		// ---
+		if ($id == -1)
+		{
 			$profile = $this->profile;
 			$id = $this->profile->id;
-		} else {
+		}
+		else
+		{
 			$identity = $this->Users_model->get_identity_where_id($id);
 			
-			if ($identity->num_rows() == 0) {
+			if ($identity->num_rows() == 0)
+			{
 				show_404();
 				return;
 			}
@@ -96,15 +122,18 @@ class Account extends MY_Controller {
 			$profile = $this->ion_auth->profile($identity->row()->identity);
 		}
 		
+		// ---
 		// If the user has the appropriate credentials to see the profile page,
 		// check to see if any edits were submitted (and then try to apply
 		// them), then display the user editing page; otherwise, show an access
 		// denied page
-		if ($this->powers->i_can('view', 'user', $profile)) {
+		// ---
+		if ($this->powers->i_can('view', 'user', $profile))
+		{
 			if ($this->form_validation->run() &&
-				$this->powers->i_can('edit', 'user', $profile)) {
-				$this->Users_model->update(
-					$id,
+				$this->powers->i_can('edit', 'user', $profile))
+			{
+				$this->Users_model->update($id,
 					($this->powers->i_can('edit', 'user_name', $profile)) ?
 						$this->input->post('name', true) : false,
 					($this->powers->i_can('edit', 'user_email', $profile)) ?
@@ -117,9 +146,10 @@ class Account extends MY_Controller {
 			$this->dwootemplate->assign('user', $profile);
 			$this->dwootemplate->assign('groups', $this->Groups_model->get()->result());
 			$this->dwootemplate->display('account/settings.tpl');
-		} else {
+		}
+		else
+		{
 			show_access_denied();
 		}
 	}
-
 }
