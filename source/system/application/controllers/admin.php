@@ -239,15 +239,162 @@ class Admin extends MY_Controller {
 	
 	function question ($action)
 	{
-		$id = $this->uri->segment(4);
+		$this->load->library('form_validation');
+		$this->load->library('csrf');
+		$this->load->helper('form');
+		
+		// ---
+		// Make sure to set the selected section of the admin subnavigation to
+		// the "Quizzes" section
+		// ---
+		$this->dwootemplate->assign('selected_section', 'quizzes');
 		
 		switch ($action)
 		{
 			case 'create':
-			case 'update':
+				// ---
+				// Get identifiers for the attached quiz
+				// ---
+				$quiz_id = $this->uri->segment(5);
+			
+				// ---
+				// Set up validation rules
+				// ---
+				$this->form_validation->set_rules('question', 'Question', 'required');
+				
+				if ($this->form_validation->run())
+				{
+					// ---
+					// Try to add the questions since the user filled in the 
+					// form correctly
+					// ---
+					$this->Questions_model->create($quiz_id,
+						$this->input->post('question', true));
+					$question_id = $this->db->last_insert();
+					$this->answers($quiz_id, $question_id);
+				}
+				else
+				{
+					// ---
+					// Display a question creation page since the user either
+					// did not submit the form or had invalid data
+					// ---
+					$this->dwootemplate->assign('action', 'create');
+					$this->dwootemplate->display('admin/question.tpl');
+				}
+			case 'edit':
+				// ---
+				// Get identifiers for the attached quiz and question id
+				// ---
+				$question_id = $this->uri->segment(4);
+				$quiz_id = $this->uri->segment(6);
+				
+				// ---
+				// Set up validation rules
+				// ---
+				$this->form_validation->set_rules('question', 'Question', 'required');
+				
+				// ---
+				// If there is information to be saved, save it
+				// ---
+				if ($this->form_validation->run())
+				{
+					$this->Questions_model->update($quiz_id,
+						$question_id,
+						$this->input->post('question', true));
+					$this->answers($quiz_id, $question_id);
+				}
+				
+				// --
+				// Get existing information about the attached question and
+				// answers
+				// --
+				$question = $this->Questions_model->get_where_ids($quiz_id,
+					$question_id);
+				$answers = $this->Answers_model->get_where_ids($quiz_id,
+					$question_id);
+				
+				// ---
+				// Display a question editing page
+				// ---
+				$this->dwootemplate->assign('action', 'edit');
+				$this->dwootemplate->display('admin/question.tpl');
 				break;
 			case 'delete':
+				// ---
+				// Get identifiers for the attached quiz and question id
+				// ---
+				$question_id = $this->uri->segment(4);
+				$quiz_id = $this->uri->segment(6);
+				
+				// ---
+				// Get information about the user's CSRF tokens
+				// ---
+				$form_id = $this->input->post('form_id');
+				$token = $this->input->post('token');
+				
+				if ($this->csrf->validate_token($form_id, $token))
+				{
+					// ---
+					// Delete the question from the database and redirect back
+					// to the editing page for this quiz
+					// ---
+					$this->Questions_model->delete($quiz_id, $question_id);
+					$this->Answers_model->delete_where_ids($quiz_id, $question_id);
+					redirect("admin/quiz/edit/{$quiz_id}");
+				}
+				else
+				{
+					// ---
+					// Retrieve existing data regarding the question and create
+					// a confirmation message for the question deletion
+					// ---
+					$quiz = $this->Questions_model->get_where_ids($quiz_id,
+						$question_id)->row();
+					$message = "Are you sure that you would like to delete the "
+							 . "question, {$question->title}?  This cannot be "
+							 . "undone.";
+					
+					// ---
+					// Display a confirmation page with that message
+					// ---
+					$this->dwootemplate->assign('message', $message);
+					$this->dwootemplate->display('admin/confirm.tpl');
+				}
 				break;
+		}
+	}
+	
+	private function answers ($quiz_id, $question_id) {
+		$this->load->library('Answers_model');
+		
+		$count = $this->input->post('count');
+		$correct = $this->input->post('correct');
+		
+		for ($i = 0; $i < $count; $i++)
+		{
+			$choice = $this->input->post("choice-{$i}", true);
+			$existing = $this->input->post("choice-{$i}-id");
+			
+			// ---
+			// Create the answer if it isn't already in the database; update the
+			// existing related element if it isn't
+			// ---
+			if ( ! $existing)
+			{
+				$this->Answers_model->create($question_id,
+					$quiz_id,
+					$choice,
+					$correct == $i);
+			}
+			else
+			{
+				$this->Answers_model->update($existing,
+					$question_id,
+					$quiz_id,
+					$choice,
+					$correct == $i);
+			}
 		}
 	}
 }

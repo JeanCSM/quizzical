@@ -37,37 +37,39 @@
 
 {block "content"}
 <div class="grid_6 prefix_3 sufix_3">
-	<h2><?php echo $form_title; ?></h2>
+	<h2>{$action|ucwords} Quiz</h2>
 	
 	{validation_errors('<div class="error">', '</div>')}
 
 	<form method="post" action="{$current_url}">
 		<label>Question</label>
 		<input type="text" class="text" name="question"
-			value="{tif isset($question) ? $question->content}" />
+			value="{tif isset($question) ? $question.content}" />
 		<br />
 		
-        {foreach $answers answer}
+        {for index 0 $count}
 		<label>Choice</label>
 		
-		<input type="text" class="text" name="choice-{$dwoo.index}"
-			value="{tif $answer ? $answer.content}" />
+		<input type="text" class="text" name="choice-{$index}"
+			value="{tif $answers ? $answer.$index.content}" />
 		
-		{if $answer}
-        <input type="hidden" name="<?php echo "choice-{$dwoo.index}-id" ?>" 
-			value="{$answer.id}" />
+		{if $answers}
+        <input type="hidden" name="<?php echo "choice-{$index}-id" ?>" 
+			value="{$answers.$index.id}" />
 		{/if}
 			
 		<span class="extra">
-			<input type="radio" name="correct" value="{$dwoo.index}" 
-				{tif (answer && $answer->correct) ?  "checked=\"checked\""} />
+			<input type="radio" name="correct" value="{$index}" 
+				{tif ($answers && $answer.$i.correct) ? "checked=\"checked\""} />
 			This is the correct choice.
 		</span>
 		<br />
-		{/foreach}
+		{/for}
 		
-		<input type="hidden" name="choices" value="{$count}" />
+		<input type="hidden" name="count" value="{$count}" />
 		
+        {form_token()}
+        
 		<div class="submit-or-cancel">
 			<input type="submit" class="button" value="Save Changes" />
 			or <a href="{$site_url}/admin/edit/quiz/{$quiz.id}">Cancel</a>
