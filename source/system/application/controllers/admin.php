@@ -141,6 +141,37 @@ class Admin extends MY_Controller {
 		
 		switch ($action)
 		{
+			case 'create':
+				$this->form_validation->set_rules('title', 'Title', 'required');
+				$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
+				
+				if ($this->form_validation->run())
+				{
+					// ---
+					// If validation passed, push the new quiz into the database
+					// and redirect the user over to a page to continue adding
+					// questions to that quiz
+					// ---
+					$this->Quizzes_model->create(
+						$this->input->post('title', true),
+						$this->input->post('summary', true),
+						$this->input->post('published', true) != false,
+						$this->input->post('tries', true)
+					);
+					
+					redirect('admin/quiz/edit/'. $this->db->insert_id());
+					return;
+				}
+				else
+				{
+					// ---
+					// Since nothing was submitted, display an empty form that
+					// allows a user to create a new quiz
+					// ---
+					$this->dwootemplate->assign('action', 'create');
+					$this->dwootemplate->display('admin/quiz.tpl');
+				}
+				break;
 			case 'edit':
 				$this->form_validation->set_rules('title', 'Title', 'required');
 				$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
@@ -172,37 +203,6 @@ class Admin extends MY_Controller {
 				$this->dwootemplate->assign('action', 'edit');
 				$this->dwootemplate->display('admin/quiz.tpl');
 				
-				break;
-			case 'create':
-				$this->form_validation->set_rules('title', 'Title', 'required');
-				$this->form_validation->set_rules('tries', 'Max Tries', 'integer');
-				
-				if ($this->form_validation->run())
-				{
-					// ---
-					// If validation passed, push the new quiz into the database
-					// and redirect the user over to a page to continue adding
-					// questions to that quiz
-					// ---
-					$this->Quizzes_model->create(
-						$this->input->post('title', true),
-						$this->input->post('summary', true),
-						$this->input->post('published', true) != false,
-						$this->input->post('tries', true)
-					);
-					
-					redirect('admin/quiz/edit/'. $this->db->insert_id());
-					return;
-				}
-				else
-				{
-					// ---
-					// Since nothing was submitted, display an empty form that
-					// allows a user to create a new quiz
-					// ---
-					$this->dwootemplate->assign('action', 'create');
-					$this->dwootemplate->display('admin/quiz.tpl');
-				}
 				break;
 			case 'delete':
 				$form_id = $this->input->post('form_id');
