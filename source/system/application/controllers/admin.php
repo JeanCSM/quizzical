@@ -128,13 +128,12 @@ class Admin extends MY_Controller {
 		$this->load->library('csrf');
 		$this->load->helper('form');
 		
-		// Try to determine the id of the quiz being edited/deleted
-		$id = $this->uri->segment(4);
-		
 		// Make sure to set the selected section of the admin subnavigation to
 		// the "Quizzes" section
 		$this->dwootemplate->assign('selected_section', 'quizzes');
 		
+		// Try to determine the id of the quiz being edited/deleted
+		$id = $this->uri->segment(4);
 		
 		switch ($action)
 		{
