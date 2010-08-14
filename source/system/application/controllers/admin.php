@@ -210,7 +210,7 @@ class Admin extends MY_Controller {
 					// Retrieve existing data regarding the quiz and create
 					// a confirmation message for the quiz deletion
 					$quiz = $this->Quizzes_model->get_where_id($id)->row();
-					$message = "Are you sure that you would like to delete the"
+					$message = "Are you sure that you would like to delete the "
 							 . "quiz, {$quiz->title}?  This cannot be undone.";
 					
 					// Display a confirmation page with that message
