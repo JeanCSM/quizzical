@@ -135,9 +135,6 @@ class Admin extends MY_Controller {
 		// the "Quizzes" section
 		$this->dwootemplate->assign('selected_section', 'quizzes');
 		
-		// Set the form name for use with nonces
-		$form_name = "quiz_{$action}";
-		$this->dwootemplate->assign('form_name', $form_name);
 		
 		switch ($action)
 		{
