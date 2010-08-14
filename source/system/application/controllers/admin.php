@@ -125,6 +125,8 @@ class Admin extends MY_Controller {
 		$this->load->model('Quizzes_model');
 		$this->load->model('Questions_model');
 		$this->load->library('form_validation');
+		$this->load->library('csrf');
+		$this->load->helper('form');
 		
 		// Try to determine the id of the quiz being edited/deleted
 		$id = $this->uri->segment(4);
@@ -193,12 +195,15 @@ class Admin extends MY_Controller {
 				}
 				break;
 			case 'delete':
-				if ($this->form_validation->run())
+				$form_id = $this->input->post('form_id');
+				$token = $this->input->post('token');
+				
+				if ($this->csrf->validate_token($form_id, $token))
 				{
 					// Delete the quiz from the database and redirect back to
 					// the quizzes page
-					//$this->Quizzes_model->delete($id);
-					//redirect('admin/quizzes');
+					$this->Quizzes_model->delete($id);
+					redirect('admin/quizzes');
 				}
 				else
 				{

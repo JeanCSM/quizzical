@@ -44,7 +44,8 @@
         {$message}
     </div>
 	<form method="post" action="{$current_url}" class="submit-or-cancel">
-		{nonce_fields($form_name)}
+		{form_token()}
+		
 		<input type="submit" class="button" value="Go Ahead" />
 		or <a href="{$site_url}/admin">Cancel</a>
 	</form>

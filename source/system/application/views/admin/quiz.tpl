@@ -67,6 +67,8 @@
 		</span>
 		<br />
 		
+		{form_token()}
+		
 		<span class="save-or-delete">
 		<input type="submit" class="button" value="Save Changes" />
 	
