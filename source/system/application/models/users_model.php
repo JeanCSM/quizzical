@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,27 +36,33 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Users_model extends Model {
-	
-	function __split_name ($name) {
+	function __split_name ($name)
+	{
 		preg_match('/(?P<first_name>\w+) (?P<last_name>[\w ]+)/', $name, $names);
 		return $names;
 	}
 	
-	function create ($name, $email, $password, $group_name, $notify=true) {
+	function create ($name, $email, $password, $group_name, $notify = true)
+	{
 		$names = $this->__split_name($name);
 
 		$meta['first_name'] = $names['first_name'];
 		$meta['last_name'] = $names['last_name'];
 
-		if ($notify) {
+		if ($notify)
+		{
 			$this->ion_auth->register($name, $password, $email, $meta, $group_name);
-		} else {
+		}
+		else
+		{
 			$this->ion_auth_model->register($name, $password, $email, $meta, $group_name);
 		}
 	}
 	
-	function update ($id, $name=false, $email, $group_id=false) {
-		if ($name != false) {
+	function update ($id, $name = false, $email, $group_id = false)
+	{
+		if ($name != false)
+		{
 			$names = $this->__split_name($name);
 			$changes['first_name'] = $names['first_name'];
 			$changes['last_name'] = $names['last_name'];
@@ -65,14 +71,16 @@ class Users_model extends Model {
 		
 		$changes['email'] = $email;
 		
-		if ($group_id != false) {
+		if ($group_id != false)
+		{
 			$changes['group_id'] = $group_id;
 		}
 		
 		$this->ion_auth_model->update_user($id, $changes);
 	}
 	
-	function get_identity_where_id ($id) {
+	function get_identity_where_id ($id)
+	{
 		$identity = $this->config->item('identity', 'ion_auth');
 		
 		$this->db->select($identity);

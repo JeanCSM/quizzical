@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,39 +36,46 @@
  * ***** END LICENSE BLOCK ***** */
 
 class powers_model extends Model {
-
-    function get_group_powers ($group_id) {
+    function get_group_powers ($group_id)
+    {
         // Grab all of the powers that match the group_id
-        $powers = $this->db->get_where("powers", array(
-            "group_id" => $group_id
-        ));
+        $powers = $this->db->get_where('powers',
+            array(
+                'group_id' => $group_id
+            ));
 
         // Create an array to hold our final permission set
         $allowed = array();
 
         // Grab the permissions and add each of them to our array
         foreach ($powers->result() as $power)
+        {
             array_push($allowed, $power->name);
+        }
 
         // Return the final permission set
         return $allowed;
     }
 
-    function group_authorize ($group_id, $power) {
+    function group_authorize ($group_id, $power)
+    {
         // Insert the power into the DB
-        $this->db->insert("powers", array(
-            "group_id" => $group_id,
-            "name" => $power
-        ));
+        $this->db->insert('powers',
+            array(
+                'group_id' => $group_id,
+                'name' => $power
+            ));
     }
 
-    function group_deauthorize ($group_id, $power) {
+    function group_deauthorize ($group_id, $power)
+    {
         // Delete the authorizations that match the current group_id and
         // power name
-        $this->db->delete("group_id", array(
-            "group_id" => $group_id,
-            "name" => $power
-        ));
+        $this->db->delete('group_id',
+            array(
+                'group_id' => $group_id,
+                'name' => $power
+            ));
     }
 
 }

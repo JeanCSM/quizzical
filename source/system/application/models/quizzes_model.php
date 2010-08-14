@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,56 +36,52 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Quizzes_model extends Model {
-	
-	function get_where_published () {
-		return $this->db->get_where(
-			'quizzes',
+	function get_where_published ()
+	{
+		return $this->db->get_where('quizzes',
 			array(
 				'published' => true
-			)
-		);
+			));
 	}
 	
-	function get_where_id ($id) {
-		return $this->db->get_where(
-			'quizzes',
+	function get_where_id ($id)
+	{
+		return $this->db->get_where('quizzes',
 			array(
 				'id' => $id
-			)
-		);
+			));
 	}
 	
-	function get () {
+	function get ()
+	{
 		return $this->db->get('quizzes');
 	}
 	
-	function create ($title, $summary, $published, $tries) {
-		$this->db->insert(
-			'quizzes',
+	function create ($title, $summary, $published, $tries)
+	{
+		$this->db->insert('quizzes',
 			array(
 				'title' => $title,
 				'summary' => $summary,
 				'published' => $published,
 				'tries' => ($tries == '') ? -1 : $tries
-			)
-		);
+			));
 	}
 	
-	function update ($id, $title, $summary, $published, $tries) {
+	function update ($id, $title, $summary, $published, $tries)
+	{
 		$this->db->where(array('id' => $id));
-		$this->db->update(
-			'quizzes',
+		$this->db->update('quizzes',
 			array(
 				'title' => $title,
 				'summary' => $summary,
 				'published' => $published,
 				'tries' => ($tries == '') ? -1 : $tries
-			)
-		);
+			));
 	}
 	
-	function delete ($id) {
+	function delete ($id)
+	{
 		$this->db->delete('quizzes', array('id' => $id));
 	}
-	
 }

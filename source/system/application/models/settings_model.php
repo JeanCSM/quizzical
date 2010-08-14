@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,15 +36,12 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Settings_model extends Model {
-	
-	function create ($name, $value) {
-		$this->db->insert(
-			'settings',
+	function create ($name, $value)
+	{
+		$this->db->insert('settings',
 			array(
 				'name' => (String) $name,
 				'value' => (String) $value
-			)
-		);
+			));
 	}
-	
 }

@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,14 +36,17 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Questions_model extends Model {
-	
-	function get_where_quiz ($quiz_id) {
-		return $this->db->get_where(
-			'questions',
+	function get_where_quiz ($quiz_id)
+	{
+		return $this->db->get_where('questions',
 			array(
 				'quiz' => $quiz_id
-			)
-		);
+			));
+	}
+	
+	function create ($quiz, $question)
+	{
+		
 	}
 	
 }

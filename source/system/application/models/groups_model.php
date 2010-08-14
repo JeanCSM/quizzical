@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('Direct access not allowed.');
+<?php if ( ! defined('BASEPATH')) exit('Direct access not allowed.');
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -36,9 +36,8 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Groups_model extends Model {
-	
-	function get () {
+	function get ()
+	{
 		return $this->db->get('groups');
 	}
-	
 }
