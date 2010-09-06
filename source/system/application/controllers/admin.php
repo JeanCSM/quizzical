@@ -124,6 +124,7 @@ class Admin extends MY_Controller {
 	{
 		$this->load->model('Quizzes_model');
 		$this->load->model('Questions_model');
+		$this->load->model('Answers_model');
 		$this->load->library('form_validation');
 		$this->load->library('csrf');
 		$this->load->helper('form');
