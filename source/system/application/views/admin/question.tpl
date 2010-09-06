@@ -47,20 +47,20 @@
 			value="{tif isset($question) ? $question->content}" />
 		<br />
 		
-        {for index 0 $count}
+        {for index 0 $end}
 		<label>Choice</label>
 		
 		<input type="text" class="text" name="choice-{$index}"
-			value="{tif $answers ? $answer.$index->content}" />
+			value="{tif $answers ? $answers.$index->content}" />
 		
 		{if $answers}
         <input type="hidden" name="choice-{$index}-id" 
-			value="{$answers.$index.id}" />
+			value="{$answers.$index->id}" />
 		{/if}
-			
+		
 		<span class="extra">
 			<input type="radio" name="correct" value="{$index}" 
-				{tif $answers.$i->correct ? 'checked="checked"'} />
+				{tif $answers.$index->correct ? 'checked="checked"'} />
 			This is the correct choice.
 		</span>
 		<br />

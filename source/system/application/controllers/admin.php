@@ -285,7 +285,8 @@ class Admin extends MY_Controller {
 					// did not submit the form or had invalid data
 					// ---
 					$this->dwootemplate->assign('action', 'create');
-					$this->dwootemplate->assign('count', 3);
+					$this->dwootemplate->assign('count', 4);
+					$this->dwootemplate->assign('end', 3);
 					$this->dwootemplate->assign('quiz', $quiz_id);
 					$this->dwootemplate->display('admin/question.tpl');
 				}
@@ -319,15 +320,17 @@ class Admin extends MY_Controller {
 				// --
 				$question = $this->Questions_model->get_where_id($question_id);
 				$answers = $this->Answers_model->get_where_ids($quiz_id,
-					$question_id);
+					$question_id)->result();
+				$answers_length = count($answers);
 				
 				// ---
 				// Display a question editing page
 				// ---
 				$this->dwootemplate->assign('action', 'edit');
 				$this->dwootemplate->assign('question', $question->row());
-				$this->dwootemplate->assign('answers', $answers->result());
-				$this->dwootemplate->assign('count', count($answers));
+				$this->dwootemplate->assign('answers', $answers);
+				$this->dwootemplate->assign('count', $answers_length);
+				$this->dwootemplate->assign('end', $answers_length - 1);
 				$this->dwootemplate->assign('quiz', $quiz_id);
 				$this->dwootemplate->display('admin/question.tpl');
 				break;
