@@ -52,6 +52,17 @@ class Questions_model extends Model {
 			));
 	}
 	
+	function update ($question_id, $content)
+	{
+		$this->db->update('questions',
+			array(
+				'content' => $content
+			),
+			array(
+				'id' => $question_id
+			));
+	}
+	
 	function create ($quiz_id, $question)
 	{
 		$this->db->insert('questions',

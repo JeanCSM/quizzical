@@ -309,8 +309,7 @@ class Admin extends MY_Controller {
 				// ---
 				if ($this->form_validation->run())
 				{
-					$this->Questions_model->update($quiz_id,
-						$question_id,
+					$this->Questions_model->update($question_id,
 						$this->input->post('question', true));
 					$this->answers($quiz_id, $question_id);
 				}
