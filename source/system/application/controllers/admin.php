@@ -275,6 +275,8 @@ class Admin extends MY_Controller {
 					
 					$question_id = $this->db->insert_id();
 					$this->answers($quiz_id, $question_id);
+					
+					redirect("admin/quiz/edit/{$quiz_id}");
 				}
 				else
 				{
