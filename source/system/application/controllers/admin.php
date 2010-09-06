@@ -242,6 +242,8 @@ class Admin extends MY_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('csrf');
 		$this->load->helper('form');
+		$this->load->model('Questions_model');
+		$this->load->model('Answers_model');
 		
 		// ---
 		// Make sure to set the selected section of the admin subnavigation to
@@ -310,8 +312,7 @@ class Admin extends MY_Controller {
 				// Get existing information about the attached question and
 				// answers
 				// --
-				$question = $this->Questions_model->get_where_ids($quiz_id,
-					$question_id);
+				$question = $this->Questions_model->get_where_id($question_id);
 				$answers = $this->Answers_model->get_where_ids($quiz_id,
 					$question_id);
 				
@@ -340,7 +341,7 @@ class Admin extends MY_Controller {
 					// Delete the question from the database and redirect back
 					// to the editing page for this quiz
 					// ---
-					$this->Questions_model->delete($quiz_id, $question_id);
+					$this->Questions_model->delete($question_id);
 					$this->Answers_model->delete_where_ids($quiz_id, $question_id);
 					redirect("admin/quiz/edit/{$quiz_id}");
 				}
@@ -367,7 +368,7 @@ class Admin extends MY_Controller {
 	}
 	
 	private function answers ($quiz_id, $question_id) {
-		$this->load->library('Answers_model');
+		$this->load->model('Answers_model');
 		
 		$count = $this->input->post('count');
 		$correct = $this->input->post('correct');

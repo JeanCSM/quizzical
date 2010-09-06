@@ -38,11 +38,44 @@
 class Answers_model extends Model {
 	function get_where_quiz_and_question ($quiz_id, $question_id)
 	{
-		return $this->get_where('answers',
+		return $this->db->get_where('answers',
 			array(
 				'quiz' => $quiz_id,
 				'question' => $question_id
-			)
-		);
+			));
+	}
+	
+	function get_where_ids ($quiz_id, $question_id)
+	{
+		return $this->db->get_where('answers',
+			array(
+				'quiz' => $quiz_id,
+				'question' => $question_id
+			));
+	}
+	
+	function update ($answer_id, $question_id, $quiz_id, $choice, $correct)
+	{
+		$this->db->update('answers',
+			array(
+				'question' => $question_id,
+				'quiz' => $quiz_id,
+				'content' => $choice,
+				'correct' => $correct
+			),
+			array(
+				'id' => $answer_id
+			));
+	}
+	
+	function create ($question_id, $quiz_id, $choice, $correct)
+	{
+		$this->db->insert('answers',
+			array(
+				'question' => $question_id,
+				'quiz' => $quiz_id,
+				'content' => $choice,
+				'correct' => $correct
+			));
 	}
 }

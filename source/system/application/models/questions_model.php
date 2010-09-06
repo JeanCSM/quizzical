@@ -44,9 +44,20 @@ class Questions_model extends Model {
 			));
 	}
 	
-	function create ($quiz, $question)
+	function get_where_id ($question_id)
 	{
-		
+		return $this->db->get_where('questions',
+			array(
+				'id' => $question_id
+			));
 	}
 	
+	function create ($quiz_id, $question)
+	{
+		$this->db->insert('questions',
+			array(
+				'quiz' => $quiz_id,
+				'content' => $question
+			));
+	}
 }
