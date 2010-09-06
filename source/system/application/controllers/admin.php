@@ -363,11 +363,10 @@ class Admin extends MY_Controller {
 					// Retrieve existing data regarding the question and create
 					// a confirmation message for the question deletion
 					// ---
-					$quiz = $this->Questions_model->get_where_ids($quiz_id,
-						$question_id)->row();
+					$question = $this->Questions_model->get_where_id($question_id)->row();
 					$message = "Are you sure that you would like to delete the "
-							 . "question, {$question->title}?  This cannot be "
-							 . "undone.";
+							 . "question, \"{$question->content}\"?  This cannot "
+							 . "be undone.";
 					
 					// ---
 					// Display a confirmation page with that message
