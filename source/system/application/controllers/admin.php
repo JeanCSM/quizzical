@@ -287,6 +287,7 @@ class Admin extends MY_Controller {
 					$this->dwootemplate->assign('quiz', $quiz_id);
 					$this->dwootemplate->display('admin/question.tpl');
 				}
+				break;
 			case 'edit':
 				// ---
 				// Get identifiers for the attached quiz and question id
