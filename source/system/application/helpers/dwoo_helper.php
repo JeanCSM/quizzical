@@ -45,7 +45,8 @@ function Dwoo_Plugin_allowed_to (Dwoo $dwoo, $action, $item, $user=null) {
 }
 
 function Dwoo_Plugin_get_question_answers (Dwoo $dwoo, $quiz_id, $question_id) {
-	return array();
+	$CI =& get_instance();
+	return $CI->Answers_model->get_where_ids($quiz_id, $question_id)->result();
 }
 
 function Dwoo_Plugin_unint_tries (Dwoo $dwoo, $raw) {
