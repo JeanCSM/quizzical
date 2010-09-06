@@ -71,4 +71,12 @@ class Questions_model extends Model {
 				'content' => $question
 			));
 	}
+	
+	function delete ($question_id)
+	{
+		$this->db->delete('questions',
+			array(
+				'id' => $question_id
+			));
+	}
 }

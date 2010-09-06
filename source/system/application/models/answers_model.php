@@ -78,4 +78,13 @@ class Answers_model extends Model {
 				'correct' => $correct
 			));
 	}
+	
+	function delete_where_ids ($quiz_id, $question_id)
+	{
+		$this->db->delete('answers',
+			array(
+				'quiz' => $quiz_id,
+				'question' => $question_id
+			));
+	}
 }
