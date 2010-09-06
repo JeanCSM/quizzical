@@ -37,30 +37,30 @@
 
 {block "content"}
 <div class="grid_6 prefix_3 sufix_3">
-	<h2>{$action|ucwords} Quiz</h2>
+	<h2>{$action|ucwords} Question</h2>
 	
 	{validation_errors('<div class="error">', '</div>')}
 
 	<form method="post" action="{$current_url}">
 		<label>Question</label>
 		<input type="text" class="text" name="question"
-			value="{tif isset($question) ? $question.content}" />
+			value="{tif isset($question) ? $question->content}" />
 		<br />
 		
         {for index 0 $count}
 		<label>Choice</label>
 		
 		<input type="text" class="text" name="choice-{$index}"
-			value="{tif $answers ? $answer.$index.content}" />
+			value="{tif $answers ? $answer.$index->content}" />
 		
 		{if $answers}
-        <input type="hidden" name="<?php echo "choice-{$index}-id" ?>" 
+        <input type="hidden" name="choice-{$index}-id" 
 			value="{$answers.$index.id}" />
 		{/if}
 			
 		<span class="extra">
 			<input type="radio" name="correct" value="{$index}" 
-				{tif ($answers && $answer.$i.correct) ? "checked=\"checked\""} />
+				{tif $answers.$i->correct ? 'checked="checked"'} />
 			This is the correct choice.
 		</span>
 		<br />
@@ -72,7 +72,7 @@
         
 		<div class="submit-or-cancel">
 			<input type="submit" class="button" value="Save Changes" />
-			or <a href="{$site_url}/admin/edit/quiz/{$quiz.id}">Cancel</a>
+			or <a href="{$site_url}/admin/quiz/edit/{$quiz}">Cancel</a>
 		</div>
 	</form>
 </div>

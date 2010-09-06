@@ -283,6 +283,8 @@ class Admin extends MY_Controller {
 					// did not submit the form or had invalid data
 					// ---
 					$this->dwootemplate->assign('action', 'create');
+					$this->dwootemplate->assign('count', 3);
+					$this->dwootemplate->assign('quiz', $quiz_id);
 					$this->dwootemplate->display('admin/question.tpl');
 				}
 			case 'edit':
@@ -320,6 +322,10 @@ class Admin extends MY_Controller {
 				// Display a question editing page
 				// ---
 				$this->dwootemplate->assign('action', 'edit');
+				$this->dwootemplate->assign('question', $question->row());
+				$this->dwootemplate->assign('answers', $answers->result());
+				$this->dwootemplate->assign('count', count($answers));
+				$this->dwootemplate->assign('quiz', $quiz_id);
 				$this->dwootemplate->display('admin/question.tpl');
 				break;
 			case 'delete':
