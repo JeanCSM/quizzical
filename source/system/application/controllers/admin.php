@@ -270,7 +270,8 @@ class Admin extends MY_Controller {
 					// ---
 					$this->Questions_model->create($quiz_id,
 						$this->input->post('question', true));
-					$question_id = $this->db->last_insert();
+					
+					$question_id = $this->db->insert_id();
 					$this->answers($quiz_id, $question_id);
 				}
 				else
