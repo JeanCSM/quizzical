@@ -36,6 +36,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 class powers_model extends Model {
+    
     function get_group_powers ($group_id)
     {
         // Grab all of the powers that match the group_id
