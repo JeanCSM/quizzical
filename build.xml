@@ -122,7 +122,7 @@
 				<include name="views/**" />
 			</fileset>
 		</copy>
-		
+
 		<!-- CI CSRF -->
 		<copy todir="${build}/system/application">
 			<fileset dir="${packages}/csrf/dhorrigan-codeigniter-csrf-${v_csrf}">

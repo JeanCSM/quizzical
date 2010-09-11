@@ -80,7 +80,8 @@ class Account extends MY_Controller {
 		}
 	}
 
-	function logout () {
+	function logout ()
+	{
 		// Log the user out
 		$this->ion_auth->logout();
 
