@@ -46,7 +46,7 @@
 	<!-- Versions of dependencies -->
 	<property name="v_ci" value="1.7.2" /> 		<!-- CodeIgniter -->
 	<property name="v_dwoo" value="1-1-1" />	<!-- Dwoo Templates -->
-	<property name="v_ion" value="13576c3" />	<!-- Ion Auth -->
+	<property name="v_ion" value="1ee2c90" />	<!-- Ion Auth -->
 	<property name="v_csrf" value="cac8719" />		<!-- CI CSRF -->
 
 	<target name="fetch">
