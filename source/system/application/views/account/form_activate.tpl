@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" href="{$site_url}/account/activate">
+<form method="post" action="{$site_url}/account/activate">
 	<label for="code" class="two">Activation Code</label>
 	<input type="text" class="text" name="code" />
 	<br />
