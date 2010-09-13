@@ -89,6 +89,81 @@ class Account extends MY_Controller {
 		redirect();
 	}
 	
+	function forgot ($action = false)
+	{
+		$this->load->library('form_validation');
+		
+		switch ($action)
+		{
+			case 'reset':
+				$this->form_validation->set_rules('code', 'Code',
+					'required|callback_attempt_reset');
+				
+				// ---
+				// THIS IS NOT CSRF-VALIDATED
+				// ---
+				if ( ! $this->form_validation->run('', false))
+				{
+					$this->dwootemplate->display('account/reset.tpl');
+				}
+				else
+				{
+					$this->dwootemplate->display('account/confirm_reset.tpl');
+				}
+				
+				break;
+			default:
+				$this->form_validation->set_rules('email', 'Email',
+					'required|valid_email|callback_attempt_validate');
+			
+				// ---
+				// THIS IS NOT CSRF-VALIDATED
+				// ---
+				if ( ! $this->form_validation->run('', false))
+				{
+					$this->dwootemplate->display('account/forgot.tpl');
+				}
+				else
+				{
+					$this->dwootemplate->display('account/confirm_forgot.tpl');
+				}
+		}
+	}
+	
+	function attempt_validate ($email)
+	{
+		if ($this->ion_auth->forgotten_password($email))
+		{
+			return true;
+		}
+		else
+		{
+			$this->form_validation->set_message('attempt_validate',
+				'Quizzical could not send the validation code email.  This is '
+			  .	'probably because there is <strong>no account</strong> for the '
+			  . 'address specified in the Email field.  However, this may also '
+			  . ' be caused by a <strong>configuration issue</strong> with this'
+			  . ' site.  If you\'re sure that you have the email correct, '
+			  . 'contact this site\'s administrator.');
+			return false;
+		}
+	}
+	
+	function attempt_reset ($code)
+	{
+		if ($this->ion_auth->forgotten_password_complete($code))
+		{
+			return true;
+		}
+		else
+		{
+			$this->form_validation->set_message('attempt_reset',
+				'The password reset code that entered in the Verification Code '
+			  . 'field is incorrect.');
+			return false;
+		}
+	}
+	
 	function details ($id = -1)
 	{
 		$this->load->model('Users_model');

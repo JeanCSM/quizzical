@@ -33,17 +33,12 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" action="{$site_url}/account/login">
-	<label for="email">Email</label>
-	<input type="text" class="text" name="email" value="{set_value('email')}" />
-	<br />
+{extends "../layout.tpl"}
 
-	<label for="password">Password</label>
-	<input type="password" class="text" name="password" />
-	<br />
-	
-	<a href="{$site_url}/account/forgot">Forgot your password?</a>
-	
-	<input type="hidden" name="redirect" value="{$redirect|default:''}" />
-	<input type="submit" class="button" value="Log In" />
-</form>
+{block "content"}
+<div class="prefix_3 suffix_3 grid_6">
+	<h2>Verify Your Identity</h2>
+	{validation_errors('<div class="error">', '</div>')}
+	{include('form_reset.tpl')}
+</div>
+{/block}
