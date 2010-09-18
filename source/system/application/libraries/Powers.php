@@ -57,6 +57,7 @@ class Powers {
 	{
 		return ($own) ? "{$action}_own_{$item}" : "{$action}_{$item}";
 	}
+	
 	public function load ($profile) {
 		// Get information about the user from the database
 		$this->user = $profile;
@@ -79,12 +80,15 @@ class Powers {
 	public function i_can ($action, $item, $user = null)
 	{
 		// Give the first user full access to the website
-		if (is_object($this->user) && $this->user->id == 1) {
+		if (is_object($this->user) && $this->user->id == 1)
+		{
 			return true;
 		}
 		
-		if ($user == $this->user) {
-			return $this->have_power($action, $item, true) ||
+		if ((is_object($user)) ? $user->identity == $this->identity :
+				$user == $this->identity)
+		{
+			return $this->have_power($action, $item, true) or
 				$this->have_power($action, $item, false);
 		}
 		else
