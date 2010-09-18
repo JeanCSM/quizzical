@@ -147,6 +147,8 @@
 	</div>
 	{/if}
 	
+	{form_token()}
+	
 	<div class="clear">&nbsp;</div>
 </form>
 {/block}
