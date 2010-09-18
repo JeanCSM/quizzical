@@ -36,10 +36,15 @@
 {extends "../layout.tpl"}
 
 {block "content"}
+<div class="grid_9">
+	<h2>Account</h2>
+</div>
+
+<div class="clear"></div>
+
 <form method="post" action="{$current_url}">
-	<div class="grid_9">
-		<h2>Account</h2>
-	
+	<div class="grid_6">
+		<h3>Profile</h3>
 		{validation_errors('<div class="error">', '</div>')}
 		
 		{if allowed_to('view', 'user_name', $user)}
@@ -107,40 +112,41 @@
 			{/if}
 		{/if}
 	</div>
-
-	<div class="grid_3">
+	
+	
+	<div class="grid_6">
 		{if allowed_to('edit', 'user_password', $user)}
-		<div class="aside">
-			<h4>Reset Password</h4>
-			<div class="aside-content">
-				<p class="aside-row">
-					We can send you an email with a <em>unique verification link</em>
-					to your password reset form.
-				</p>
-				<div class="aside-row more">
-					<a href="{$site_url}/account/send/reset/[token]">Send Reset Email</a>
-				</div>
-			</div>
-		</div>
+		<h3>Password</h3>
+		
+		<label>Current</label>
+		<input type="password" class="text" name="old" />
+		<br />
+		
+		<label>New</label>
+		<input type="password" class="text" name="old" />
+		<br />
+		
+		<label>New (Again)</label>
+		<input type="password" class="text" name="old" />
+		<br />
 		{/if}
 	</div>
 	
 	<div class="clear">&nbsp;</div>
 	
-	<div class="save-or-delete">
+	<div class="grid_9">
 		{if allowed_to('edit', 'user', $user)}
-		<div class="grid_6">
-			<input type="submit" class="button" value="Save Changes" />
-		</div>
-		{/if}
-		
-		{if allowed_to('delete', 'user', $user)}
-		<div class="grid_3 suffix_3">
-			<a href="{$site_url}/account/send/delete/[token]" class="delete account">
-				Delete Account</a>
-		</div>
+		<input type="submit" class="button" value="Save Changes" />
 		{/if}
 	</div>
+	
+	{if allowed_to('delete', 'user', $user)}
+	<div class="grid_3">
+		<a href="{$site_url}/account/delete/{$user->id}" class="delete account">
+			Delete Account</a>
+	</div>
+	{/if}
+	
+	<div class="clear">&nbsp;</div>
 </form>
-
 {/block}
