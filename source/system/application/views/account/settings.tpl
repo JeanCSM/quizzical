@@ -84,7 +84,7 @@
 		<div class="field-text">
 			{$user->ip_address}
 			&mdash;
-			<a href="http://ws.arin.net/whois/?queryinput={$user->ip_address}">
+			<a href="http://www.whois-search.com/whois/{$user->ip_address}">
 				Details
 			</a>
 		</div>
