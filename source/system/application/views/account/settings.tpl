@@ -115,7 +115,7 @@
 	
 	
 	<div class="grid_6">
-		{if allowed_to('edit', 'user_password', $user)}
+		{if allowed_to('edit', 'user', $user)}
 		<h3>Password</h3>
 		
 		<label>Current</label>
@@ -123,11 +123,11 @@
 		<br />
 		
 		<label>New</label>
-		<input type="password" class="text" name="old" />
+		<input type="password" class="text" name="new" />
 		<br />
 		
 		<label>New (Again)</label>
-		<input type="password" class="text" name="old" />
+		<input type="password" class="text" name="new-again" />
 		<br />
 		{/if}
 	</div>
