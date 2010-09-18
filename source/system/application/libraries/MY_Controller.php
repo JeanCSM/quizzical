@@ -43,6 +43,9 @@ class MY_Controller extends Controller {
 
 		// Load and cache information related to the currently logged in user
 		$this->profile = $this->ion_auth->profile();
+		
+		// Load and cache the powers list for this user
+		$this->powers->load($this->profile);
 
 		// Assign core variables relating to this installation of
 		// Quizzical and its properties
