@@ -57,8 +57,8 @@
 			<label>Name</label>
 			<div class="field-text">{$user->username}</div>
 			<span class="extra">
-				You are not allowed to change your own name.  If you need your name
-				to be changed, please contact an administrator.
+				You are not allowed to change the Name field; if you need it to
+				be changed, please contact an administrator.
 			</span>
 			{/if}
 		{/if}
@@ -73,8 +73,8 @@
 			<label>Email</label>
 			<div class="field-text">{$user->email}</div>
 			<span class="extra">
-				You are not allowed to change your own email address.  If you need
-				your email address to be changed, please contact an administrator.
+				You are not allowed to change the Email field.  If you need the
+				email address to be changed, please contact an administrator.
 			</span>
 			{/if}
 		{/if}
@@ -105,8 +105,8 @@
 			<label>Group</label>
 			<div class="field-text">{$user->group|capitalize}</div>
 			<span class="extra">
-				You are not allowed to edit your own group.  If you need more access
-				privileges to various parts of the application, please contact an
+				You are not allowed to edit the Group field for this user
+				account.  If you need to modify this, please contact an
 				administrator.
 			</span>
 			{/if}
