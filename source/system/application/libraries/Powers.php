@@ -57,16 +57,21 @@ class Powers {
 	{
 		return ($own) ? "{$action}_own_{$item}" : "{$action}_{$item}";
 	}
+	public function load ($profile) {
 		// Get information about the user from the database
-		$this->user = $this->CI->ion_auth->profile();
+		$this->user = $profile;
 		
 		// Determine whether the user is logged in or not
-		if (!$this->user) {
+		if (!$this->user)
+		{
 			// Load information about the powers that users that aren't
             // logged in have
             $this->my_powers = $this->CI->powers_model->get_group_powers(-1);
-		} else {
+		}
+		else
+		{
 			// Load information about the powers of the current user's group
+			$this->identity = $this->user->{$this->CI->config->item('identity', 'ion_auth')};
 			$this->my_powers = $this->CI->powers_model->get_group_powers($this->user->group_id);
 		}
 	}
