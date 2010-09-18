@@ -37,19 +37,26 @@
 
 class Powers {
 
-	var $my_powers = false;
-	var $group = false;
-	var $user = false;
-	var $powers = array();
-	var $CI;
+	protected $my_powers = false;
+	protected $group = false;
+	protected $user = false;
+	protected $identity = false;
+	protected $powers = array();
+	protected $CI;
 
-	public function __construct () {
+	public function __construct ()
+	{
 		// Load a reference to our instance of CodeIgniter
 		$this->CI =& get_instance();
 
 		// Load the power model
 		$this->CI->load->model("powers_model");
-
+	}
+	
+	public static function __generate_power ($action, $item, $own)
+	{
+		return ($own) ? "{$action}_own_{$item}" : "{$action}_{$item}";
+	}
 		// Get information about the user from the database
 		$this->user = $this->CI->ion_auth->profile();
 		
@@ -63,12 +70,9 @@ class Powers {
 			$this->my_powers = $this->CI->powers_model->get_group_powers($this->user->group_id);
 		}
 	}
-	
-	public static function __generate_power ($action, $item, $own) {
-		return ($own) ? "{$action}_own_{$item}" : "{$action}_{$item}";
-	}
 
-	public function i_can ($action, $item, $user = null) {
+	public function i_can ($action, $item, $user = null)
+	{
 		// Give the first user full access to the website
 		if (is_object($this->user) && $this->user->id == 1) {
 			return true;
@@ -77,12 +81,15 @@ class Powers {
 		if ($user == $this->user) {
 			return $this->have_power($action, $item, true) ||
 				$this->have_power($action, $item, false);
-		} else {
+		}
+		else
+		{
 			return $this->have_power($action, $item, false);
 		}
 	}
 	
-	public function have_power ($action, $item, $own=false) {
+	public function have_power ($action, $item, $own=false)
+	{
 		// Generate the power name from the use
 		$power = self::__generate_power($action, $item, $own);
 		
@@ -93,16 +100,21 @@ class Powers {
 		return $can;
 	}
 
-	public function register ($action, $item, $own=false) {
+	public function register ($action, $item, $own=false)
+	{
 		// Generate the power name from the use
 		$power = self::__generate_power($action, $item, $own);
 		
 		// If the powers are provided as an array, merge them in;
 		// otherwise, push the power onto the end of the array
 		if (is_array($power))
+		{
 			$this->powers = array_merge($this->powers, $power);
+		}
 		else
+		{
 			array_push($this->powers, $power);
+		}
 	}
 	
 }
