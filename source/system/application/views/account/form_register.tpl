@@ -49,6 +49,6 @@
 	<label for="password" class="two">Password (Again)</label>
 	<input type="password" class="text" name="password_again" />
 	<br />
-
+	
 	<input type="submit" class="button" value="Register" />
 </form>
