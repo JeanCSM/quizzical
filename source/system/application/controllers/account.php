@@ -170,6 +170,30 @@ class Account extends MY_Controller {
 		$this->load->model('Groups_model');
 		$this->load->library('form_validation');
 		
+		$identity_key = $this->config->item('identity', 'ion_auth');
+		
+		// ---
+		// Try to grab the identity information for the user specified in the
+		// URL path; if that profile doesn't exist, display a 404 error page
+		// ---
+		if ($id == -1)
+		{
+			$identity = $this->profile->{$identity_key};
+			$id = $this->profile->id;
+		}
+		else
+		{
+			$identity_result = $this->Users_model->get_identity_where_id($id);
+			
+			if ($identity_result->num_rows() == 0)
+			{
+				show_404();
+				return;
+			}
+			
+			$identity = $identity->row()->{$identity_key};
+		}
+		
 		// ---
 		// Set up validation rules
 		// ---
@@ -178,26 +202,53 @@ class Account extends MY_Controller {
 		$this->form_validation->set_rules('group', 'Group', 'integer');
 		
 		// ---
-		// Try to grab the profile information for the user specified in the
-		// URL path; if that profile doesn't exist, display a 404 error page
+		// Add form validation rules for the password reset if any of the
+		// password editing fields were edited
 		// ---
-		if ($id == -1)
+		if ($this->input->post('new') !== false)
 		{
-			$profile = $this->profile;
-			$id = $this->profile->id;
+			$this->form_validation->set_rules('old', 'Name', 'required');
+			$this->form_validation->set_rules('new', 'New', 'required');
+			$this->form_validation->set_rules('new-again', 'New (Again)', 'required|matches[new]');
 		}
-		else
+		
+		if ($this->form_validation->run() and
+			$this->powers->i_can('edit', 'user', $identity))
 		{
-			$identity = $this->Users_model->get_identity_where_id($id);
+			$this->Users_model->update($id,
+				($this->powers->i_can('edit', 'user_name', $identity)) ?
+					$this->input->post('name', true) : false,
+				($this->powers->i_can('edit', 'user_email', $identity)) ?
+					$this->input->post('email', true) : false,
+				($this->powers->i_can('edit', 'user_group', $identity)) ?
+					$this->input->post('group', true) : false
+			);
 			
-			if ($identity->num_rows() == 0)
+			// ---
+			// If a password change was submitted, update the password in
+			// the database; throw an error message if that attempt was
+			// unsuccessful
+			// ---
+			if ($this->input->post('new') !== false)
 			{
-				show_404();
-				return;
+				if ( ! $this->ion_auth->change_password($identity,
+							$this->input->post('old', true),
+							$this->input->post('new', true)))
+				{
+					$this->form_validation->set_message('old',
+						'The password could not be reset.  This usually '
+					  . 'happens when the Old password field contains an '
+					  . 'incorrect password.  Check the spelling of that '
+					  . 'field.');
+				}
 			}
-			
-			$profile = $this->ion_auth->profile($identity->row()->identity);
 		}
+		
+		// ---
+		// Load the latest profile information and try to display the account
+		// page to the user
+		// ---
+		$profile = $this->ion_auth->profile($identity);
 		
 		// ---
 		// If the user has the appropriate credentials to see the profile page,
@@ -205,21 +256,8 @@ class Account extends MY_Controller {
 		// them), then display the user editing page; otherwise, show an access
 		// denied page
 		// ---
-		if ($this->powers->i_can('view', 'user', $profile))
-		{
-			if ($this->form_validation->run() and
-				$this->powers->i_can('edit', 'user', $profile))
-			{
-				$this->Users_model->update($id,
-					($this->powers->i_can('edit', 'user_name', $profile)) ?
-						$this->input->post('name', true) : false,
-					($this->powers->i_can('edit', 'user_email', $profile)) ?
-						$this->input->post('email', true) : false,
-					($this->powers->i_can('edit', 'user_group', $profile)) ?
-						$this->input->post('group', true) : false
-				);
-			}
-			
+		if ($this->powers->i_can('view', 'user', $identity))
+		{	
 			$this->dwootemplate->assign('user', $profile);
 			$this->dwootemplate->assign('groups', $this->Groups_model->get()->result());
 			$this->dwootemplate->display('account/settings.tpl');
