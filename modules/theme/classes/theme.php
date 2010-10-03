@@ -37,4 +37,6 @@
 
 class Theme extends Quizzical_Theme  {
     
+    // This class can be extended or replaced.
+    
 }
