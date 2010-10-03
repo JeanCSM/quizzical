@@ -60,19 +60,19 @@
 	<div class="header">
 		<div class="container_12">
 			<div class="grid_12">
-				<h1><a href="{$site_url}">{$site_title}</a></h1>
+				<h1><a href="{URL::site()}">{$site_title}</a></h1>
 
 				{block "nav"}
 				<ul class="user-bar">
 					{if allowed_to('view', 'admin_section')}
-					<li><a href="{$site_url}/admin">Admin</a></li>
+					<li><a href="{URL::site('admin')}">Admin</a></li>
 					{/if}
 
 					{if $is_logged_in}
-					<li><a href="{$site_url}/account/details">Account</a></li>
-					<li><a href="{$site_url}/account/logout">Log Out</a></li>
+					<li><a href="{URL::site('account/details')}">Account</a></li>
+					<li><a href="{URL::site('account/logout')}">Log Out</a></li>
 					{else}
-					<li><a href="{$site_url}/account/login">Log In</a></li>
+					<li><a href="{URL::site('admin/login')}">Log In</a></li>
 					{/if}
 				</ul>
 				{/block}
@@ -91,13 +91,14 @@
 				<ul>
 				{foreach $sections name method}
 					<li class="{tif $selected_section == $method ? 'selected'}">
-						<a href="{$site_url}/admin/{$method}">{$name}</a>
-						<span class="pointer">&nbsp;</span>
+						<a href="{URL::site('admin/$method')}">
+							<span>{$name}</span>
+						</a>
 					</li>
 				{/foreach}
 				</ul>
 			
-			<div class="clear">&nbsp;</div>
+				<div class="clear">&nbsp;</div>
 			</div>
 		
 			<div class="clear">&nbsp;</div>

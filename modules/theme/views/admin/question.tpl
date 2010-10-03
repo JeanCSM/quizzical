@@ -72,7 +72,7 @@
         
 		<div class="submit-or-cancel">
 			<input type="submit" class="button" value="Save Changes" />
-			or <a href="{$site_url}/admin/quiz/edit/{$quiz}">Cancel</a>
+			or <a href="{URL::site("admin/quiz/edit/$quiz")}">Cancel</a>
 		</div>
 	</form>
 </div>

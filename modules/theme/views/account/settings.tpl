@@ -142,7 +142,7 @@
 	
 	{if allowed_to('delete', 'user', $user)}
 	<div class="grid_3">
-		<a href="{$site_url}/account/delete/{$user->id}" class="delete account">
+		<a href="{URL::site("account/delete/$user->id")}" class="delete account">
 			Delete Account</a>
 	</div>
 	{/if}

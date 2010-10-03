@@ -47,6 +47,4 @@
 
 	{include "account/form_login"}
 </div>
-
-<div class="clear">&nbsp;</div>
 {/block}

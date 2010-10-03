@@ -33,8 +33,8 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" action="{$site_url}/account/forgot">
-	<label for="email">Email</label>
+<form method="post" action="{URL::site("/account/forgot")}">
+	<label for="email">Email</label>"
 	<input type="text" class="text" name="email" value="{set_value('email')}" />
 	<br />
 	

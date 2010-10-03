@@ -41,5 +41,5 @@ Quizzical is now installed propertly.  Now, all you need to do is set up
 your quizzes.
 </p>
 
-<a href="{$site_url}" class="button">Log In</a>
+<a href="{URL::site()}" class="button">Log In</a>
 {/block}

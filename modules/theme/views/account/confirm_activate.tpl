@@ -46,7 +46,7 @@
 	</div>
 
 	<div class="login-now">
-		<a href="{$site_url}/account/login" class="button">Log In</a>
+		<a href="{URL::site("/account/login")}" class="button">Log In</a>
 	</div>
 	{else}
 	<h2>Sorry!</h2>
@@ -63,6 +63,4 @@
 	</p>
 	{/if}
 </div>
-
-<div class="clear">&nbsp;</div>
 {/block}

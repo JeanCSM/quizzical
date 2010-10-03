@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" action="{$site_url}/account/forgot/reset">
+<form method="post" action="{URL::site("account/forgot/reset")}">
 	<label for="code" class="two">Verification Code</label>
 	<input type="text" class="text" name="code" />
 	<br />

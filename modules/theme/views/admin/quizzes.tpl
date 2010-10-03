@@ -38,8 +38,8 @@
 {block "content"}
 <div class="grid_12">
 	<div class="add">
-		<a href="{$site_url}/admin/quiz/create" class="button">Create Quiz</a>
-	</div>
+		<a href="{URL::site("admin/quiz/create")}" class="button">Create Quiz</a>
+	</div>"
 	
 	<h2>Quizzes You've Made</h2>
 
@@ -50,11 +50,11 @@
 		</div>
 		
 		<div class="grid_10 omega">
-			<a class="edit" href="{$site_url}/admin/quiz/edit/{$quiz->id}">
+			<a class="edit" href="{URL::site("admin/quiz/edit/{$quiz->id}")}">
 				Edit
 			</a>
 			
-			<h3><a href="{$site_url}/admin/quiz/edit/{$quiz->id}">
+			<h3><a href="{URL::site("admin/quiz/edit/{$quiz->id}")}">
 				{$quiz->title}
 			</a></h3>
 			<p>{$quiz->summary}</p>

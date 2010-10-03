@@ -73,7 +73,7 @@
 		<input type="submit" class="button" value="Save Changes" />
 	
 		{if isset($quiz)}
-		or <a href="{$site_url}/admin/delete/quiz/{$quiz->id}"
+		or <a href="{URL::site()}/admin/delete/quiz/{$quiz->id}"
 			  class="confirm">Delete</a>
 		{/if}
 		</span>
@@ -85,9 +85,9 @@
 	<ol id="editor">
 		{foreach $questions question}
 		<li class="question">
-			<a href="{$site_url}/admin/question/delete/{$question->id}/on/{$quiz->id}"
+			<a href="{URL::site("admin/question/delete/{$question->id}/on/{$quiz->id}")}"
 			   class="delete light-button">&times;</a> 
-			<a href="{$site_url}/admin/question/edit/{$question->id}/on/{$quiz->id}"
+			<a href="{URL::site("admin/question/edit/{$question->id}/on/{$quiz->id}")}"
 			   class="edit light-button">Edit</a> 
 		
 			<p class="question-text">{$question->content}</p>
@@ -117,7 +117,7 @@
 	{/if}
 	
 	{if isset($quiz)}
-	<a href="{$site_url}/admin/question/create/on/{$quiz->id}"
+	<a href="{URL::site("admin/question/create/on/{$quiz->id}")}"
 	   class="button align-left">+ Add Question</a>
 	{/if}
 </div>

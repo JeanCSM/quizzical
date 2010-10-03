@@ -47,7 +47,7 @@
 		{form_token()}
 		
 		<input type="submit" class="button" value="Go Ahead" />
-		or <a href="{$site_url}/admin">Cancel</a>
+		or <a href="{URL::site("admin")}">Cancel</a>
 	</form>
 </div>
 {/block}
