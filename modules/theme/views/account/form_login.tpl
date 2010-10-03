@@ -33,16 +33,16 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<form method="post" action="{$site_url}/account/login">
+<form method="post" action="{$base_url}account/login">
 	<label for="email">Email</label>
-	<input type="text" class="text" name="email" value="{set_value('email')}" />
+	<input type="text" class="text" name="email" value="{Arr::get($_POST, 'email')}" />
 	<br />
 
 	<label for="password">Password</label>
 	<input type="password" class="text" name="password" />
 	<br />
 	
-	<a href="{$site_url}/account/forgot">Forgot your password?</a>
+	<a href="{$base_url}account/forgot">Forgot your password?</a>
 	
 	<input type="hidden" name="redirect" value="{$redirect|default:''}" />
 	<input type="submit" class="button" value="Log In" />
