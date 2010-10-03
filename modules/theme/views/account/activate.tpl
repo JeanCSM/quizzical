@@ -33,11 +33,11 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "layout.tpl"}
+{extends "layout"}
 
 {block "content"}
 <div class="prefix_3 suffix_3 grid_6">
 	<h2>Activate Your Account</h2>
-	{include('form_activate.tpl')}
+	{include('form_activate')}
 </div>
 {/block}

@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "../dialog.tpl"}
+{extends "dialog"}
 
 {block "content"}
 <p>

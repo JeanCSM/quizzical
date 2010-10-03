@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "../layout.tpl"}
+{extends "layout"}
 
 {block "content"}
 <div class="prefix_3 suffix_3 grid_6">
@@ -46,6 +46,6 @@
 	
 	{validation_errors('<div class="error">', '</div>')}
 	
-	{include('form_forgot.tpl')}
+	{include('account/form_forgot')}
 </div>
 {/block}

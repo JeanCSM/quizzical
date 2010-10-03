@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "../layout.tpl"}
+{extends "layout"}
 
 {block "content"}
 <div class="prefix_3 suffix_3 grid_6">
@@ -53,7 +53,7 @@
 	</p>
 
 	<h3>Verify Your Identity</h3>
-	{include('form_reset.tpl')}
+	{include('account/form_reset')}
 </div>
 {/block}
 

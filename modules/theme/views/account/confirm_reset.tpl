@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "../layout.tpl"}
+{extends "layout"}
 
 {block "content"}
 <div class="prefix_3 suffix_3 grid_6">
@@ -45,7 +45,7 @@
 		navigation bar after logging in).
 	</div>
 
-	{include "form_login.tpl"}
+	{include "account/form_login"}
 </div>
 
 <div class="clear">&nbsp;</div>

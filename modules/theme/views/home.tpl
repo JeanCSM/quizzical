@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-{extends "layout.tpl"}
+{extends "layout"}
 
 {block "content"}
 <div class="grid_12">
@@ -47,12 +47,12 @@
 
 <div class="login grid_6">
 	<h3>Log In</h3>
-	{include('account/form_login.tpl')}
+	{include('account/form_login')}
 </div>
 
 <div class="logout grid_6">
 	<h3>Register</h3>
-	{include('account/form_register.tpl')}
+	{include('account/form_register')}
 </div>
 <div class="clear">&nbsp;</div>
 {/block}
