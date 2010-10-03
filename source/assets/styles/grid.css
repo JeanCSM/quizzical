@@ -1,6 +1,7 @@
 /*
 	Variable Grid System.
-	Learn more ~ http://www.spry-soft.com/grids/
+	Learn more ~ http://www.spry-soft.com/grids/quiz 4
+	
 	Based on 960 Grid System - http://960.gs/
 
 	Licensed under GPL and MIT.
@@ -35,8 +36,6 @@
 	position: relative;
 	margin-left: 10px;
 	margin-right: 10px;
-}
-
 /* Grid >> Children (Alpha ~ First, Omega ~ Last)
 ----------------------------------------------------------------------------------------------------*/
 
