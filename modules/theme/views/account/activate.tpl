@@ -38,6 +38,6 @@
 {block "content"}
 <div class="prefix_3 suffix_3 grid_6">
 	<h2>Activate Your Account</h2>
-	{include('form_activate')}
+	{include('account/form_activate')}
 </div>
 {/block}
