@@ -67,16 +67,16 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	   'auth'       => MODPATH.'auth',       // Basic authentication
-	   'database'   => MODPATH.'database',   // Database access
-	   'jelly'      => MODPATH.'jelly',      // Object-relational mapping
-	   'jelly-auth' => MODPATH.'jelly-auth', // Auth to Jelly driver
+	   '971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
 	   'migration'  => MODPATH.'migration',  // Migration system for DB
 	   'dbforge' 	=> MODPATH.'dbforge',  	 // DB editing system
+	   'jelly'      => MODPATH.'jelly',      // Object-relational mapping
+	   'jelly-auth' => MODPATH.'jelly-auth', // Auth to Jelly driver
+	   'auth'       => MODPATH.'auth',       // Basic authentication
+	   'database'   => MODPATH.'database',   // Database access
 	   'pagination' => MODPATH.'pagination', // Paging of results
 	   'unittest'   => MODPATH.'unittest',   // Unit testing
 	   'theme'		=> MODPATH.'theme',		 // Theming system
-	   '971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
 	));
 
 /**
