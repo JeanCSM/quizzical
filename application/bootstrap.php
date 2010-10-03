@@ -67,7 +67,6 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	   '971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
 	   'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
@@ -79,6 +78,7 @@ Kohana::modules(array(
 	   'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	   'theme'		=> MODPATH.'theme',		 // Theming system
+	   //'971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
 	));
 
 /**
