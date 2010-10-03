@@ -35,14 +35,15 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-class Controller_Account extends Controller_Template {
+class Controller_Template extends Controller {
     
-    function action_index ()
+    function before ()
     {
-        if ( ! Auth::instance()->logged_in())
-		{
-			$this->request->response = Template::factory('home')->render();
-		}
+        Template::set_global(array(
+            'site_title' => 'Quizzical'
+          , 'base_url' => Kohana::$base_url
+          , 'site_url' => Kohana::$base_url  // Depreciated
+        ));
     }
     
 }
