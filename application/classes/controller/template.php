@@ -40,9 +40,10 @@ class Controller_Template extends Controller {
     function before ()
     {
         Template::set_global(array(
-            'site_title' => 'Quizzical'
-          , 'base_url' => Kohana::$base_url
-          , 'site_url' => Kohana::$base_url  // Depreciated
+            'site_title' => 'Quizzical',
+            'version' => 3.0,
+            'base_url' => Kohana::$base_url,
+            'site_url' => Kohana::$base_url  // Depreciated
         ));
     }
     
