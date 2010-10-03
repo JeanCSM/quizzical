@@ -10,3 +10,9 @@
 [submodule "modules/auth"]
 	path = modules/auth
 	url = http://github.com/kohana/auth.git
+[submodule "modules/migration"]
+	path = modules/migration
+	url = git://github.com/ollym/migration.git
+[submodule "modules/dbforge"]
+	path = modules/dbforge
+	url = git://github.com/ollym/dbforge.git
