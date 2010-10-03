@@ -22,6 +22,3 @@
 [submodule "application/vendor/dwoo"]
 	path = application/vendor/dwoo
 	url = git://github.com/Seldaek/Dwoo.git
-[submodule "modules/orm"]
-	path = modules/orm
-	url = git://github.com/kohana/orm.git
