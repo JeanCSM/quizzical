@@ -105,13 +105,6 @@
 			</fileset>
 		</copy>
 
-		<copy todir="${build}/system/application">
-			<fileset dir="${packages}/dwoo/dwoo/Dwoo/Adapters/CodeIgniter">
-				<include name="config/**" />
-				<include name="libraries/**" />
-			</fileset>
-		</copy>
-
 		<!-- Ion Auth -->
 		<copy todir="${build}/system/application">
 			<fileset dir="${packages}/ion/speedbreeze-CodeIgniter-Ion-Auth-${v_ion}">
