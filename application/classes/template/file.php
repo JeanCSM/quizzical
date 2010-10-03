@@ -35,75 +35,21 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// First, we need to load up all of Dwoo
-require_once Kohana::find_file('vendor', 'dwoo/lib/dwooAutoload');
-
-class Template {
-    protected $file = NULL;
-    protected $data = NULL;
-    
-    protected static $dwoo;
-    public static $data_global = array();
-    
-    public static function factory ($file = NULL, array $data = NULL)
+class Template_File extends Dwoo_Template_File {
+    public function getResourceIdentifier ()
     {
-        return new Template($file, $data);
-    }
-    
-    public function __construct ($file = NULL, array $data = NULL)
-    {
-        $this->data = new Dwoo_Data();
-        
-        if (isset($file))
+        if ($this->resolvedPath === NULL)
         {
-            $this->set_filename($file);
+            $this->resolvedPath =
+                Kohana::find_file('views', $this->file, 'tpl');
         }
         
-        if (isset($data))
-        {
-            $this->set($data);
-        }
+        return $this->resolvedPath;
     }
     
-    public static function set_global ($key, $data = null)
+    public static function templateFactory (Dwoo_Core $dwoo, $resourceId, $cacheTime = NULL, $cacheId = NULL, $compileId = null, Dwoo_ITemplate $parentTemplate = NULL)
     {
-        if (is_array($key) and ! isset($data))
-        {
-            Template::$data_global = array_merge(Template::$data_global, $key);
-        }
-        else if (isset($data))
-        {
-            Template::$data_global[$key] = $data;
-        }
-    }
-    
-    public function set_filename ($file)
-    {
-        $this->file = new Template_File($file);
-    }
-    
-    public function set ($key, $value = null)
-    {
-        $this->data->assign($key, $value);
-    }
-    
-    protected static function _render ($file, $data)
-    {
-        if ( ! isset($dwoo))
-        {
-            $loader = new Dwoo_Loader(Kohana::$cache_dir);
-            $loader->addDirectory(APPPATH . '/classes/template/plugin');
-        
-            $dwoo = new Template_Engine();
-            $dwoo->setLoader($loader);
-        }
-        
-        return $dwoo->get($file, $data);
-    }
-    
-    public function render ()
-    {
-        $this->set(Template::$data_global);
-        return Template::_render($this->file, $this->data);
+        $class = ($parentTemplate) ? get_class($parentTemplate) : 'Template_File';
+        return new $class($resourceId, $cacheTime, $cacheId, $compileId);
     }
 }
