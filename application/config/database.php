@@ -2,27 +2,27 @@
 
 return array
 (
-	'default' => array(
-		'type'       => 'pdo',
+	'default' => array
+	(
+		'type'       => 'mysql',
 		'connection' => array(
 			/**
-			 * The following options are available for PDO:
+			 * The following options are available for MySQL:
 			 *
-			 * string   dsn         Data Source Name
-			 * string   username    database username
-			 * string   password    database password
-			 * boolean  persistent  use persistent connections?
+			 * string   hostname     server hostname, or socket
+			 * string   database     database name
+			 * string   username     database username
+			 * string   password     database password
+			 * boolean  persistent   use persistent connections?
+			 *
+			 * Ports and sockets may be appended to the hostname.
 			 */
-			'dsn'        => 'mysql:host=localhost;dbname=q3',
+			'hostname'   => 'localhost',
+			'database'   => 'q3',
 			'username'   => 'root',
-			'password'   => '',
+			'password'   => FALSE,
 			'persistent' => FALSE,
 		),
-		/**
-		 * The following extra options are available for PDO:
-		 *
-		 * string   identifier  set the escaping identifier
-		 */
 		'table_prefix' => '',
 		'charset'      => 'utf8',
 		'caching'      => FALSE,
