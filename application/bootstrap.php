@@ -68,17 +68,15 @@ Kohana::$config->attach(new Kohana_Config_File);
  */
 Kohana::modules(array(
 	   'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	   'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	   'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'oauth'      => MODPATH.'oauth',      // OAuth authentication
+	   'jelly'      => MODPATH.'jelly',      // Object-relational mapping
+	   'jelly-auth' => MODPATH.'jelly-auth', // Auth to Jelly driver
+	   'migration'  => MODPATH.'migration',  // Migration system for DB
+	   'dbforge' 	=> MODPATH.'dbforge',  	 // DB editing system
 	   'pagination' => MODPATH.'pagination', // Paging of results
 	   'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	   'theme'		=> MODPATH.'theme',		 // Theming system
-	   //'971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
+	   '971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
 	));
 
 /**
