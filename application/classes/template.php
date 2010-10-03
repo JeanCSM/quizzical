@@ -41,7 +41,9 @@ require_once Kohana::find_file('vendor', 'dwoo/lib/dwooAutoload');
 class Template {
     protected $file = NULL;
     protected $data = NULL;
+    
     protected static $dwoo;
+    public static $data_global = array();
     
     public static function factory ($file = NULL, array $data = NULL)
     {
@@ -54,7 +56,7 @@ class Template {
         
         if (isset($file))
         {
-            $this->set_file($file);
+            $this->set_filename($file);
         }
         
         if (isset($data))
@@ -63,15 +65,27 @@ class Template {
         }
     }
     
-    public function set_file ($file)
+    public static function set_global ($key, $data = null)
+    {
+        if (is_array($key) and ! isset($data))
+        {
+            Template::$data_global = array_merge(Template::$data_global, $key);
+        }
+        else if (isset($data))
+        {
+            Template::$data_global[$key] = $data;
+        }
+    }
+    
+    public function set_filename ($file)
     {
         $path  = Kohana::find_file('views', $file, 'tpl');
         $this->file = new Dwoo_Template_File($path);
     }
     
-    public function set ($data)
+    public function set ($key, $value = null)
     {
-        $this->data->set($data);
+        $this->data->assign($key, $value);
     }
     
     protected static function dwoo_render ($file, $data)
@@ -91,6 +105,7 @@ class Template {
     
     public function render ()
     {
+        $this->set(Template::$data_global);        
         return Template::dwoo_render($this->file, $this->data);
     }
 }
