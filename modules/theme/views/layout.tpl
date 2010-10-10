@@ -33,11 +33,11 @@
  *
  * ***** END LICENSE BLOCK ***** *}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="utf-8" />
+	
 	{if $page_title}
 	<title>{$page_title} ~ {$site_title}</title>
 	{else}
@@ -45,64 +45,35 @@
 	{/if}
 
 	{block "styles"}
-	<link rel="stylesheet" type="text/css"
-		 href="{$base_url}assets/styles/reset.css" />
-	<link rel="stylesheet" type="text/css"
-		 href="{$base_url}assets/styles/grid.css" />
-	<link rel="stylesheet" type="text/css"
-		 href="{$base_url}assets/styles/core.css" />
-	<link rel="stylesheet" type="text/css"
-		 href="{$base_url}assets/styles/application.css" />
+	{Theme::styles()}
 	{/block}
 </head>
 
 <body>
-	<div class="header">
-		<div class="container_12">
-			<div class="grid_12">
-				<h1><a href="{URL::site()}">{$site_title}</a></h1>
-
-				{block "nav"}
-				{menu($nav, $nav_selected)}
-				{/block}
-
-				<div class="clear">&nbsp;</div>
-			</div>
-			<div class="clear">&nbsp;</div>
-		</div>
-	</div>
-
-	{block "subnav"}
-	{if isset($sections)}
-	<div class="navigation">
-		<div class="container_12">
-			<div class="grid_12">
-				{menu($subnav, $subnav_selected)}
-			
-				<div class="clear">&nbsp;</div>
-			</div>
+	<div id="header"><div class="wrap">
+		<h1><a href="{URL::site()}">{$site_title}</a></h1>
 		
-			<div class="clear">&nbsp;</div>
+		{block "nav"}
+		<div id="nav">
+		{menu($nav, $nav_selected)}
 		</div>
-	</div>
-
-	<div class="clear">&nbsp;</div>
-	{/if}
+		{/block}
+	</div></div>
+	
+	{block "subnav"}
+	<div id="subnav"><div class="wrap">
+		{menu($subnav, $subnav_selected)}
+	</div></div>
 	{/block}
-
-	<div class="content container_12">
+	
+	<div id="content"><div class="wrap">
 		{block "content"}{/block}
+	</div></div>
 
-		<div class="clear">&nbsp;</div>
-	</div>
+	<div id="footer"><div class="wrap">
+		Powered by Quizzical v{$version}.
+	</div></div>
 
-	<div class="footer container_12">
-		<div class="grid_12">
-			Powered by Quizzical v{$version}.
-		</div>
-		<div class="clear">&nbsp;</div>
-	</div>
-
-	{block "scripts"}{/block}
+	{Theme::scripts()}
 </body>
 </html>
