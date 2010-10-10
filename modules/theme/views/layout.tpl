@@ -91,7 +91,7 @@
 				<ul>
 				{foreach $sections name method}
 					<li class="{tif $selected_section == $method ? 'selected'}">
-						<a href="{URL::site('admin/$method')}">
+						<a href="{URL::site($method)}">
 							<span>{$name}</span>
 						</a>
 					</li>
