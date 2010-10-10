@@ -37,18 +37,51 @@
 
 class Controller_Template extends Controller {
     
-    protected $template;
-    protected $auth;
+    protected $_template = false;
+    protected $_vars = array(
+        'errors' => array(),
+        'nav' => array(),
+        'nav_selected' => false);
+    
+    protected $template = false;
+    protected $auth = false;
     
     function before ()
     {
         $this->auth = Auth::instance();
         
-        Template::set_global(array(
-            'site_title' => 'Quizzical',
-            'version' => 3.0,
-            'base_url' => Kohana::$base_url,
-        ));
+        // Set up our default global variables
+        $this->_vars['site_title'] = 'Quizzical';
+        $this->_vars['version'] = 3.0;
+        $this->_vars['base_url'] = Kohana::$base_url;
+        
+        // Set up our default site-wide navigation
+        if (Powers::instance()->can('view', 'admin_section'))
+        {
+            $this->_vars['nav']['admin'] = 'Admin';
+        }
+        
+        if (Auth::instance()->logged_in())
+        {
+            $this->_vars['nav']['account/details'] = 'Account';
+            $this->_vars['nav']['account/logout'] = 'Log Out';
+        }
+        else
+        {
+            $this->_vars['nav']['account/login'] = 'Log In';
+        }
+    }
+    
+    function after ()
+    {
+        if (!$this->template)
+        {
+            $this->template = Template::factory();
+        }
+
+        $this->template->set_filename($this->_template);
+        $this->template->set($this->_vars);
+        $this->request->response = $this->template->render();
     }
     
 }

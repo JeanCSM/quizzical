@@ -42,7 +42,7 @@ class Controller_Account extends Controller_Template {
         if ( ! $this->auth->logged_in())
 		{
 			// If the user is not logged in, display the uniform welcome page
-			$this->request->response = Template::factory('home')->render();
+			$this->_template = 'home';
 		}
 		else
 		{
@@ -61,8 +61,8 @@ class Controller_Account extends Controller_Template {
 		}
 		
 		// Set up the login form so that we can render it later on
-		$this->template = Template::factory('account/login');
-		$this->template->set('errors', array());
+		$this->_template = 'account/login';
+		
 		
 		// If some sort of login information was submitted, try to validate it
 		if ($_POST)
@@ -75,21 +75,15 @@ class Controller_Account extends Controller_Template {
 			}
 			else
 			{
-				$this->template->set('errors',
-					array(
+				$this->_vars['errors'][] = 
 						'The email and/or password that you entered was '
 					  . 'incorrect. Here are some possible issues to check for:'
 					  . '<ul><li>If you have multiple email addresses, did you '
 					  . 'type in the correct one?</li>'
 					  . '<li>Do you have CAPS LOCK engaged on your keyboard?'
-					  . '</li></ul>'
-					));
+					  . '</li></ul>';
 			}
 		}
-		
-		// Display the login form with any user feedback added on to it
-		// regarding the user's login attempts
-		$this->request->response = $this->template->render();
 	}
     
 }

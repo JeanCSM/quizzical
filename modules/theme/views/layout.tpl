@@ -63,18 +63,7 @@
 				<h1><a href="{URL::site()}">{$site_title}</a></h1>
 
 				{block "nav"}
-				<ul class="user-bar">
-					{if Powers::instance()->can('view', 'admin_section')}
-					<li><a href="{URL::site('admin')}">Admin</a></li>
-					{/if}
-
-					{if Auth::instance()->logged_in()}
-					<li><a href="{URL::site('account/details')}">Account</a></li>
-					<li><a href="{URL::site('account/logout')}">Log Out</a></li>
-					{else}
-					<li><a href="{URL::site('account/login')}">Log In</a></li>
-					{/if}
-				</ul>
+				{menu($nav, $nav_selected)}
 				{/block}
 
 				<div class="clear">&nbsp;</div>
@@ -88,15 +77,7 @@
 	<div class="navigation">
 		<div class="container_12">
 			<div class="grid_12">
-				<ul>
-				{foreach $sections name method}
-					<li class="{tif $selected_section == $method ? 'selected'}">
-						<a href="{URL::site($method)}">
-							<span>{$name}</span>
-						</a>
-					</li>
-				{/foreach}
-				</ul>
+				{menu($subnav, $subnav_selected)}
 			
 				<div class="clear">&nbsp;</div>
 			</div>
