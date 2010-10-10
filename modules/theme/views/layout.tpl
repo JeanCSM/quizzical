@@ -45,7 +45,7 @@
 	{/if}
 
 	{block "styles"}
-	{Theme::styles()}
+	{Theme::links('styles')}
 	{/block}
 </head>
 
@@ -74,6 +74,6 @@
 		Powered by Quizzical v{$version}.
 	</div></div>
 
-	{Theme::scripts()}
+	{Theme::links('scripts')}
 </body>
 </html>

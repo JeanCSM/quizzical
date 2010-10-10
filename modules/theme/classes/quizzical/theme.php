@@ -37,18 +37,48 @@
 
 class Quizzical_Theme {
     
+    protected static $scripts = array();
+    protected static $styles = array();
+    
     public static function url ($name)
     {
         return Kohana::$base_url.'modules/'.$name;
     }
-
-    public static function scripts ()
-    {
-        return array();
-    }
     
-    public static function styles ()
+    public static function register ($what, $url)
     {
-        return array();
+        switch ($what)
+        {
+            case 'script':
+                $scripts[] = $url;
+                break;
+            case 'style':
+                $styles[] = $url;
+        }
+    }
+
+    public static function links ($what)
+    {
+        switch ($what)
+        {
+            case 'scripts':
+                $list =& Theme::$scripts;
+                $start = '<script type="text/javascript" src="';
+                $end = '"></script>';
+                break;
+            case 'styles':
+                $list =& Theme::$styles;
+                $start = '<link rel="stylesheet" href="';
+                $end = '" />';
+        }
+        
+        $buffer = '';
+        
+        foreach ($list as $url)
+        {
+            $buffer .= $start.$url.$end;
+        }
+        
+        return $buffer;
     }
 }
