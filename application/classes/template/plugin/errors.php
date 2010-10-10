@@ -35,20 +35,17 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-class Controller_Template extends Controller {
+function Dwoo_Plugin_errors(Dwoo $dwoo,
+    $list = array(),
+    $start_template = '<div class="error"><p>',
+    $end_template = '</p></div>')
+{
+    $buffer = '';
     
-    protected $template;
-    protected $auth;
-    
-    function before ()
+    foreach ($list as $error)
     {
-        $this->auth = Auth::instance();
-        
-        Template::set_global(array(
-            'site_title' => 'Quizzical',
-            'version' => 3.0,
-            'base_url' => Kohana::$base_url,
-        ));
+        $buffer .= $start_template.$error.$end_template;
     }
     
+    return $buffer;
 }

@@ -64,15 +64,15 @@
 
 				{block "nav"}
 				<ul class="user-bar">
-					{if allowed_to('view', 'admin_section')}
+					{if Powers::instance()->can('view', 'admin_section')}
 					<li><a href="{URL::site('admin')}">Admin</a></li>
 					{/if}
 
-					{if $is_logged_in}
+					{if Auth::instance()->logged_in()}
 					<li><a href="{URL::site('account/details')}">Account</a></li>
 					<li><a href="{URL::site('account/logout')}">Log Out</a></li>
 					{else}
-					<li><a href="{URL::site('admin/login')}">Log In</a></li>
+					<li><a href="{URL::site('account/login')}">Log In</a></li>
 					{/if}
 				</ul>
 				{/block}

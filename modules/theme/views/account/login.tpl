@@ -39,7 +39,7 @@
 <div class="prefix_3 suffix_3 grid_6">
 	<h2>Login</h2>
 
-	{validation_errors('<div class="error">', '</div>')}
+	{errors($errors)}
 	{include('account/form_login')}
 </div>
 {/block}

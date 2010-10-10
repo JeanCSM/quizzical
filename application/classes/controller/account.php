@@ -39,10 +39,57 @@ class Controller_Account extends Controller_Template {
     
     function action_index ()
     {
-        if ( ! Auth::instance()->logged_in())
+        if ( ! $this->auth->logged_in())
 		{
+			// If the user is not logged in, display the uniform welcome page
 			$this->request->response = Template::factory('home')->render();
 		}
+		else
+		{
+			// If the user is authenticated, display their personalized
+			// dashboard of quizzes to take
+		}
     }
+	
+	function action_login ()
+	{
+		// If the user is already logged in, send them over to their account 
+		if ($this->auth->logged_in())
+		{
+			Request::instance()->redirect('account/details');
+			return;
+		}
+		
+		// Set up the login form so that we can render it later on
+		$this->template = Template::factory('account/login');
+		$this->template->set('errors', array());
+		
+		// If some sort of login information was submitted, try to validate it
+		if ($_POST)
+		{
+			if ($this->auth->login($_POST['email'], $_POST['password']) and
+				$this->auth->logged_in())
+			{
+				Request::instance()->redirect();
+				return;
+			}
+			else
+			{
+				$this->template->set('errors',
+					array(
+						'The email and/or password that you entered was '
+					  . 'incorrect. Here are some possible issues to check for:'
+					  . '<ul><li>If you have multiple email addresses, did you '
+					  . 'type in the correct one?</li>'
+					  . '<li>Do you have CAPS LOCK engaged on your keyboard?'
+					  . '</li></ul>'
+					));
+			}
+		}
+		
+		// Display the login form with any user feedback added on to it
+		// regarding the user's login attempts
+		$this->request->response = $this->template->render();
+	}
     
 }
