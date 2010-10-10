@@ -95,6 +95,7 @@ class Template {
             $loader->addDirectory(APPPATH . '/classes/template/plugin');
         
             $dwoo = new Template_Engine();
+            $dwoo->setCompileDir(Kohana::$cache_dir);
             $dwoo->setLoader($loader);
         }
         
