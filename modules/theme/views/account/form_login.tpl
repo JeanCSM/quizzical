@@ -35,11 +35,11 @@
 
 <form method="post" action="{URL::site("account/login")}">
 	<label for="email">Email</label>
-	<input type="text" class="text" name="email" value="{Arr::get($_POST, 'email')}" />
+	<input type="text" id="email" name="email" value="{Arr::get($_POST, 'email')}" />
 	<br />
 
 	<label for="password">Password</label>
-	<input type="password" class="text" name="password" />
+	<input type="password" id="password" name="password" />
 	<br />
 	
 	<a href="{URL::site("account/forgot")}">Forgot your password?</a>
