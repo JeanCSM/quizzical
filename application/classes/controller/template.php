@@ -74,7 +74,12 @@ class Controller_Template extends Controller {
     
     function after ()
     {
-        if (!$this->template)
+        // Run the template engine given the specified information passed by
+        // the controller actions
+        if ( ! $this->_template)
+            return;
+        
+        if ( ! $this->template)
         {
             $this->template = Template::factory();
         }
