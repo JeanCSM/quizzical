@@ -84,5 +84,17 @@ class Controller_Account extends Controller_Template {
 			}
 		}
 	}
+	
+	function action_logout ()
+	{
+		// If the user is logged in, log them out
+		if ($this->auth->logged_in())
+		{
+			$this->auth->logout();
+		}
+		
+		// Send the user over to the homepage now that they're logged out
+		Request::instance()->redirect('/');
+	}
     
 }
