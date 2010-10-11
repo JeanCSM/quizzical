@@ -36,7 +36,7 @@
 {extends "layout"}
 
 {block "content"}
-<div class="prefix_3 suffix_3 grid_6">
+<div class="narrow">
 	<h2>There's One More Step</h2>
 
 	<div class="message">
