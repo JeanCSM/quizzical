@@ -63,7 +63,6 @@ class Controller_Account extends Controller_Template {
 		// Set up the login form so that we can render it later on
 		$this->_template = 'account/login';
 		
-		
 		// If some sort of login information was submitted, try to validate it
 		if ($_POST)
 		{
