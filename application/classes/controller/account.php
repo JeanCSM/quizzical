@@ -96,5 +96,54 @@ class Controller_Account extends Controller_Template {
 		// Send the user over to the homepage now that they're logged out
 		Request::instance()->redirect('/');
 	}
+	
+	function action_register ()
+	{
+		// If the user is already logged in, send them over to their account
+		// page from here; we'll have a separate administrative system for
+		// allowing admins to add accounts (to allow admins to bypass the
+		// verification by email process).
+		if ($this->auth->logged_in())
+		{
+			Request::instance()->redirect('account/details');
+			return;
+		}
+		
+		// Set up the registration form template
+		$this->_template = 'account/register';
+		
+		// If some sort of login information was submitted, try to validate it
+		if ($_POST)
+		{
+			// TODO: Add in recaptcha here
+			
+			// Try to validate the field for the new user
+			$user_data = Arr::extract($_POST,
+				array('email', 'password', 'password_confirm'));
+			$user_name = strtolower(str_replace(' ', '', $_POST['username']));
+			$user_names = Model_User::_split_username($_POST['username']);
+			
+			// Push all of the default data into the user model
+			$user_record = Jelly::factory('user')
+				->set($user_data)
+				->set('username', $user_name)
+				->set('first_name', $user_names[0])
+				->set('last_name', $user_names[1])
+				->add('roles', 1);
+			
+			// When we try to save this, Jelly will validate it; if the data
+			// passed in is invalid, display an error screen.
+			try
+			{
+				$user_record->save();
+				$this->_template = 'account/confirm_register';
+			}
+			catch (Validate_Exception $errors)
+			{
+				$this->_vars['errors'] = $errors->array->errors('default');
+			}
+		}
+	}
+	
     
 }
