@@ -37,37 +37,58 @@
 
 class Quizzical_Theme {
     
-    protected static $scripts = array();
-    protected static $styles = array();
+    protected $scripts = array();
+    protected $styles = array();
     
-    public static function url ($name)
+    protected static $_instance = false;
+    
+    public static function instance ()
     {
-        return Kohana::$base_url.'modules/'.$name;
+        if ( ! Theme::$_instance)
+        {
+            Theme::$_instance = new Theme();
+        }
+        
+        return Theme::$_instance;
     }
     
-    public static function register ($what, $url)
+    protected function __construct ()
+    {
+        // Load core CSS layout libraries
+        $this->register('style',
+            Theme::url('theme', 'styles/oocss/core/libraries.css'));
+        $this->register('style',
+            Theme::url('theme', 'styles/oocss/core/grid/grids.css'));
+    }
+    
+    public static function url ($module, $path)
+    {
+        return Kohana::$base_url.'modules/'.$module.'/'.$path;
+    }
+    
+    public function register ($what, $url)
     {
         switch ($what)
         {
             case 'script':
-                $scripts[] = $url;
+                $this->scripts[] = $url;
                 break;
             case 'style':
-                $styles[] = $url;
+                $this->styles[] = $url;
         }
     }
 
-    public static function links ($what)
+    public function links ($what)
     {
         switch ($what)
         {
             case 'scripts':
-                $list =& Theme::$scripts;
+                $list =& $this->scripts;
                 $start = '<script type="text/javascript" src="';
                 $end = '"></script>';
                 break;
             case 'styles':
-                $list =& Theme::$styles;
+                $list =& $this->styles;
                 $start = '<link rel="stylesheet" href="';
                 $end = '" />';
         }
