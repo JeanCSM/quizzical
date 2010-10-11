@@ -28,3 +28,6 @@
 [submodule "modules/jelly-auth"]
 	path = modules/jelly-auth
 	url = git://github.com/raeldc/jelly-auth.git
+[submodule "modules/theme/styles/oocss"]
+	path = modules/theme/styles/oocss
+	url = git://github.com/stubbornella/oocss.git
