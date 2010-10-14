@@ -38,9 +38,7 @@
 class Model_User extends Model_Auth_User {
     
     public static function initialize (Jelly_Meta $meta)
-    {
-        Model_Auth_User::initialize($meta);
-        
+    {   
         // Add fields that we'll use for sorting by first and last name later
         // on to make it easy to create a roster
         $meta->fields(array(
@@ -55,11 +53,27 @@ class Model_User extends Model_Auth_User {
                 'hash_with' => array(Auth::instance(), 'hash_password')
             ))
         ));
+        
+        // Redefine the last_login timestamp field so that the code works
+        // properly with Migrations for Ko3; based off of solution mentioned by
+        // Jonathan Geiger at <http://github.com/jonathangeiger/kohana-jelly/issues/issue/107>
+        $meta->fields(array(
+            'last_login' => new Field_Timestamp(array(
+                'format' => 'Y:m:d H:i:s'
+            ))
+        ));
+        
+        Model_Auth_User::initialize($meta);
     }
     
     public static function _split_username ($username)
     {
         return preg_split('/\s/', $username, 2);
+    }
+    
+    public static function _compress_username ($username)
+    {
+        return strtolower(str_replace(' ', '', $username));
     }
     
 }

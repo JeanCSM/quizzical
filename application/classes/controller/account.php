@@ -65,9 +65,10 @@ class Controller_Account extends Controller_Template {
 		
 		// If some sort of login information was submitted, try to validate it
 		if ($_POST)
-		{
-			if ($this->auth->login($_POST['email'], $_POST['password']) and
-				$this->auth->logged_in())
+		{	
+			$user_name = Model_User::_compress_username($_POST['username']);
+			
+			if ($this->auth->login($user_name, $_POST['password'], false))
 			{
 				Request::instance()->redirect();
 				return;
@@ -120,7 +121,7 @@ class Controller_Account extends Controller_Template {
 			// Try to validate the field for the new user
 			$user_data = Arr::extract($_POST,
 				array('email', 'password', 'password_confirm'));
-			$user_name = strtolower(str_replace(' ', '', $_POST['username']));
+			$user_name = Model_User::_compress_username($_POST['username']);
 			$user_names = Model_User::_split_username($_POST['username']);
 			
 			// Push all of the default data into the user model
