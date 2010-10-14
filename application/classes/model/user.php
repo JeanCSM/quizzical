@@ -46,7 +46,7 @@ class Model_User extends Model_Auth_User {
             'last_name' => new Field_String
         ));
         
-        // Add fields to allow us to verify a user to allow us to reset their
+        // Add field to allow us to verify a user to allow us to reset their
         // password if they need it reset for some reason
         $meta->fields(array(
             'reset' => new Field_Password(array(
