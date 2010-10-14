@@ -34,8 +34,8 @@
  * ***** END LICENSE BLOCK ***** *}
 
 <form method="post" action="{URL::site("account/login")}">
-	<label for="email">Email</label>
-	<input type="text" id="email" name="email" value="{Arr::get($_POST, 'email')}" />
+	<label for="username">First &amp; Last Name</label>
+	<input type="text" id="username" name="username" value="{$dwoo.post.username|default:''}" />
 	<br />
 
 	<label for="password">Password</label>
