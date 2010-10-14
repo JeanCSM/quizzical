@@ -116,8 +116,6 @@ class Controller_Account extends Controller_Template {
 		// If some sort of login information was submitted, try to validate it
 		if ($_POST)
 		{
-			// TODO: Add in recaptcha here
-			
 			// Try to validate the field for the new user
 			$user_data = Arr::extract($_POST,
 				array('email', 'password', 'password_confirm'));
