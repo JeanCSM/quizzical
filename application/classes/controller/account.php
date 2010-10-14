@@ -70,7 +70,7 @@ class Controller_Account extends Controller_Template {
 			
 			if ($this->auth->login($user_name, $_POST['password'], false))
 			{
-				Request::instance()->redirect();
+				Request::instance()->redirect($_POST['redirect']);
 				return;
 			}
 			else
