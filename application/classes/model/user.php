@@ -54,6 +54,14 @@ class Model_User extends Model_Auth_User {
             ))
         ));
         
+        // Add field that we'll use to verify them to ensure that they are who
+        // they say they are after registration
+        $meta->fields(array(
+            'activate' => new Field_Password(array(
+                'hash_width' => array(Auth::instance(), 'hash_password')
+            ))
+        ));
+        
         // Redefine the last_login timestamp field so that the code works
         // properly with Migrations for Ko3; based off of solution mentioned by
         // Jonathan Geiger at <http://github.com/jonathangeiger/kohana-jelly/issues/issue/107>
