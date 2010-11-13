@@ -144,5 +144,9 @@ class Controller_Account extends Controller_Template {
 		}
 	}
 	
+	function action_sync ()
+	{
+		Migration::factory('user', 'jelly')->sync();
+	}
     
 }
