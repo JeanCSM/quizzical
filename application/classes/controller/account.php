@@ -81,7 +81,7 @@ class Controller_Account extends Controller_Template {
 					  . '<ul><li>If you have multiple email addresses, did you '
 					  . 'type in the correct one?</li>'
 					  . '<li>Do you have CAPS LOCK engaged on your keyboard?'
-					  . '</li></ul>';
+					  . '</li><li>Have you activated your account?</li></ul>';
 			}
 		}
 	}
