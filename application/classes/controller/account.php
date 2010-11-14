@@ -48,6 +48,8 @@ class Controller_Account extends Controller_Template {
 		{
 			// If the user is authenticated, display their personalized
 			// dashboard of quizzes to take
+			
+			$this->_template = 'dashboard';
 		}
     }
 	
