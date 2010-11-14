@@ -71,15 +71,14 @@ class Controller_Account extends Controller_Template {
 			if ($this->auth->login($user_name, $_POST['password'], false))
 			{
 				Request::instance()->redirect($_POST['redirect']);
-				return;
 			}
 			else
 			{
 				$this->_vars['errors'][] = 
-						'The email and/or password that you entered was '
+						'The name/password combination that you entered was '
 					  . 'incorrect. Here are some possible issues to check for:'
-					  . '<ul><li>If you have multiple email addresses, did you '
-					  . 'type in the correct one?</li>'
+					  . '<ul><li>Did you use a middle name or initial when you '
+					  . 'registered?  Make sure that it is included.</li>'
 					  . '<li>Do you have CAPS LOCK engaged on your keyboard?'
 					  . '</li><li>Have you activated your account?</li></ul>';
 			}
