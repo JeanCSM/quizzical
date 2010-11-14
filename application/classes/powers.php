@@ -37,6 +37,7 @@
 
 class Powers {
     protected $_powers = array();
+    protected $_super = false;
     
     protected static $_instance = false;
     
@@ -62,9 +63,21 @@ class Powers {
                 ->where('roles', '=', -1)
                 ->execute();
         }
+        elseif ($user->id == 1)
+        {
+        	$this->_super = true;
+        }
         else
         {
-            // TODO
+            $roles = $user->get('roles');
+            
+            foreach ($roles as $role)
+            {
+            	$powers = Jelly::select('power')
+            		->where('roles', '=', $role->id)
+            		->execute();
+            	$this->_powers = Arr::merge($this->_powers, $powers);
+            }
         }
     }
     
@@ -75,6 +88,9 @@ class Powers {
     
     public function can ($item, $action)
     {
+    	if ($this->_super == true)
+    		return true;
+    
         $can = false;
         $power_name = $this->_power_name($item, $action);
         
