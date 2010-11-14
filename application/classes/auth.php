@@ -45,9 +45,9 @@ abstract class Auth extends Kohana_Auth {
     function login ($username, $password, $remember = false)
     {
         if ( ! $this->_active($username))
-            return false;
+        	return false;
         
-        parent::login($username, $password, $remember);
+        return parent::login($username, $password, $remember);
     }
     
 }
