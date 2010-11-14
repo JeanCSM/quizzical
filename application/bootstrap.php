@@ -50,7 +50,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/q3/',
+	'base_url'   => '/quizzical/',
 ));
 
 /**
@@ -67,16 +67,17 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	   '971'		=> MODPATH.'971',		 // Team 971's Quizzical theme
-	   'theme'		=> MODPATH.'theme',		 // Theming system
+	   '971'	=> MODPATH.'971',	 // Team 971's Quizzical theme
+	   'theme'	=> MODPATH.'theme',	 // Theming system
 	   'jelly-auth' => MODPATH.'jelly-auth', // Auth to Jelly driver
 	   'jelly'      => MODPATH.'jelly',      // Object-relational mapping
 	   'auth'       => MODPATH.'auth',       // Basic authentication
 	   'migration'  => MODPATH.'migration',  // Migration system for DB
 	   'dbforge' 	=> MODPATH.'dbforge',  	 // DB editing system
 	   'database'   => MODPATH.'database',   // Database access
-	   //'pagination' => MODPATH.'pagination', // Paging of results
-	   //'unittest'   => MODPATH.'unittest',   // Unit testing
+	   'email'	=> MODPATH.'email',	 // Email submission
+	 //'pagination' => MODPATH.'pagination', // Paging of results
+	 //'unittest'   => MODPATH.'unittest',   // Unit testing
 	));
 
 /**

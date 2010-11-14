@@ -77,7 +77,7 @@
 			<div class="aside-row">
 				<a href="{URL::site("/quiz/result/$result.id")}">
 					{$result.title} &mdash;
-					{percentage($result.correct, $result.total)}%
+					{$result.percent}%
 				</a>
 			</div>
 			{else}
