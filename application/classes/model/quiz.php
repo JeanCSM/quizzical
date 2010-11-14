@@ -35,19 +35,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-class Controller_Migrate extends Controller {
-	
-	function action_index ()
-	{
-		Migration::factory('user', 'jelly')->sync();
-		Migration::factory('power', 'jelly')->sync();
-		Migration::factory('role', 'jelly')->sync();
-		Migration::factory('user_token', 'jelly')->sync();
-		Migration::factory('quiz', 'jelly')->sync();
-		Migration::factory('question', 'jelly')->sync();
-		Migration::factory('answer', 'jelly')->sync();
-		Migration::factory('result', 'jelly')->sync();
-		Migration::factory('score', 'jelly')->sync();
-	}
-    
+class Model_Quiz extends Jelly_Model {
+    public static function initialize (Jelly_Meta $meta)
+    {
+        $meta->table('quizzes');
+       	$meta->fields(array(
+            'id' => new Field_Primary,
+            'title' => new Field_String,
+            'description' => new Field_Text,
+            'tries' => new Field_Integer(array( 'default' => -1 )),
+            'published' => new Field_Boolean(array( 'default' => false ))
+        ));
+    }
 }
