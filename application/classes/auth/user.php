@@ -40,9 +40,13 @@ class Model_User extends Model_Auth_User {
     public static function initialize (Jelly_Meta $meta)
     {
         $meta->fields(array(
-            'activated' => new Field_Boolean,
-            'activate_token' => new Field_Password,
-            'forgot_token' => new Field_Password
+            'activated' => new Field_Boolean(array( 'default' => false )),
+            'activate_token' => new Field_Password(array(
+            	'hash_with' => Auth::hash_password
+            )),
+            'forgot_token' => new Field_Password(array(
+            	'hash_with' => Auth::hash_password
+            ))
         ));
         
         parent::initialize($meta);

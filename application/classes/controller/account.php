@@ -128,6 +128,7 @@ class Controller_Account extends Controller_Template {
 				->set('username', $user_name)
 				->set('first_name', $user_names[0])
 				->set('last_name', $user_names[1])
+				->set('activate_token', uniqid())
 				->add('roles', 1);
 			
 			// When we try to save this, Jelly will validate it; if the data
