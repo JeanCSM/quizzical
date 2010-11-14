@@ -138,7 +138,8 @@ class Controller_Account extends Controller_Template {
 			try
 			{
 				$user_record->save();
-				$this->email_code('activate', $activate_token);
+				$email = $user_data['email'];
+				$this->email_code($email, $activate_token);
 				$this->_template = 'account/confirm_register';
 			}
 			catch (Validate_Exception $errors)
@@ -148,9 +149,19 @@ class Controller_Account extends Controller_Template {
 		}
 	}
 	
-	public function email_code ($context, $token)
+	public function email_code ($to, $token, $subject='Your Activation Code', 
+		$context='activate', $page='')
 	{
+		$message = Template::factory();
+		$message->set_filename('account/'.$context.'_email.tpl');
+		$message->set('token', $token);
+		$message->set('page', $page);
 		
+		$output = $message->render();
+		$from = 'quizzical-noreply@'.$_SERVER['HTTP_HOST'];
+		
+		$sender = Email::connect();
+		$sender->send($to, $from, '[Quizzical] '.$subject, $output);
 	}
 }
 
