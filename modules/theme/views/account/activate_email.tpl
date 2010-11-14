@@ -40,12 +40,12 @@ tests.  When you submitted the registration code for your account, a page
 popped up with a box that allowed you to enter a code that activates your 
 account.  The following is the code for that:
  
-	{code}
+	{$token}
  
 If you accidentally closed that page, don't worry. You can go to the following 
 page and enter the code there to activate your account:
  
-	{page}
+	{$page}
  
 Thanks,
 The Quizzical Team

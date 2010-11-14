@@ -153,7 +153,7 @@ class Controller_Account extends Controller_Template {
 		$context='activate', $page='')
 	{
 		$message = Template::factory();
-		$message->set_filename('account/'.$context.'_email.tpl');
+		$message->set_filename('account/'.$context.'_email');
 		$message->set('token', $token);
 		$message->set('page', $page);
 		
@@ -161,7 +161,7 @@ class Controller_Account extends Controller_Template {
 		$from = 'quizzical-noreply@'.$_SERVER['HTTP_HOST'];
 		
 		$sender = Email::connect();
-		$sender->send($to, $from, '[Quizzical] '.$subject, $output);
+		Email::send($to, $from, '[Quizzical] '.$subject, $output);
 	}
 }
 
