@@ -49,7 +49,7 @@ class Model_User extends Model_Auth_User {
         // Add field to allow us to verify a user to allow us to reset their
         // password if they need it reset for some reason
         $meta->fields(array(
-            'reset' => new Field_Password(array(
+            'reset_token' => new Field_Password(array(
                 'hash_with' => array(Auth::instance(), 'hash_password')
             ))
         ));
@@ -57,9 +57,18 @@ class Model_User extends Model_Auth_User {
         // Add field that we'll use to verify them to ensure that they are who
         // they say they are after registration
         $meta->fields(array(
-            'activate' => new Field_Password(array(
+            'activate_token' => new Field_Password(array(
                 'hash_width' => array(Auth::instance(), 'hash_password')
             ))
+        ));
+        
+        
+        // Add field that we'll use to check if the user has been activated or 
+        // not at all
+        $meta->fields(array(
+        	'activated' => new Field_Boolean(array(
+        		'default' => false
+        	))
         ));
         
         // Redefine the last_login timestamp field so that the code works
