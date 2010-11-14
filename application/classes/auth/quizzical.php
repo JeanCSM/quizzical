@@ -40,7 +40,7 @@ class Auth_Quizzical extends Auth_Jelly {
     protected function _active ($username)
     {
         $user =& $this->_get_object($username);
-        return strlen($user->activate) <= 0;
+        return $user->activated == true;
     }
     
 }
