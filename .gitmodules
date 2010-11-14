@@ -31,3 +31,6 @@
 [submodule "modules/theme/styles/oocss"]
 	path = modules/theme/styles/oocss
 	url = http://github.com/stubbornella/oocss.git
+[submodule "modules/email"]
+	path = modules/email
+	url = https://github.com/banks/kohana-email.git
