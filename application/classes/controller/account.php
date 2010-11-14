@@ -116,11 +116,11 @@ class Controller_Account extends Controller_Template {
 		// If some sort of login information was submitted, try to validate it
 		if ($_POST)
 		{
-			// Try to validate the field for the new user
 			$user_data = Arr::extract($_POST,
 				array('email', 'password', 'password_confirm'));
 			$user_name = Model_User::_compress_username($_POST['username']);
 			$user_names = Model_User::_split_username($_POST['username']);
+			$activate_token = uniqid();
 			
 			// Push all of the default data into the user model
 			$user_record = Jelly::factory('user')
@@ -128,14 +128,17 @@ class Controller_Account extends Controller_Template {
 				->set('username', $user_name)
 				->set('first_name', $user_names[0])
 				->set('last_name', $user_names[1])
-				->set('activate_token', uniqid())
+				->set('activate_token', $activate_token)
 				->add('roles', 1);
 			
-			// When we try to save this, Jelly will validate it; if the data
-			// passed in is invalid, display an error screen.
+			// When we try to save this, Jelly will validate it.  If the data 
+			// is valid, the user will be saved and an activation message will 
+			// be sent to the user; if the data passed in is invalid, display 
+			// an error screen.
 			try
 			{
 				$user_record->save();
+				$this->email_code('activate', $activate_token);
 				$this->_template = 'account/confirm_register';
 			}
 			catch (Validate_Exception $errors)
@@ -143,6 +146,11 @@ class Controller_Account extends Controller_Template {
 				$this->_vars['errors'] = $errors->array->errors('default');
 			}
 		}
+	}
+	
+	public function email_code ($context, $token)
+	{
+		
 	}
 }
 
