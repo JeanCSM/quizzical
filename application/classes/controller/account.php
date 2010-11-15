@@ -145,7 +145,15 @@ class Controller_Account extends Controller_Template {
 			{
 				$user_record->save();
 				$email = $user_data['email'];
-				$this->email_code($email, $activate_token);
+				
+				$this->email_code(
+					$email, 
+					$activate_token, 
+					'Your Activation Code',
+					'activate',
+					URL::site('/account/activate')
+				);
+				
 				$this->_template = 'account/confirm_register';
 			}
 			catch (Validate_Exception $errors)
