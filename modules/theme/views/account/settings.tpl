@@ -45,7 +45,7 @@
 <form method="post" action="{$current_url}">
 	<div class="grid_6">
 		<h3>Profile</h3>
-		{validation_errors('<div class="error">', '</div>')}
+		{errors($errors)}
 		
 		{if allowed_to('view', 'user_name', $user)}
 			{if allowed_to('edit', 'user_name', $user)}
