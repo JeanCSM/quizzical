@@ -56,7 +56,7 @@ class Controller_Template extends Controller {
         $this->_vars['base_url'] = Kohana::$base_url;
         
         // Set up our default site-wide navigation
-        if (Powers::instance()->can('view', 'admin_section'))
+        if (Acl::instance()->allowed('admin', 'editor', 'supervisor'))
         {
             $this->_vars['nav']['admin'] = 'Admin';
         }
