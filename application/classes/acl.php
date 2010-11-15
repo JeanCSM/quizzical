@@ -38,6 +38,7 @@
 class Acl {
 
 	protected $_user;
+	protected static $_instance = false;
 	
 	public function __construct ()
 	{
@@ -57,6 +58,16 @@ class Acl {
 		}
 		
 		return false;
+	}
+	
+	public static function instance () 
+	{
+		if ( ! self::$_instance)
+		{
+			self::$_instance = new Acl();
+		}
+		
+		return self::$_instance;
 	}
 }
  
