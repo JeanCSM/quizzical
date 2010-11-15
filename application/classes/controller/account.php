@@ -112,7 +112,7 @@ class Controller_Account extends Controller_Template {
 		// verification by email process).
 		if ($this->auth->logged_in())
 		{
-			Request::instance()->redirect('account/details');
+			Request::instance()->redirect('account/settings');
 			return;
 		}
 		
@@ -242,6 +242,18 @@ class Controller_Account extends Controller_Template {
 				}
 			}
 		}
+	}
+	
+	public function action_settings ()
+	{
+		if ( ! $this->auth->logged_in())
+		{
+			Request::instance()->redirect('account/login');
+			return;
+		}
+		
+		$this->_vars['user'] = $this->auth->get_user();
+		$this->_template = 'account/settings';
 	}
 	
 	public function email_code ($to, $token, $subject, $context='activate', $page)
