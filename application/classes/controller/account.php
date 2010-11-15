@@ -163,8 +163,88 @@ class Controller_Account extends Controller_Template {
 		}
 	}
 	
-	public function email_code ($to, $token, $subject='Your Activation Code', 
-		$context='activate', $page='')
+	public function action_activate ()
+	{
+		$this->_template = 'account/activate';
+		
+		if ($_POST)
+		{
+			$user = Jelly::select('user')
+				->where('activate_token', '=', $_POST['token'])
+				->execute();
+			
+			if ($user)
+			{
+				$user->set('activated', true);
+				$user->save();
+				$this->_template = 'account/confirm_activate';
+			}
+		}
+	}
+	
+	public function action_forgot ()
+	{
+		$this->_template = 'account/forgot';
+	
+		if ($_POST)
+		{
+			// Look to see if there is a user with that first/last name 
+			// combination
+			$user_name = Model_User::_compress_username($_POST['username']);
+			$user = Jelly::select('user')
+				->where('username', '=', $user_name)
+				->execute();
+			
+			// If there is a user with that first/last name combo, send them a 
+			// verification code that they can use to reset their password.
+			if ($user)
+			{
+				$token = unqid();
+				$user->set('reset_token', $token);
+				$user->save();
+				
+				$this->email_code(
+					$user->email, 
+					$token, 
+					'Your Password Reset Code',
+					'reset',
+					URL::site('/account/forgot')
+				);
+				
+				$this->_template = 'account/confirm_forgot';
+			} 
+		}
+	}
+	
+	public function action_reset ()
+	{
+		$this->_template = 'account/reset';
+		
+		if ($_POST)
+		{
+			$user = Jelly::select('user')
+				->where('reset_token', '=', $_POST['token'])
+				->execute();
+			
+			if ($user)
+			{
+				$user->set('password', $_POST['password']);
+				$user->set('password_confirm', $_POST['password_confirm']);
+				
+				try 
+				{
+					$user->save();
+					$this->_template = 'account/confirm_reset';
+				} 
+				catch (Validate_Exception $errors)
+				{
+					$this->_vars['errors'] = $errors->array->errors('default');
+				}
+			}
+		}
+	}
+	
+	public function email_code ($to, $token, $subject, $context='activate', $page)
 	{
 		$message = Template::factory();
 		$message->set_filename('account/'.$context.'_email');
