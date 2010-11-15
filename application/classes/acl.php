@@ -47,6 +47,9 @@ class Acl {
 	
 	public function allowed ()
 	{
+		if ( ! $this->_user)
+			return false;
+			
 		if ($this->_user->id == 1)
 			return true;
 			
