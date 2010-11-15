@@ -37,7 +37,7 @@
 
 class Controller_Account extends Controller_Template {
     
-    function action_index ()
+    public function action_index ()
     {
         if ( ! $this->auth->logged_in())
 		{
@@ -87,7 +87,7 @@ class Controller_Account extends Controller_Template {
 		}
 	}
 	
-	function action_logout ()
+	public function action_logout ()
 	{
 		// If the user is logged in, log them out
 		if ($this->auth->logged_in())
@@ -99,7 +99,7 @@ class Controller_Account extends Controller_Template {
 		Request::instance()->redirect('/');
 	}
 	
-	function action_register ()
+	public function action_register ()
 	{
 		// If the user is already logged in, send them over to their account
 		// page from here; we'll have a separate administrative system for
