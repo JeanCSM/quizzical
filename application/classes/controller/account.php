@@ -254,6 +254,11 @@ class Controller_Account extends Controller_Template {
 		
 		$this->_vars['user'] = $this->auth->get_user();
 		$this->_template = 'account/settings';
+		
+		if ($_POST)
+		{
+		
+		}
 	}
 	
 	public function email_code ($to, $token, $subject, $context='activate', $page)
