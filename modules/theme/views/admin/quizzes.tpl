@@ -36,7 +36,7 @@
 {extends "layout"}
 
 {block "content"}
-<div class="grid_12">
+<div class="line">
 	<div class="add">
 		<a href="{URL::site("admin/quiz/create")}" class="button">Create Quiz</a>
 	</div>"
@@ -44,23 +44,24 @@
 	<h2>Quizzes You've Made</h2>
 
 	{foreach $quizzes quiz}
-	<div class="quiz-summary">
-		<div class="grid_2 alpha quiz-date">
+	<div class="quiz-summary line">
+		<div class="quiz-number">
 			Quiz #{$quiz->id}
 		</div>
 		
-		<div class="grid_10 omega">
+		<div class="quiz-edit">
 			<a class="edit" href="{URL::site("admin/quiz/edit/{$quiz->id}")}">
 				Edit
 			</a>
-			
-			<h3><a href="{URL::site("admin/quiz/edit/{$quiz->id}")}">
-				{$quiz->title}
-			</a></h3>
-			<p>{$quiz->summary}</p>
 		</div>
 		
-		<div class="clear">&nbsp;</div>
+		<h3><a href="{URL::site("admin/quiz/edit/{$quiz->id}")}">
+			{$quiz->title}
+		</a></h3>
+		
+		<div class="quiz-summary">
+			<p>{$quiz->summary}</p>
+		</div>
 	</div>
 	{else}
 	<p>You haven't created any quizzes yet.</p>

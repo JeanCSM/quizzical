@@ -36,59 +36,59 @@
 {extends "layout"}
 
 {block "content"}
-<div class="grid_9">
-	<h2>Quizzes to Take</h2>
+<div class="line">
+	<div class="unit size3of4">
+		<h2>Quizzes to Take</h2>
 
-	{foreach $quizzes quiz}
-	<h3><a href="{URL::site("/quiz/take/$quiz.id")}">
-		{$quiz.title|escape}
-	</a></h3>"
+		{foreach $quizzes quiz}
+		<h3><a href="{URL::site("/quiz/take/$quiz.id")}">
+			{$quiz.title|escape}
+		</a></h3>"
 
-	<p>{$quiz.summary|escape|nl2br}</p>
+		<p>{$quiz.summary|escape|nl2br}</p>
 
-	<div class="take-it-button">
-		<a href="{URL::site("/quiz/take/$quiz.id")}">Take It</a>
+		<div class="take-it-button">
+			<a href="{URL::site("/quiz/take/$quiz.id")}">Take It</a>
+		</div>
+
+		<p>
+			{if isset($quiz.tries)}
+			You're allowed to retake this quiz an unlimited number of times.
+			{else}
+			You've taken it {$quiz.user_tries}
+			time{tif $quiz.user_tries != 1 ?: "s"}.
+
+			You're allowed to take it {$quiz.tries}
+			time{tif $quiz.user_tries != 1 ?: "s"}
+			{/if}
+		</p>
+		{else}
+		<p>There are no quizzes to take right now.</p>
+		{/foreach}
 	</div>
 
-	<p>
-		{if isset($quiz.tries)}
-		You're allowed to retake this quiz an unlimited number of times.
-		{else}
-		You've taken it {$quiz.user_tries}
-		time{tif $quiz.user_tries != 1 ?: "s"}.
+	<div class="unit size1of4 lastUnit">
+		<div class="aside">
+			<h4>Recent Test Scores</h4>
 
-		You're allowed to take it {$quiz.tries}
-		time{tif $quiz.user_tries != 1 ?: "s"}
-		{/if}
-	</p>
-	{else}
-	<p>There are no quizzes to take right now.</p>
-	{/foreach}
+			<div class="aside-content">
+				{foreach $results result}
+				<div class="aside-row">
+					<a href="{URL::site("/quiz/result/$result.id")}">
+						{$result.title} &mdash;
+						{$result.percent}%
+					</a>
+				</div>
+				{else}
+				<p>You haven't taken any quizzes yet.</p>
+				{/foreach}
 
-	<p class="clear">&nbsp;</p>
-</div>
-
-<div class="grid_3">
-	<div class="aside">
-		<h4>Recent Test Scores</h4>
-
-		<div class="aside-content">
-			{foreach $results result}
-			<div class="aside-row">
-				<a href="{URL::site("/quiz/result/$result.id")}">
-					{$result.title} &mdash;
-					{$result.percent}%
-				</a>
+				{if $results_count}
+				<div class="aside-row more">
+					<a href="{URL::site("/quiz/results")}">See Full List</a>
+				</div>
+				{/if}
 			</div>
-			{else}
-			<p>You haven't taken any quizzes yet.</p>
-			{/foreach}
-
-			{if $results_count}
-			<div class="aside-row more">
-				<a href="{URL::site("/quiz/results")}">See Full List</a>
-			</div>
-			{/if}
 		</div>
 	</div>
 </div>

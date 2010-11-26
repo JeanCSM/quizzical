@@ -36,11 +36,7 @@
 {extends "layout"}
 
 {block "content"}
-<div class="grid_9">
-	<h2>Account</h2>
-</div>
-
-<div class="clear"></div>
+<h2>Account</h2>
 
 <form method="post" action="{$current_url}">
 	<div class="grid_6">
