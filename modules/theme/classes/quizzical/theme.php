@@ -59,6 +59,14 @@ class Quizzical_Theme {
             Theme::url('theme', 'styles/oocss/core/libraries.css'));
         $this->register('style',
             Theme::url('theme', 'styles/oocss/core/grid/grids.css'));
+            
+        // Load the special layout library
+        $this->register('style',
+        	Theme::url('theme', 'styles/theme/layout.css'));
+    	
+    	// Load the minimal skin
+        $this->register('style',
+        	Theme::url('theme', 'styles/theme/skin.css'));
     }
     
     public static function url ($module, $path)
