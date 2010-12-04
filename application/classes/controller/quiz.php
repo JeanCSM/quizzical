@@ -41,5 +41,17 @@ class Controller_Quiz extends Controller_Template {
 	{
 		
 	}
+	public function action_index ()
+    {
+		// If the user is authenticated, display their personalized
+		// dashboard of quizzes to take
+		$this->_template = 'dashboard';
+		
+		$this->_vars['quizzes'] = 
+			Jelly::select('quiz')->where('published', '=', true)->execute();
+		$this->_vars['results'] = 
+			$this->auth->get_user()->results;
+		$this->_vars['results_count'] = count($this->_vars['results']);
+    }
     
 }

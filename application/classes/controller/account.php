@@ -36,27 +36,19 @@
  * ***** END LICENSE BLOCK ***** */
 
 class Controller_Account extends Controller_Template {
-    
-    public function action_index ()
-    {
-        if ( ! $this->auth->logged_in())
+	
+	public function action_index ()
+	{
+		if ( ! $this->auth->logged_in())
 		{
 			// If the user is not logged in, display the uniform welcome page
 			$this->_template = 'home';
 		}
 		else
 		{
-			// If the user is authenticated, display their personalized
-			// dashboard of quizzes to take
-			$this->_template = 'dashboard';
-			
-			$this->_vars['quizzes'] = 
-				Jelly::select('quiz')->where('published', '=', true)->execute();
-			$this->_vars['results'] = 
-				$this->auth->get_user()->results;
-			$this->_vars['results_count'] = count($this->_vars['results']);
+			Request::instance()->redirect('quiz');
 		}
-    }
+	}
 	
 	public function action_login ()
 	{
