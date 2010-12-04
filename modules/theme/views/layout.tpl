@@ -70,10 +70,6 @@
 		{block "content"}{/block}
 	</div></div>
 
-	<div id="footer"><div class="wrap">
-		Powered by Quizzical v{$version}.
-	</div></div>
-
 	{Theme::instance()->links('scripts')}
 </body>
 </html>
