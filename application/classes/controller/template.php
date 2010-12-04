@@ -89,4 +89,11 @@ class Controller_Template extends Controller {
         $this->request->response = $this->template->render();
     }
     
+    public function deny ($template = 'errors/access_denied_anonymous')
+    {
+        $this->_template = $template;
+		$this->after();
+		die(Request::instance()->response);
+    }
+    
 }
