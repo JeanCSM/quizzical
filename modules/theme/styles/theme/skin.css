@@ -17,6 +17,11 @@ h1 {
     font-style: italic;
 }
 
+h2 {
+    font-family: Georgia, serif;
+    font-size: 1.5em;
+}
+
 h3 {
     text-transform: uppercase;
     font-size: 0.75em;
