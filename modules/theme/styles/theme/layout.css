@@ -1,0 +1,36 @@
+html, body {
+    font-size: 16px;
+}
+.wrap {
+    width: 80%;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+/* -----------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+#header {}
+
+#nav {}
+
+    #nav li {
+        float: right;
+    }
+
+@media (max-width: 56em) {
+
+.wrap {
+    width: 44.8em;
+}
+
+}
+
+@media (min-width: 80em) {
+
+.wrap {
+    width: 64em;
+}
+
+}
