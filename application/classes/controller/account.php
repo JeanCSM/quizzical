@@ -55,7 +55,7 @@ class Controller_Account extends Controller_Template {
 		// If the user is already logged in, send them over to their account 
 		if ($this->auth->logged_in())
 		{
-			Request::instance()->redirect('account/details');
+			Request::instance()->redirect('account/settings');
 			return;
 		}
 		
