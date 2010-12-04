@@ -58,7 +58,7 @@ class Quizzical_Theme {
         $this->register('style',
             Theme::url('theme', 'styles/oocss/core/libraries.css'));
         $this->register('style',
-            Theme::url('theme', 'styles/oocss/core/grid/grids.css'));
+            Theme::url('theme', 'styles/deco-grids/decogrids-16.css'));
             
         // Load the special layout library
         $this->register('style',
