@@ -36,10 +36,16 @@
 {extends "layout"}
 
 {block "content"}
-<div class="line">
-	<div class="unit size3of4">
-		<h2>Quizzes to Take</h2>
-
+<div class="row">
+	<div class="cell width-2:3 position-0">
+		<div class="toolbar">
+			{if Acl::instance()->allowed('quiz editor')}
+			<a href="{URL::site("/quiz/create")}" class="button align-right">Create Quiz</a>
+			{/if}
+			
+			<h2>Quizzes</h2>
+		</div>
+		
 		{foreach $quizzes quiz}
 		<h3><a href="{URL::site("/quiz/take/$quiz.id")}">
 			{$quiz.title|escape}
@@ -63,28 +69,41 @@
 			{/if}
 		</p>
 		{else}
-		<p>There are no quizzes to take right now.</p>
+		<p class="message">
+			There are no quizzes available right now.
+			
+			{if Acl::instance()->allowed('quiz editor')}
+			Why don't you jump in and <a href="{URL::site("/quiz/create")}">
+			create your first quiz</a>? It's really easy.
+			{/if}
+		</p>
 		{/foreach}
 	</div>
 
-	<div class="unit size1of4 lastUnit">
-		<div class="aside">
-			<h4>Recent Test Scores</h4>
+	<div class="cell width-1:3 position-2:3">
+		<div class="block">
+			<h3>Recent Test Scores</h3>
 
-			<div class="aside-content">
+			<div class="block-content">
 				{foreach $results result}
-				<div class="aside-row">
+				<div class="block-row">
 					<a href="{URL::site("/quiz/result/$result.id")}">
 						{$result.title} &mdash;
 						{$result.percent}%
 					</a>
 				</div>
 				{else}
-				<p>You haven't taken any quizzes yet.</p>
+				<div class="block-row block-placeholder">
+					<p>
+						You haven't taken any quizzes yet.  This area will get
+						filled in with a feed of your quiz-taking activity
+						once you start taking quizzes.
+					</p>
+				</div>
 				{/foreach}
 
 				{if $results_count}
-				<div class="aside-row more">
+				<div class="block-row more">
 					<a href="{URL::site("/quiz/results")}">See Full List</a>
 				</div>
 				{/if}

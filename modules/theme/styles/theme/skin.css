@@ -86,6 +86,19 @@ p.error {
             background: #666;
         }
 
+.toolbar {
+    padding: 0 0 1em 0;
+    overflow: auto;
+}
+
+    .align-right {
+        float: right;
+    }
+
+.block-row {
+    padding: 1em 0;
+}
+
 /* -----------------------------------------------------------------------------
    Dividers
    -------------------------------------------------------------------------- */
@@ -141,4 +154,10 @@ hr {
         font-family: Georgia, serif;
         text-shadow: #0053FF 1px 1px 0;
         cursor: pointer;
+        display: block;
+        text-align: center;
+    }
+    
+    a.button {
+        padding: 0.5em;
     }
