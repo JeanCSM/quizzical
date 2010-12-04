@@ -240,8 +240,7 @@ class Controller_Account extends Controller_Template {
 	{
 		if ( ! $this->auth->logged_in())
 		{
-			Request::instance()->redirect('account/login');
-			return;
+			$this->deny();
 		}
 		
 		$this->_vars['user'] = $this->auth->get_user();
