@@ -36,13 +36,10 @@
 {extends "layout"}
 
 {block "content"}
-<div class="prefix_3 suffix_3 grid_6">
-    <div class="error">
-        In order to view this page, you need to log in to {$site_title}.
-    </div>
-    
-    <h2>Login</h2>
-    
-    {include(../account/form_login.tpl)}
-</div>
+<p class="error">
+    In order to view this page, you need to log in.
+</p>
+
+<h2>Login</h2>
+{include('account/form_login')}
 {/block}
