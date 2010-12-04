@@ -50,15 +50,26 @@
 </head>
 
 <body>
-	<div id="header"><div class="wrap">
-		<h1><a href="{URL::site()}">{$site_title}</a></h1>
-		
-		{block "nav"}
-		<div id="nav">
-		{menu($nav, $nav_selected)}
+	<div id="header">
+		<div class="wrap">
+			<div class="row">
+				<div class="cell width-1:2 position-0">
+					<h1>
+						<a href="{URL::site()}">{$site_title}</a>
+						<span class="version">v3</span>
+					</h1>
+				</div>
+				
+				{block "nav"}
+				<div id="nav" class="cell width-1:2 position-1:2">
+				{menu($nav, $nav_selected)}
+				</div>
+				{/block}
+			</div>
 		</div>
-		{/block}
-	</div></div>
+	</div>
+	
+	<hr />
 	
 	{block "subnav"}
 	<div id="subnav"><div class="wrap">
