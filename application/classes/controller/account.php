@@ -157,6 +157,13 @@ class Controller_Account extends Controller_Template {
 	
 	public function action_activate ()
 	{
+		// If the user is already logged in, send them over to their account 
+		if ($this->auth->logged_in())
+		{
+			Request::instance()->redirect('account/settings');
+			return;
+		}
+		
 		$this->_template = 'account/activate';
 		
 		if ($_POST)
@@ -176,6 +183,13 @@ class Controller_Account extends Controller_Template {
 	
 	public function action_forgot ()
 	{
+		// If the user is already logged in, send them over to their account 
+		if ($this->auth->logged_in())
+		{
+			Request::instance()->redirect('account/settings');
+			return;
+		}
+		
 		$this->_template = 'account/forgot';
 	
 		if ($_POST)
@@ -210,6 +224,13 @@ class Controller_Account extends Controller_Template {
 	
 	public function action_reset ()
 	{
+		// If the user is already logged in, send them over to their account 
+		if ($this->auth->logged_in())
+		{
+			Request::instance()->redirect('account/settings');
+			return;
+		}
+		
 		$this->_template = 'account/reset';
 		
 		if ($_POST)
