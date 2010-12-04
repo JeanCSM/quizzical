@@ -37,10 +37,18 @@
 
 class Controller_Quiz extends Controller_Template {
 	
-	function action_index ()
+	public function before ()
 	{
+		parent::before();
 		
+		$this->_vars['nav_selected'] = 'quiz';
+		
+		if ( ! $this->auth->logged_in())
+		{
+			$this->deny();
+		}
 	}
+	
 	public function action_index ()
     {
 		// If the user is authenticated, display their personalized
