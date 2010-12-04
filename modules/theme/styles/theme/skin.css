@@ -76,6 +76,15 @@ p.error {
             display: block;
             color: #666;
         }
+    
+    #nav li.selected {
+        background: transparent url(../../assets/callout.png) center bottom no-repeat;
+    }
+    
+        #nav li.selected a {
+            color: #fff;
+            background: #666;
+        }
 
 /* -----------------------------------------------------------------------------
    Dividers
