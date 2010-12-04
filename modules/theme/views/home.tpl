@@ -36,19 +36,23 @@
 {extends "layout"}
 
 {block "content"}
-<div class="message">
-	<strong>Quizzical</strong> is Spartan Robotics's automated
-	quizzing service. We use this to administer our yearly
-	workshop/power tool safety test.
+<div class="row">
+	<div class="cell width-full position-0">
+		<p class="message">
+			<strong>Quizzical</strong> is Spartan Robotics's automated
+			quizzing service. We use this to administer our yearly
+			workshop/power tool safety test.
+		</p>
+	</div>
 </div>
 
-<div class="line">
-	<div class="login unit size1of2">
+<div class="row">
+	<div class="login cell width-1:2 position-0">
 		<h3>Log In</h3>
 		{include('account/form_login')}
 	</div>
 	
-	<div class="logout unit lastUnit size1of2">
+	<div class="logout cell width-1:2 position-1:2">
 		<h3>Register</h3>
 		{include('account/form_register')}
 	</div>
