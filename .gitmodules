@@ -33,4 +33,4 @@
 	url = http://github.com/stubbornella/oocss.git
 [submodule "modules/email"]
 	path = modules/email
-	url = https://github.com/banks/kohana-email.git
+	url = http://github.com/banks/kohana-email.git
