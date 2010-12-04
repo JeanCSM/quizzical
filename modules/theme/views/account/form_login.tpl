@@ -34,15 +34,19 @@
  * ***** END LICENSE BLOCK ***** *}
 
 <form method="post" action="{URL::site("account/login")}">
+	<div class="field">
 	<label for="username">First &amp; Last Name</label>
 	<input type="text" id="username" name="username" value="{$dwoo.post.username|default:''}" />
-	<br />
+	</div>
 
+	<div class="field">
 	<label for="password">Password</label>
 	<input type="password" id="password" name="password" />
-	<br />
+	</div>
 	
+	<div class="field">
 	<a href="{URL::site("account/forgot")}">Forgot your password?</a>
+	</div>
 	
 	<input type="hidden" name="redirect" value="{$redirect|default:''}" />
 	<input type="submit" class="button" value="Log In" />

@@ -34,21 +34,25 @@
  * ***** END LICENSE BLOCK ***** *}
 
 <form method="post" action="{URL::site("account/register")}">
+	<div class="field">
 	<label for="username">First &amp; Last Name</label>
 	<input type="text" id="username" name="username" value="{Arr::get($_POST, 'name')}" />
-	<br />
+	</div>
 
+	<div class="field">
 	<label for="email">Email</label>
 	<input type="text" id="email" name="email" value="{Arr::get($_POST, 'email')}" />
-	<br />
+	</div>
 
+	<div class="field">
 	<label for="password">Password</label>
 	<input type="password" id="password" name="password" />
-	<br />
+	</div>
 
+	<div class="field">
 	<label for="password_confirm">Password (Again)</label>
 	<input type="password" id="password_confirm" name="password_confirm" />
-	<br />
+	</div>
 	
 	<input type="submit" class="button" value="Register" />
 </form>
