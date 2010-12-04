@@ -67,6 +67,7 @@ p.error {
 
     #nav li {
         padding-bottom: 6px;                    /* Beware -- here be dragons. */
+        margin-left: 0.3em;
     }
     
         #nav li a {
