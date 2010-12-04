@@ -63,8 +63,10 @@ class Controller_Template extends Controller {
         
         if (Auth::instance()->logged_in())
         {
-            $this->_vars['nav']['account/settings'] = 'Account';
             $this->_vars['nav']['account/logout'] = 'Log Out';
+            $this->_vars['nav']['account/settings'] = 'Profile';
+            $this->_vars['nav']['score'] = 'Scores';
+            $this->_vars['nav']['quiz'] = 'Quizzes';
         }
         else
         {
