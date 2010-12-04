@@ -56,7 +56,7 @@ class Acl {
 		$roles = func_get_args();
 		foreach ($roles as $role)
 		{
-			if ($user->has_role($role))
+			if ($this->_user->has_role($role))
 				return true;
 		}
 		
