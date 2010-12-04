@@ -40,7 +40,6 @@ class Controller_Migrate extends Controller {
 	function action_index ()
 	{
 		Migration::factory('user', 'jelly')->sync();
-		Migration::factory('power', 'jelly')->sync();
 		Migration::factory('role', 'jelly')->sync();
 		Migration::factory('user_token', 'jelly')->sync();
 		Migration::factory('quiz', 'jelly')->sync();
