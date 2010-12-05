@@ -67,6 +67,14 @@ class Quizzical_Theme {
     	// Load the minimal skin
         $this->register('style',
         	Theme::url('theme', 'styles/theme/skin.css'));
+        
+        // Load Mootools, which is our core engine for getting shiny effects,
+        // along with our core behaviors engine
+        $this->register('script',
+            Theme::url('theme', 'scripts/mootools-core-1.3.js'));
+        $this->register('script',
+            Theme::url('theme', 'scripts/behaviors.js'));
+        
     }
     
     public static function url ($module, $path)
