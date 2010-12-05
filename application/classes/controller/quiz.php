@@ -66,8 +66,8 @@ class Controller_Quiz extends Controller_Template {
 			$this->_vars['quizzes'] = Jelly::select('quiz')
 				->execute();
 		}
-		$this->_vars['results'] = 
-			$this->auth->get_user()->results;
+		
+		$this->_vars['results'] = $this->auth->get_user()->results;
 		$this->_vars['results_count'] = count($this->_vars['results']);
     }
     
