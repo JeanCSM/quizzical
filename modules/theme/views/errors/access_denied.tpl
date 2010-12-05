@@ -36,11 +36,9 @@
 {extends "layout"}
 
 {block "content"}
-<div class="prefix_3 suffix_3 grid_6">
-    <div class="error">
-        Your account does not have the appropriate privileges in order to view
-        this page.  If you would like access to this, please contact the
-        {$site_title} administrator.
-    </div>
-</div>
+<p class="error">
+    Your account does not have the appropriate privileges in order to view
+    this page.  If you would like access to this, please contact this site's
+    administrator.
+</p>
 {/block}
