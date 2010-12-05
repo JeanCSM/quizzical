@@ -38,7 +38,7 @@
 {block "content"}
 
 <div class="row">
-	<div class="cell width-1:2 position-1:4 confirm">
+	<div class="cell width-12 position-2 confirm">
 		<h2>Are you sure?</h2>
 		
 		<p class="message">
