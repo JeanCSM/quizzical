@@ -36,44 +36,54 @@
 {extends "layout"}
 
 {block "content"}
-<div class="grid_6 prefix_3 sufix_3">
-	<h2>{$action|ucwords} Question</h2>
+<div class="row">
+	<div class="cell width-12 position-2 confirm">
+		{errors($errors)}
 	
-	{validation_errors('<div class="error">', '</div>')}
-
-	<form method="post" action="{$current_url}">
-		<label>Question</label>
-		<input type="text" class="text" name="question"
-			value="{tif isset($question) ? $question->content}" />
-		<br />
-		
-        {for index 0 $end}
-		<label>Choice</label>
-		
-		<input type="text" class="text" name="choice-{$index}"
-			value="{tif $answers ? $answers.$index->content}" />
-		
-		{if $answers}
-        <input type="hidden" name="choice-{$index}-id" 
-			value="{$answers.$index->id}" />
+		{if isset($question_object->id)}
+		{Form::open("question/edit/$question_object->id")}
+		{else}
+		{Form::open("question/create/$question_object->quiz->id")}
 		{/if}
 		
-		<span class="extra">
-			<input type="radio" name="correct" value="{$index}" 
-				{tif $answers.$index->correct ? 'checked="checked"'} />
-			This is the correct choice.
-		</span>
-		<br />
-		{/for}
-		
-		<input type="hidden" name="count" value="{$count}" />
-		
-        {form_token()}
-        
-		<div class="submit-or-cancel">
-			<input type="submit" class="button" value="Save Changes" />
-			or <a href="{URL::site("admin/quiz/edit/$quiz")}">Cancel</a>
-		</div>
-	</form>
+			<div class="field">
+				<label>Question</label>
+				<input type="text" name="content"
+					value="{$question_object->content}" />
+			</div>
+			
+			<h3>Answer Choices</h3>
+			
+			{for index 0 $end}
+			<div class="field">
+				<label>Choice</label>
+				
+				<input type="text" class="text" name="choice-{$index}"
+					value="{tif $answers ? $answers.$index->content}" />
+				
+				{if $answers}
+				<input type="hidden" name="choice-{$index}-id" 
+					value="{$answers.$index->id}" />
+				{/if}
+			</div>
+			
+			<div class="field inline-field linked">
+				<div class="radio-field">
+					<input type="radio" name="correct" value="{$index}" 
+						{tif $answers.$index->correct ? 'checked="checked"'} />
+				</div>
+				<label>This is the correct choice.</label>
+			</div>
+			{/for}
+			
+			<input type="hidden" name="count" value="{$count}" />
+			
+			<input type="submit" class="button partial-width" value="Save" />
+			<div class="cancel">
+			{* This will generate an extra query.  This needs to be avoided. *}
+				or <a href="{URL::site("quiz/edit/$question_object->quiz->id")}">Cancel</a>
+			</div>
+		</form>
+	</div>
 </div>
 {/block}
