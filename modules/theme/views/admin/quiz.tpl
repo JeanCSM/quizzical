@@ -36,89 +36,77 @@
 {extends "layout"}
 
 {block "content"}
-<div class="grid_12">
-	<h2>{$action|ucwords} Quiz</h2>
-</div>
-<div class="clear">&nbsp;</div>
+{errors($errors)}
 
-<div class="grid_5 aside-form">
-	{validation_errors('<div class="error">', '</div>')}
-
-	<form method="post" action="{$current_url}">
-		<label>Title</label>
-		<input type="text" class="text text-aside" name="title"
-			   value="{tif isset(quiz) ? $quiz->title}" />
-		<br />
-		
-		<label>Summary</label>
-		<textarea name="summary" class="text-aside">{tif isset(quiz) ? $quiz->summary}</textarea>
-		<br />
-		
-		<label class="checkbox">Public</label>
-		<input type="checkbox" class="checkbox" name="published"
-			   {tif isset($quiz) && $quiz->published ? 'checked="checked"'} />
-		<br />
-		
-		<label>Max. Tries</label>
-		<input type="text" class="text text-small" name="tries"
-			   value="{tif isset($quiz) ? unint_tries($quiz->tries)}" />
-		<span class="details">
-			Leave this blank to give the user unlimited tries.
-		</span>
-		<br />
-		
-		{form_token()}
-		
-		<span class="save-or-delete">
-		<input type="submit" class="button" value="Save Changes" />
-	
-		{if isset($quiz)}
-		or <a href="{URL::site()}/admin/delete/quiz/{$quiz->id}"
-			  class="confirm">Delete</a>
-		{/if}
-		</span>
-	</form>
-</div>
-
-<div class="grid_7">
-	{if isset($questions) && count($questions) > 0 && isset($quiz)}
-	<ol id="editor">
-		{foreach $questions question}
-		<li class="question">
-			<a href="{URL::site("admin/question/delete/{$question->id}/on/{$quiz->id}")}"
-			   class="delete light-button">&times;</a> 
-			<a href="{URL::site("admin/question/edit/{$question->id}/on/{$quiz->id}")}"
-			   class="edit light-button">Edit</a> 
-		
-			<p class="question-text">{$question->content}</p>
+{if isset($quiz_object->id)}
+<form method="post" action="{URL::site("quiz/edit/$quiz_object->id")}">
+{else}
+<form method="post" action="{URL::site('quiz/create')}">
+{/if}
+	<div class="row">
+		<div class="cell width-3:4 position-0">
+			<div class="field">
+				<label>Title</label>
+				<input type="text" name="title" class="title"
+					   value="{$quiz_object->title|escape}" />
+			</div>
 			
-			{$answers = get_question_answers($quiz->id, $question->id)}
+			<div class="field">
+				<label>Description</label>
+				<textarea name="description">{$quiz_object->description|escape}</textarea>
+			</div>
 			
-			<ul class="choices">
-				{foreach $answers answer}
-				<li class="{tif $answer->correct ? 'answer'}">
-					{$answer->content}
-				</li>
-				{/foreach}
-			</ul>
-		</li>
-		{/foreach}
-	</ol>
-	{elseif count($questions) == 0 && isset($quiz)}
-	<div class="message">
-		There are no questions in this quiz.  You can add them using the 
-		button below.
+			<h3>Questions</h3>
+			{foreach $quiz_object->questions question_object}
+			
+			{else}
+				{if isset($quiz_object->id)}
+					<p class="message">
+						There aren't any questions in this quiz.  Why not add
+						one with the button below?
+					</p>
+				{else}
+					<p class="message">
+						Before you can add questions to this quiz, you'll need
+						to fill in the "Title" field and save the quiz.
+					</p>
+				{/if}
+			{/foreach}
+			
+			{if isset($quiz_object->id)}
+			<div class="toolbar">
+				<a href="{URL::site('question/create/$quiz_object->id')}"
+				   class="button partial-width">Add Question</a>
+			</div>
+			{/if}
+		</div>
+		
+		<div class="cell width-1:4 position-3:4">
+			<div class="field">
+				<input type="submit" class="button" value="Save Changes" />
+			</div>
+			
+			<div class="field inline-field">
+				<span class="checkbox-field">
+					<input type="checkbox" name="published"
+						   {tif $quiz_object->published ? 'checked="checked"'} />
+				</span>
+				<label>Published</label>
+			</div>
+			
+			<div class="field inline-field">
+				<input name="tries" value="{$quiz_object->tries|escape}" />
+				<label>Maximum Allowed Tries</label>
+			</div>
+			
+			{if isset($quiz_object->id)}
+			<div class="field alternate">
+				<a href="{URL::site('quiz/delete/$quiz_object->id')}">Delete</a>
+			</div>
+			{/if}
+		</div>
 	</div>
-	{elseif !isset($questions) && !isset($quiz)}
-	<div class="message">
-		In order to add questions to this quiz, you'll need to first 
-		fill in the form on the left and click "Save Changes."
-	</div>
-	{/if}
-	
-	{if isset($quiz)}
-	<a href="{URL::site("admin/question/create/on/{$quiz->id}")}"
-	   class="button align-left">+ Add Question</a>
-	{/if}
-</div>
+</form>
+
+
 {/block}
