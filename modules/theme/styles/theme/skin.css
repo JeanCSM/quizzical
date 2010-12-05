@@ -217,8 +217,17 @@ hr {
             text-shadow: none;
             color: #4A5C12;
         }
+    
+    .micro {
+        font-family: Georgia, serif;
+        font-size: 0.75em;
+        padding: 0.8em;
     }
     
+        a.micro:hover {
+            color: #fff;
+            background: #777;
+        }
     
     a.button {
         padding: 0.5em 0 0.45em;
