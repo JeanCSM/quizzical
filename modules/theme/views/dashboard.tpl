@@ -47,29 +47,38 @@
 		</div>
 		
 		{foreach $quizzes quiz_object}
-		<h3>
-			<a href="{URL::site("/quiz/take/$quiz_object->id")}">
-				{$quiz_object->title|escape}
-			</a>
-		</h3>
-
-		<p>{$quiz_object->description|escape|nl2br}</p>
-
-		<div class="take-quiz-button">
-			<a href="{URL::site("/quiz/take/$quiz_object->id")}">Take It</a>
+		<div class="quiz">
+			<div class="take">
+				<div class="tries">
+					<span class="num">{Model_Quiz::tries('used', $quiz_object)}</span> /
+					<span class="denom">{Model_Quiz::tries('total', $quiz_object)}</span>
+				</div>
+				
+				<div class="tries-label">
+					tries used
+				</div>
+				
+				{if Model_Quiz::tries('allowed', $quiz_object)}
+				<div class="take-button">
+					<a class="button go"
+					   href="{URL::site("/quiz/take/$quiz_object->id")}">Take It!</a>
+				</div>
+				{/if}
+			</div>
+			
+			<div class="info">
+				{if Acl::instance()->allowed('quiz editor')}
+				<a href="{URL::site("/quiz/edit/$quiz_object->id")}" class="micro toolbar-action">Edit</a>
+				
+					{if ! $quiz_object->published}
+					<span class="micro toolbar-action">Unpublished</span>
+					{/if}
+				{/if}
+				
+				<h3>{$quiz_object->title|escape}</h3>
+				<p>{$quiz_object->description|escape|nl2br}</p>
+			</div>
 		</div>
-
-		<p>
-			{if isset($quiz.tries)}
-			You're allowed to retake this quiz an unlimited number of times.
-			{else}
-			You've taken it {$quiz.user_tries}
-			time{tif $quiz.user_tries != 1 ?: "s"}.
-
-			You're allowed to take it {$quiz.tries}
-			time{tif $quiz.user_tries != 1 ?: "s"}
-			{/if}
-		</p>
 		{else}
 		<p class="message">
 			There are no quizzes available right now.

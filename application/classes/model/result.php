@@ -40,8 +40,9 @@ class Model_Result extends Jelly_Model {
     {
         $meta->fields(array(
             'id' => new Field_Primary,
-            'quizzes' => new Field_BelongsTo(array( 'model' => 'quiz' )),
-            'users' => new Field_BelongsTo,
+            'quizzes' => new Field_BelongsTo(array( 'model' => 'quiz', 'column' => 'quiz_id' )),
+            'scores' => new Field_BelongsTo(array( 'column' => 'score_id' )),
+            'users' => new Field_BelongsTo(array( 'column' => 'user_id' )),
             'correct' => new Field_Integer,
             'total' => new Field_Integer,
             'percent' => new Field_Integer,

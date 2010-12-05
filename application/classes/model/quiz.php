@@ -44,7 +44,44 @@ class Model_Quiz extends Jelly_Model {
             'title' => new Field_String,
             'description' => new Field_Text,
             'tries' => new Field_Integer(array( 'default' => -1 )),
-            'published' => new Field_Boolean(array( 'default' => false ))
+            'published' => new Field_Boolean(array( 'default' => false )),
+			'results' => new Field_HasMany()
         ));
     }
+	
+	public static function tries ($type, $quiz_object)
+	{
+		static $used = array();
+		static $total = array();
+		
+		switch ($type)
+		{
+			case 'used':
+				if ( ! array_key_exists($quiz_object->id, $used))
+				{
+					$user_object = Auth::instance()->get_user();
+					$used[$quiz_object->id] = $quiz_object->get('results')
+						->where('user_id', '=', $user_object->id)
+						->count();
+				}
+				
+				return $used[$quiz_object->id];
+			case 'total':
+				if ( ! array_key_exists($quiz_object->id, $total))
+				{
+					$total[$quiz_object->id] = ($quiz_object->tries == -1) ?
+						'&#8734;' : $quiz_object->tries;
+				}
+				
+				return $total[$quiz_object->id];
+			case 'allowed':
+				if (self::tries('total', $quiz_object) === '&#8734;')
+					return true;
+				
+				$used_num = (int) self::tries('used', $quiz_object);
+				$total_num = (int) self::tries('total', $quiz_object);
+				
+				return  $used_num < $total_num;
+		}
+	}
 }

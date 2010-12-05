@@ -124,6 +124,40 @@ hr {
     padding: 0 0 1em 0;
 }
 
+/* -----------------------------------------------------------------------------
+   Quiz Entry
+   -------------------------------------------------------------------------- */
+
+.quiz {
+    overflow: auto;
+    margin: 0 0 1em 0;
+}
+
+    .take {
+        width: 13%;
+        float: right;
+        background: #666;
+    }
+    
+        .take .tries {
+            font-size: 1.5em;
+            padding: 0.5em 0 0;
+            text-align: center;
+            color: #fff;
+            font-family: Georgia, serif;
+        }
+        
+        .take .tries-label {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            padding: 0.75em 0 1.3em;
+            text-align: center;
+        }
+    
+    .info {
+        margin: 0 15% 0  0;
+    }
 
 /* -----------------------------------------------------------------------------
    Forms
