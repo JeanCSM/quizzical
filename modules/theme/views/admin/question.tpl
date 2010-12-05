@@ -81,7 +81,7 @@
 			<input type="submit" class="button partial-width" value="Save" />
 			<div class="cancel">
 			{* This will generate an extra query.  This needs to be avoided. *}
-				or <a href="{URL::site("quiz/edit/$question_object->quiz->id")}">Cancel</a>
+				or <a href="{URL::site("quiz/edit/$question_object->quiz->id#question-$question_object->id")}">Cancel</a>
 			</div>
 		</form>
 	</div>
