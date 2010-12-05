@@ -92,6 +92,34 @@ class Controller_Quiz extends Controller_Template {
 		$quiz_object = Jelly::select('quiz')->load($quiz_number);
 		$this->edit($quiz_object);
 	}
+	
+	public function action_delete ($quiz_number)
+	{
+		if ( ! Acl::instance()->allowed('quiz editor'))
+		{
+			$this->deny('errors/access_denied');
+		}
+		
+		if ( ! $_POST)
+		{
+			$quiz_object = Jelly::select('quiz')->load($quiz_number);
+			
+			$this->_vars['message'] =
+				"Are you really sure that you want to delete "
+			  . "\"$quiz_object->title\" from Quizzical?  There's no going back"
+			  . " after clicking 'Go Ahead' below.";
+			$this->_vars['cancel'] = "quiz/edit/$quiz_number";
+			$this->_template = 'admin/confirm';
+		}
+		else
+		{
+			Jelly::delete('quiz')
+				->where('id', '=', $quiz_number)
+				->execute();
+			Request::instance()->redirect('quiz');
+		}
+	}
+	
 	public function edit ($quiz_object)
 	{
 		// If there's any information that needs to be saved into the database,
