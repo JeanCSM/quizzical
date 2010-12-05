@@ -57,8 +57,33 @@
 			</div>
 			
 			<h3>Questions</h3>
+			{if $quiz_object->questions}<ol>{/if}
 			{foreach $quiz_object->questions question_object}
-			
+				<li>
+					<a class="micro question-action"
+					   href="{URL::site("question/delete/$question_object->id")}">
+						Delete
+					</a>
+					
+					<a class="micro question-action"
+					   href="{URL::site("question/edit/$question_object->id")}">
+						Edit
+					</a>
+					
+					<a name="question-{$question_object->id}"></a>
+					<p class="question">{$question_object->content|escape|nl2br}</p>
+					
+					{foreach $question_object->answers answer_object}
+					<p class="choice {tif $answer_object->correct ? 'correct'}">
+						{$answer_object->content}
+					</p>
+					{else}
+					<p class="no-choices">
+						This question has no answer choices.  You can
+						<a href="{URL::site("question/edit/$question_object->id")}">add some</a>
+						to it.</p>
+					{/foreach}
+				</li>
 			{else}
 				{if isset($quiz_object->id)}
 					<p class="message">
@@ -72,6 +97,7 @@
 					</p>
 				{/if}
 			{/foreach}
+			{if $quiz_object->questions}</ol>{/if}
 			
 			{if isset($quiz_object->id)}
 			<div class="toolbar">
