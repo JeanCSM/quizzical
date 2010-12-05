@@ -55,8 +55,17 @@ class Controller_Quiz extends Controller_Template {
 		// dashboard of quizzes to take
 		$this->_template = 'dashboard';
 		
-		$this->_vars['quizzes'] = 
-			Jelly::select('quiz')->where('published', '=', true)->execute();
+		if ( ! Acl::instance()->allowed('quiz editor'))
+		{
+			$this->_vars['quizzes'] = Jelly::select('quiz')
+				->where('published', '=', true)
+				->execute();
+		}
+		else
+		{
+			$this->_vars['quizzes'] = Jelly::select('quiz')
+				->execute();
+		}
 		$this->_vars['results'] = 
 			$this->auth->get_user()->results;
 		$this->_vars['results_count'] = count($this->_vars['results']);
