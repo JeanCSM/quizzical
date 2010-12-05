@@ -36,18 +36,22 @@
 {extends "layout"}
 
 {block "content"}
-{validation_errors()}
 
-<div class="prefix_3 suffix_3 grid_6">
-	<h2>Are you sure?</h2>
-    <div class="message">
-        {$message}
-    </div>
-	<form method="post" action="{$current_url}" class="submit-or-cancel">
-		{form_token()}
+<div class="row">
+	<div class="cell width-1:2 position-1:4 confirm">
+		<h2>Are you sure?</h2>
 		
-		<input type="submit" class="button" value="Go Ahead" />
-		or <a href="{URL::site("admin")}">Cancel</a>
-	</form>
+		<p class="message">
+			{$message}
+		</p>
+		
+		{Form::open}
+			<input type="hidden" name="token" value="token" />
+			<input type="submit" class="button partial-width" value="Go Ahead" />
+			<div class="cancel">
+				or <a href="{URL::site($cancel)}">Cancel</a>
+			</div>
+		</form>
+	</div>
 </div>
 {/block}
