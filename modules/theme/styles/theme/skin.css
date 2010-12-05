@@ -28,6 +28,7 @@ h3 {
     padding: 0.8em 0;
     border-bottom: 1px solid #ccc;
     font-weight: bold;
+    margin-bottom: 1.2em;
 }
 
 p {
@@ -129,7 +130,7 @@ hr {
    -------------------------------------------------------------------------- */
 
 .field {
-    margin: 1em 0;
+    margin: 0 0 1em 0;
 }
 
     label {
