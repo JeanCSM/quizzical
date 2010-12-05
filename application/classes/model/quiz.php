@@ -45,7 +45,8 @@ class Model_Quiz extends Jelly_Model {
             'description' => new Field_Text,
             'tries' => new Field_Integer(array( 'default' => -1 )),
             'published' => new Field_Boolean(array( 'default' => false )),
-			'results' => new Field_HasMany()
+			'results' => new Field_HasMany(),
+			'questions' => new Field_HasMany()
         ));
     }
 	
