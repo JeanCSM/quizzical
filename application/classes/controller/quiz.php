@@ -70,5 +70,51 @@ class Controller_Quiz extends Controller_Template {
 		$this->_vars['results'] = $this->auth->get_user()->results;
 		$this->_vars['results_count'] = count($this->_vars['results']);
     }
+	
+	public function action_create ()
+	{
+		if ( ! Acl::instance()->allowed('quiz editor'))
+		{
+			$this->deny('errors/access_denied');
+		}
+		
+		$quiz_object = Jelly::factory('quiz');
+		$this->edit($quiz_object);
+	}
+	
+	public function action_edit ($quiz_number)
+	{
+		if ( ! Acl::instance()->allowed('quiz editor'))
+		{
+			$this->deny('errors/access_denied');
+		}
+		
+		$quiz_object = Jelly::select('quiz')->load($quiz_number);
+		$this->edit($quiz_object);
+	}
+	public function edit ($quiz_object)
+	{
+		// If there's any information that needs to be saved into the database,
+		// do that now; display any errors that might arise to the user
+		if ($_POST)
+		{
+			$quiz_data = Arr::extract($_POST, array('title', 'description', 'tries'));
+			$quiz_object->set($quiz_data);
+			$quiz_object->set('published', isset($_POST['published']));
+			
+			try
+			{
+				$quiz_object->save();
+			}
+			catch (Validate_Exception $errors)
+			{
+				$this->_vars['errors'] = $errors->array->errors('default');
+			}
+		}
+		
+		// Display the editing page with all of the appropriate data filled in
+		$this->_vars['quiz_object'] = $quiz_object;
+		$this->_template = 'admin/quiz';
+	}
     
 }
