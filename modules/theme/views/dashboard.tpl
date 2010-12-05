@@ -37,7 +37,7 @@
 
 {block "content"}
 <div class="row">
-	<div class="cell width-2:3 position-0">
+	<div class="cell width-full position-0">
 		<div class="toolbar">
 			{if Acl::instance()->allowed('quiz editor')}
 			<a href="{URL::site("/quiz/create")}" class="button align-right">Create Quiz</a>
@@ -78,37 +78,6 @@
 			{/if}
 		</p>
 		{/foreach}
-	</div>
-
-	<div class="cell width-1:3 position-2:3">
-		<div class="block">
-			<h3>Recent Test Scores</h3>
-
-			<div class="block-content">
-				{foreach $results result}
-				<div class="block-row">
-					<a href="{URL::site("/quiz/result/$result.id")}">
-						{$result.title} &mdash;
-						{$result.percent}%
-					</a>
-				</div>
-				{else}
-				<div class="block-row block-placeholder">
-					<p>
-						You haven't taken any quizzes yet.  This area will get
-						filled in with a feed of your quiz-taking activity
-						once you start taking quizzes.
-					</p>
-				</div>
-				{/foreach}
-
-				{if $results_count}
-				<div class="block-row more">
-					<a href="{URL::site("/quiz/results")}">See Full List</a>
-				</div>
-				{/if}
-			</div>
-		</div>
 	</div>
 </div>
 {/block}
