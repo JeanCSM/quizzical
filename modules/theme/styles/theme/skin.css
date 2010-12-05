@@ -148,9 +148,12 @@ hr {
         border: 0;
         color: #6c6c6c;
         font-size: 0.875em;
-        padding: 0.5em 0;
+        padding: 0.5em 2%;
         display: block;
-        width: 100%;
+        width: 96%;
+        max-width: 96%;
+        min-width: 96%;
+    }
     }
     
     .button {
