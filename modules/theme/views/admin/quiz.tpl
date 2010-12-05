@@ -83,7 +83,7 @@
 		
 		<div class="cell width-1:4 position-3:4">
 			<div class="field">
-				<input type="submit" class="button" value="Save Changes" />
+				<input type="submit" class="button" value="Save" />
 			</div>
 			
 			<div class="field inline-field">
