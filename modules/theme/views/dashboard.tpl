@@ -40,7 +40,8 @@
 	<div class="cell width-full position-0">
 		<div class="toolbar">
 			{if Acl::instance()->allowed('quiz editor')}
-			<a href="{URL::site("/quiz/create")}" class="button align-right">Create Quiz</a>
+			<a href="{URL::site("/quiz/create")}"
+			   class="button partial-width toolbar-action">Create Quiz</a>
 			{/if}
 			
 			<h2>Quizzes</h2>
