@@ -46,15 +46,17 @@
 			<h2>Quizzes</h2>
 		</div>
 		
-		{foreach $quizzes quiz}
-		<h3><a href="{URL::site("/quiz/take/$quiz.id")}">
-			{$quiz.title|escape}
-		</a></h3>"
+		{foreach $quizzes quiz_object}
+		<h3>
+			<a href="{URL::site("/quiz/take/$quiz_object->id")}">
+				{$quiz_object->title|escape}
+			</a>
+		</h3>
 
-		<p>{$quiz.summary|escape|nl2br}</p>
+		<p>{$quiz_object->description|escape|nl2br}</p>
 
-		<div class="take-it-button">
-			<a href="{URL::site("/quiz/take/$quiz.id")}">Take It</a>
+		<div class="take-quiz-button">
+			<a href="{URL::site("/quiz/take/$quiz_object->id")}">Take It</a>
 		</div>
 
 		<p>
