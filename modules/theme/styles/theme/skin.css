@@ -261,17 +261,22 @@ hr {
             text-align: center;
         }
     
-        .inline-field .checkbox-field {
+        .inline-field .checkbox-field, .inline-field .radio-field {
             padding: 0.5em;
             float: left;
             background: #e9e9e9;
         }
         
-            .inline-field .checkbox-field input {
+            .inline-field .checkbox-field input,
+            .inline-field .radio-field input {
                 width: 1em;
             }
         
         .inline-field label {
             padding: 0.35em 0;
             margin: 0 0 0 2.5em;
+        }
+        
+        .inline-field.linked {
+            margin-left: 1em;
         }
