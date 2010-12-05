@@ -41,7 +41,8 @@ class Model_Question extends Jelly_Model {
         $meta->fields(array(
             'id' => new Field_Primary,
             'quizzes' => new Field_BelongsTo(array( 'model' => 'quiz', 'column' => 'quiz_id' )),
-            'content' => new Field_Text,
+            'answers' => new Field_HasMany,
+            'content' => new Field_Text
         ));
     }
 }
