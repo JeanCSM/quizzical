@@ -215,6 +215,11 @@ hr {
     
     a.button {
         padding: 0.5em 0.4em 0.45em;
+        .button.go {
+            background: url(../../assets/green-major.png) !important;
+            text-shadow: none;
+            color: #4A5C12;
+        }
     }
     
     .align-right {
