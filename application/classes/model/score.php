@@ -46,7 +46,9 @@ class Model_Score extends Jelly_Model {
             'total' => new Field_Integer,
             'percent' => new Field_Integer,
             'tries' => new Field_Integer,
-            'date' => new Field_Timestamp
+            'date' => new Field_Timestamp,
+            'editor' => new Field_BelongsTo(array( 'model' => 'user' )),
+            'comment' => new Field_String
         ));
     }
 }
