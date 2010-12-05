@@ -210,11 +210,8 @@ hr {
         text-align: center;
         width: 100%;
         max-width: 100%;
-        
     }
     
-    a.button {
-        padding: 0.5em 0.4em 0.45em;
         .button.go {
             background: url(../../assets/green-major.png) !important;
             text-shadow: none;
@@ -222,14 +219,27 @@ hr {
         }
     }
     
-    .align-right {
-        float: right;
-        width: 22%;
+    
+    a.button {
+        padding: 0.5em 0 0.45em;
     }
     
-    .align-left {
+    .confirm .button {
         float: left;
-        width: 22%;
+        margin-right: 0.4em;
+    }
+    
+    .confirm .cancel {
+        padding: 0.7em 0 0 0;
+    }
+    
+    .partial-width {
+        width: 22.91667% !important;
+        min-width: 22.91667% !important;
+    }
+    
+    .toolbar-action {
+        float: right;
     }
     
     .inline-field {}
