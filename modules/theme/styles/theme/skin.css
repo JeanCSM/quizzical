@@ -154,6 +154,14 @@ hr {
         max-width: 96%;
         min-width: 96%;
     }
+    
+    textarea {
+        height: 5em;
+    }
+    
+    input.title {
+        font-family: Georgia, serif;
+        font-size: 1.125em !important;
     }
     
     .button {
@@ -165,8 +173,46 @@ hr {
         cursor: pointer;
         display: block;
         text-align: center;
+        width: 100%;
+        max-width: 100%;
+        
     }
     
     a.button {
-        padding: 0.5em;
+        padding: 0.5em 0.4em 0.45em;
     }
+    
+    .align-right {
+        float: right;
+        width: 22%;
+    }
+    
+    .align-left {
+        float: left;
+        width: 22%;
+    }
+    
+    .inline-field {}
+    
+        .inline-field input {
+            float: left;
+            padding: 0.5em;
+            width: 1.2em;
+            min-width: 1.2em;
+            text-align: center;
+        }
+    
+        .inline-field .checkbox-field {
+            padding: 0.5em;
+            float: left;
+            background: #e9e9e9;
+        }
+        
+            .inline-field .checkbox-field input {
+                width: 1em;
+            }
+        
+        .inline-field label {
+            padding: 0.35em 0;
+            margin: 0 0 0 2.5em;
+        }
