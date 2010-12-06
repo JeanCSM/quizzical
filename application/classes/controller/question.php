@@ -107,9 +107,32 @@ class Controller_Question extends Controller_Template {
 			$question_data = Arr::extract($_POST, array('content'));
 			$question_object->set($question_data);
 			
+			$answer_count = (int) $_POST['count'];
+			$answer_correct = (int) $_POST['correct'];
+			
 			try
 			{
 				$question_object->save();
+				
+				for ($i = 0; $i < $answer_count; $i++)
+				{
+					$answer_text = $_POST["choice-$i"];
+					
+					$answer_object = Jelly::factory('answer');
+					$answer_object->content = $answer_text;
+					$answer_object->correct = ($answer_correct == $i);
+					$answer_object->question = $question_object;
+					
+					if (array_key_exists("choice-$i-id", $_POST))
+					{
+						$answer_number = $_POST["choice-$i-id"];
+						$answer_object->save($answer_number);
+					}
+					else
+					{
+						$answer_object->save();
+					}
+				}
 			}
 			catch (Validate_Exception $errors)
 			{
