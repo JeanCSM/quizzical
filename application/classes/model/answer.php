@@ -40,7 +40,6 @@ class Model_Answer extends Jelly_Model {
     {
         $meta->fields(array(
             'id' => new Field_Primary,
-            'quiz' => new Field_BelongsTo,
             'question' => new Field_BelongsTo,
             'content' => new Field_Text,
             'correct' => new Field_Boolean(array( 'default' => 0 )),
