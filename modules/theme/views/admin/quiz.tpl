@@ -48,7 +48,7 @@
 			<div class="field">
 				<label>Title</label>
 				<input type="text" name="title" class="title"
-					   value="{$quiz_object->title|escape}" />
+					   value="{escape $quiz_object->title "htmlall"}" />
 			</div>
 			
 			<div class="field">
@@ -121,7 +121,7 @@
 			</div>
 			
 			<div class="field inline-field">
-				<input name="tries" value="{$quiz_object->tries|escape}" />
+				<input name="tries" value="{escape $quiz_object->tries "htmlall"}" />
 				<label>Maximum Allowed Tries</label>
 			</div>
 			

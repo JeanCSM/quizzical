@@ -49,7 +49,7 @@
 			<div class="field">
 				<label>Question</label>
 				<input type="text" name="content"
-					value="{$question_object->content}" />
+					value="{escape $question_object->content "htmlall"}" />
 			</div>
 			
 			<h3>Answer Choices</h3>
@@ -58,12 +58,13 @@
 			<div class="field">
 				<label>Choice</label>
 				
-				<input type="text" class="text" name="choice-{$index}"
-					value="{tif $answers ? $answers.$index->content}" />
-				
 				{if $answers}
+				<input type="text" class="text" name="choice-{$index}"
+					value="{escape $answers.$index->content "htmlall"}" />
 				<input type="hidden" name="choice-{$index}-id" 
 					value="{$answers.$index->id}" />
+				{else}
+				<input type="text" class="text" name="choice-{$index}" />
 				{/if}
 			</div>
 			

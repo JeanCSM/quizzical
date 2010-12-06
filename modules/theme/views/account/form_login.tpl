@@ -36,7 +36,7 @@
 <form method="post" action="{URL::site("account/login")}">
 	<div class="field">
 	<label for="username">First &amp; Last Name</label>
-	<input type="text" id="username" name="username" value="{$dwoo.post.username|default:''}" />
+	<input type="text" id="username" name="username" value="{escape(default($dwoo.post.username, ''),"htmlall")}" />
 	</div>
 
 	<div class="field">

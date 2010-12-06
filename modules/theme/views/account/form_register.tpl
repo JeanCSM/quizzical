@@ -36,12 +36,12 @@
 <form method="post" action="{URL::site("account/register")}">
 	<div class="field">
 	<label for="username">First &amp; Last Name</label>
-	<input type="text" id="username" name="username" value="{Arr::get($_POST, 'name')}" />
+	<input type="text" id="username" name="username" value="{escape Arr::get($_POST, 'name') "htmlall"}" />
 	</div>
 
 	<div class="field">
 	<label for="email">Email</label>
-	<input type="text" id="email" name="email" value="{Arr::get($_POST, 'email')}" />
+	<input type="text" id="email" name="email" value="{escape Arr::get($_POST, 'email') "htmlall"}" />
 	</div>
 
 	<div class="field">
