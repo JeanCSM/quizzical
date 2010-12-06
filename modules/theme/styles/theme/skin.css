@@ -161,7 +161,7 @@ hr {
     }
 
 ol {
-    margin-bottom: 2em;    
+    margin-bottom: 1em;    
 }
 
     ol li {
@@ -175,6 +175,16 @@ p.no-choices {
     font-style: italic;
     color: #999;
 }
+
+p.choice {
+    padding: 0.7em 1em;
+    margin: 0;
+}
+
+    p.correct {
+        color: #4A5C12;
+        background: url(../../assets/green-major.png);
+    }
 
 /* -----------------------------------------------------------------------------
    Forms
