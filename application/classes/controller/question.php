@@ -92,8 +92,13 @@ class Controller_Question extends Controller_Template {
 		}
 		else
 		{
-			$quiz_id = $question_object->quiz_id;
+			$quiz_id = $question_object->quiz->id;
+			
+			Jelly::delete('answer')
+				->where('question_id', '=', $question_number)
+				->execute();
 			$question_object->delete();
+			
 			Request::instance()->redirect("quiz/edit/$quiz_id");
 		}
 	}
