@@ -108,7 +108,8 @@ class Controller_Question extends Controller_Template {
 			$question_object->set($question_data);
 			
 			$answer_count = (int) $_POST['count'];
-			$answer_correct = (int) $_POST['correct'];
+			$answer_correct = array_key_exists('correct', $_POST) ?
+				(int) $_POST['correct'] : -1;
 			
 			try
 			{
@@ -117,6 +118,9 @@ class Controller_Question extends Controller_Template {
 				for ($i = 0; $i < $answer_count; $i++)
 				{
 					$answer_text = $_POST["choice-$i"];
+				
+					if (!$answer_text)
+						continue;
 					
 					$answer_object = Jelly::factory('answer');
 					$answer_object->content = $answer_text;
