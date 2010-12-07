@@ -85,9 +85,9 @@ class Controller_Question extends Controller_Template {
 		{
 			$this->_vars['message'] =
 				"Are you really sure that you want to delete the question, "
-			  . "\"$question_object->title,\" from Quizzical?  There's no going"
+			  . "\"$question_object->content,\" from Quizzical?  There's no going"
 			  . " back after clicking 'Go Ahead' below.";
-			$this->_vars['cancel'] = "question/edit/$question_object";
+			$this->_vars['cancel'] = "quiz/edit/{$question_object->quiz->id}#question-$question_object->id";
 			$this->_template = 'admin/confirm';
 		}
 		else
