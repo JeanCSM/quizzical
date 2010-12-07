@@ -74,10 +74,10 @@ class Controller_Account extends Controller_Template {
 			else
 			{
 				$this->_vars['errors'][] = 
-						'The name/password combination that you entered was '
+						'<p>The name/password combination that you entered was '
 					  . 'incorrect. Here are some possible issues to check for:'
-					  . '<ul><li>Did you use a middle name or initial when you '
-					  . 'registered?  Make sure that it is included.</li>'
+					  . '</p><ul><li>Did you use a middle name or initial when '
+					  . 'you registered?  Make sure that it is included.</li>'
 					  . '<li>Do you have CAPS LOCK engaged on your keyboard?'
 					  . '</li><li>Have you activated your account?</li></ul>';
 			}

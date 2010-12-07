@@ -34,19 +34,25 @@ h3 {
 
 p {
     margin-bottom: 1em;
-   
 }
 
-p.message {
+.message {
     color: #4A5C12;
     background: url(../../assets/green-minor.png);
     padding: 1em;
+    margin-bottom: 1em;
 }
 
-p.error {
+.error {
     background: #FFD5CA url(../../assets/error.png);
     color: #7F1900;
     padding: 1em;
+    margin-bottom: 1em;
+}
+
+#content ul li {
+    list-style: disc outside;
+    margin-left: 2em;
 }
 
 /* -----------------------------------------------------------------------------

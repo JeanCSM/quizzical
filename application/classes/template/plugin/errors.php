@@ -37,8 +37,8 @@
 
 function Dwoo_Plugin_errors(Dwoo $dwoo,
     $list = array(),
-    $start_template = '<p class="error">',
-    $end_template = '</p>')
+    $start_template = '<div class="error">',
+    $end_template = '</div>')
 {
     $buffer = '';
     
