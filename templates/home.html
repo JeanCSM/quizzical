@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block link_home %}active{% endblock %}
+
+{% block content %}
+<div class="page-header"><div class="row">
+    <div class="span11"><h1>Quizzes to Take</h1></div>
+    <div class="span5">
+        {% if is_admin %}
+        <a class="btn side-btn primary" href="{{ links.Quiz.add }}">Create Quiz</a>
+        {% endif %}
+    </div>
+</div></div>
+
+<div class="row">
+    <div class="span11">
+        {% if quizzes %}
+        <div id="quizzes">
+            {% for quiz in quizzes %}
+            <div class="quiz actionable">
+                <h3>
+                    <a href="{{ quiz.link_take }}">{{ quiz.title }}</a>
+                    
+                    {% if is_admin %}
+                    {% if not quiz.is_published %}
+                    <span class="label">Unpublished</span>
+                    {% endif %}
+                    
+                    <span class="action">
+                        <a href="{{ quiz.link_edit }}" class="edit">Edit</a>
+                    </span>
+                    
+                    <span class="action">
+                        <a href="{{ quiz.link_roster }}" class="roster">Roster</a>
+                    </span>
+                    {% endif %}
+                </h3>
+                
+                {% if quiz.prompt %}
+                <p>{{ quiz.prompt }}</p>
+            {% endif %}
+                {% if quiz.is_limited %}
+                <p class="scoring">
+                    {% if quiz.related_score %}
+                    <span class="score">{{ quiz.related_score.percentage}}%</span>
+                    &mdash;
+                    <span class="attempts">
+                        {{ quiz.related_score.attempts|default:0 }}
+                        / {{ quiz.attempts}} attempts used.
+                    </span>
+                    {% ifnotequal quiz.related_score.attempts quiz.attempts %}
+                    <a href="{{ quiz.link_take }}" class="btn">Retake &raquo;</a>
+                    {% endifnotequal %}
+                    {% else %}
+                    <span class="attempts">
+                        0 / {{ quiz.attempts}} attempts used.
+                    </span>
+                    <a href="{{ quiz.link_take }}" class="btn">Take &raquo;</a>
+                    {% endif %}
+                </p>
+                {% else %}
+                <p class="scoring">
+                    <span class="attempts">Unlimited attempts allowed.</span>
+                    <a href="{{ quiz.link_take }}" class="btn">Take &raquo;</a>
+                </p>        
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h3>Nothing to See Here</h3>
+        <div class="alert-message block-message">
+            {% if is_admin %}
+            <p><strong>Hey.</strong> There aren't any quizzes here at all yet.
+            You should go make one.  Your users are waiting.</p>
+            {% else %}
+            <p><strong>So sad.</strong> There aren't any quizzes that have been
+            published yet.  You should bug the person making quizzes to finish
+            up and publish it.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="span5">
+        <h3>Recent Attempts</h3>
+        {% if attempts %}
+        <ul>
+            {% for attempt in attempts %}
+            <li>
+                {{ attempt.quiz.title }}
+                -
+                <a href="{{ attempt.link_view }}">{{ attempt.percentage }} %</a></li>    
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="alert-message block-message info">
+            <p>After you take a quiz, your latest results will show up here.</p>
+        </div>
+        {% endif %}
+        <p>
+            <a href="/user/me/scores" class="btn">View Overall Scores &raquo;</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row"><div class="span8 offset4"><div class="clearfix">
+    <div class="modal static-modal">
+        <div class="modal-header">
+            <h3>Are you sure?</h3>
+        </div>
+        
+        <div class="modal-body">
+            <p>{{prompt}}</p>
+        </div>
+        
+        <div class="modal-footer">
+            <form method="post" action="{{action}}" class="form-stacked">
+                <input type="submit" class="btn submit primary" value="Yes" />
+                <a href="{{back}}" class="btn">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div></div></div>
+{% endblock %}

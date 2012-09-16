@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block quiz_before %}{% endblock %}
+
+<div class="page-header pill-header clearfix">
+    {% block quiz_title_before %}{% endblock %}
+    
+    {% block quiz_title %}
+    {% if quiz %}
+    <h1>{{ quiz.title }}</h1>
+    {% else %}
+    <h1>New Quiz</h1>
+    {% endif %}
+    {% endblock %}
+
+    {% if quiz %}
+    <ul class="pills">
+        {% if quiz.is_deleting %}
+        <li><span class="header-note">(Being deleted.)</span></li>
+        {% endif %}
+
+        <li class="{% block link_quiz_take %}{% endblock %}">
+            <a href="{{ quiz.link_take }}">Take</a></li>
+        
+        {% if is_admin %}
+        <li class="{% block link_quiz_edit %}{% endblock %}">
+            <a href="{{ quiz.link_edit }}">Edit</a></li>
+        
+        <li class="{% block link_quiz_roster %}{% endblock %}">
+            <a href="{{ quiz.link_roster }}">Roster</a></li>
+        {% endif %}
+    
+        <li class="{% block link_quiz_my_score %}{% endblock %}">
+            <a href="{{ quiz.link_my_score }}">My Score</a></li>
+    </ul>
+    
+    {% endif %}
+</div>
+
+{% block quiz_content %}{% endblock %}
+{% block quiz_after %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "quiz_base.html" %}
+
+{% block link_quiz_roster %}active{% endblock %}
+
+{% block quiz_content %}
+<div class="row">
+    <div class="span11">
+        <table class="zebra-striped">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Overall Score</th>
+                    <th>Attempts Used</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score.last_name }}</td>
+                    <td>{{ score.first_name }}</td>
+                    <td>{{ score.percentage }}%</td>
+                    <td>{{ score.attempts }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">
+                        Nothing to see here.
+                        Maybe there's something in the <a href="{{ link_archived }}">archives</a>?
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <p><a href="{{ link_archived }}" class="btn">View Archived Scores</a></p>
+    </div>
+    
+    <div class="span5">
+        <div class="alert-message block-message info">
+            <p>
+                <strong>Done with these scores?</strong>
+                Archive them so everybody can retake the quiz again.
+            </p>
+            <p><a href="{{ link_archive }}" class="btn primary">Archive Scores</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
