@@ -1,0 +1,35 @@
+application: <your_app_name_here>
+version: 1.1
+runtime: python
+api_version: 1
+
+handlers:
+# Static assets (e.g. stylesheets, images, etc)
+- url: /static
+  static_dir: static
+
+# Views visible to all users
+- url: /
+  script: handlers/home.py
+  login: required
+  secure: always
+- url: /user/me/.*
+  script: handlers/user/me.py
+  login: required
+  secure: always
+- url: /quiz/(take|attempt|my_score)/.*
+  script: handlers/quiz/take.py
+  login: required
+  secure: always
+
+# Views visible to administrators
+- url: /quiz/.*
+  script: handlers/quiz/edit.py
+  login: admin
+- url: /question/.*
+  script: handlers/question/edit.py
+  login: admin
+- url: /user/.*
+  script: handlers/user/edit.py
+  login: admin
+  
