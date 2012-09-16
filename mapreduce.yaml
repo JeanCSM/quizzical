@@ -8,3 +8,17 @@ mapreduce:
       default: models.Attempt
     - name: quiz_id
       default:
+- name: Poke entities
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: jobs.cleanup.poke
+    params:
+    - name: entity_kind
+      default: models.Attempt
+- name: Dump all entities
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: jobs.cleanup.dump
+    params:
+    - name: entity_kind
+      default: models.Attempt
