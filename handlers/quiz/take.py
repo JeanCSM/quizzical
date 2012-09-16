@@ -113,10 +113,12 @@ class AttemptHandler(BaseHandler):
             self.error(404)
             return
 
+        '''
         if (not self.is_admin) and (attempt.user is not self.user):
             print attempt.to_xml()
             self.error(403)
             return
+        '''
 
         if (not self.is_admin) and attempt.is_archived:
             self.error(403)
