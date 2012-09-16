@@ -32,9 +32,11 @@
     </div>
     
     <div class="span5">
+        {% if quiz.prompt %}
         <div class="alert-message block-message info">
             {{ quiz.prompt }}
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

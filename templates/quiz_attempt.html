@@ -33,9 +33,11 @@
     <div class="span5">
         <h1>{{ attempt.percentage }}%</h1>
         
+        {% if quiz_snapshot.prompt %}
         <div class="alert-message block-message info">
             {{ quiz_snapshot.prompt }}
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
