@@ -3,6 +3,9 @@ version: 1_1
 runtime: python
 api_version: 1
 
+builtins:
+- mapreduce: on
+
 handlers:
 # Static assets (e.g. stylesheets, images, etc)
 - url: /static
