@@ -58,6 +58,7 @@ class Quiz(db.Model):
                 user = users.get_current_user();
             
             query = db.Query(Score)
+            query.filter('is_archived =', False)
             query.filter('quiz =', self)
             query.filter('user =', user)
             self._score = query.get()
@@ -150,6 +151,7 @@ class Score(db.Model):
     updated = db.DateTimeProperty(auto_now=True)
     first_name = db.StringProperty()
     last_name = db.StringProperty()
+    is_archived = db.BooleanProperty(default=False)
     
     @staticmethod
     def link_my_scores():

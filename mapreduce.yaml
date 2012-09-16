@@ -1,5 +1,5 @@
 mapreduce:
-- name: Archive attempts for quiz
+- name: Archive entities
   mapper:
     input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
     handler: jobs.cleanup.archive
@@ -7,4 +7,4 @@ mapreduce:
     - name: entity_kind
       default: models.Attempt
     - name: quiz_id
-      default: 
+      default:

@@ -3,6 +3,7 @@ from google.appengine.ext import db
 from google.appengine.ext.webapp import util
 from google.appengine.ext.webapp import template
 from google.appengine.ext.db import djangoforms
+from google.appengine.ext.mapreduce.control import start_map
 from django import forms
 
 import os
@@ -74,7 +75,8 @@ class DeleteHandler(QuizHandler):
         self.values['prompt'] = \
             'Are you absolutely sure that you would like to delete the ' \
             'quiz, "%s," forever?' % self.quiz_entity.title 
-        self.values['back'] = os.environ['HTTP_REFERER']
+        self.values['back'] = os.environ.get('HTTP_REFERER',
+                                             links.Quiz.edit(int(id)))
         self.output('confirm.html')
     
     def post(self, id): 
@@ -83,8 +85,39 @@ class DeleteHandler(QuizHandler):
         self.quiz_entity.put()
         
         # TODO: Delete quiz, questions, attempts, scores, attempts, snapshots
+        #       via a couple of mapreduce jobs from cleanup.py
         
         self.redirect('/')
+
+class ArchiveHandler(QuizHandler):
+    def get(self, id):
+        self.fetch(id)
+        self.values['action'] = links.Quiz.archive(int(id))
+        self.values['prompt'] = \
+            'Are you sure that you would like archive all scores for the ' \
+            'quiz, "%s," forever?' % self.quiz_entity.title 
+        self.values['back'] = os.environ.get('HTTP_REFERER',
+                                             links.Quiz.roster(int(id)))
+        self.output('confirm.html')
+
+    def post(self, id):
+        start_map('Archive scores',
+                  'jobs.cleanup.archive',
+                  'google.appengine.ext.mapreduce.input_readers.DatastoreInputReader',
+                  {
+                    'entity_kind': 'models.Score',
+                    'quiz_id': int(id)
+                  });
+
+        start_map('Archive attempts',
+                  'jobs.cleanup.archive',
+                  'google.appengine.ext.mapreduce.input_readers.DatastoreInputReader',
+                  {
+                    'entity_kind': 'models.Attempt',
+                    'quiz_id': int(id)
+                  });
+
+        self.redirect(links.Quiz.roster(int(id)))
 
 class RosterHandler(QuizHandler):
     def get(self, id):
@@ -102,7 +135,8 @@ def main():
         ('/quiz/add', AddHandler),
         (r'/quiz/edit/(.*)', EditHandler),
         (r'/quiz/delete/(.*)', DeleteHandler),
-        (r'/quiz/roster/(.*)', RosterHandler)
+        (r'/quiz/roster/(.*)', RosterHandler),
+        (r'/quiz/archive/(.*)', ArchiveHandler)
     ], debug=True)
     util.run_wsgi_app(application)
 

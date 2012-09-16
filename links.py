@@ -18,7 +18,11 @@ class Quiz:
     @staticmethod
     def delete(id):
         return '/quiz/delete/%d' % int(id)
-        
+
+    @staticmethod
+    def archive(id):
+        return '/quiz/archive/%d' % int(id)
+
     @staticmethod
     def add():
         return '/quiz/add'

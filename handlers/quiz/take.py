@@ -118,7 +118,7 @@ class AttemptHandler(BaseHandler):
             self.error(403)
             return
 
-        if attempt.is_archived:
+        if (not self.is_admin) and attempt.is_archived:
             self.error(403)
             return
         
