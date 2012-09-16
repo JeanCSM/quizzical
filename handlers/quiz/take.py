@@ -6,9 +6,25 @@ from google.appengine.ext.db import djangoforms
 
 from django.utils import simplejson
 
-from base import BaseHandler, QuizHandler
+from base import BaseHandler, BaseView, QuizHandler
 import links
 from models import *
+
+class AttemptView(BaseView):
+    attempt = None
+    template = 'quiz_attempt.html'
+    
+    def __init__(self, attempt, handler):
+        super(AttemptView, self).__init__(handler);
+        self.attempt = attempt
+        
+        template.register_template_library('filters.resolve')
+        
+        self.set('attempt', attempt)
+        self.set('quiz', attempt.quiz)
+        self.set('quiz_snapshot', attempt.snapshot.quiz_entity)
+        self.set('questions', attempt.snapshot.questions)
+        self.set('responses', attempt.responses)
 
 class TakeHandler(QuizHandler):
     def get(self, id):
@@ -86,7 +102,8 @@ class TakeHandler(QuizHandler):
         
         score.put()
         
-        self.redirect(links.Quiz.attempt(attempt.key().id()))
+        view = AttemptView(attempt, self)
+        view.output()
 
 class AttemptHandler(BaseHandler):
     def get(self, id):
@@ -95,29 +112,18 @@ class AttemptHandler(BaseHandler):
         if attempt is None:
             self.error(404)
             return
-        
-        '''
+
         if (not self.is_admin) and (attempt.user is not self.user):
             print attempt.to_xml()
-            #self.error(403)
+            self.error(403)
             return
-        '''
-        
-        # TODO: Find a way that to limit this that doesn't implode when combined
-        #       with the AppEngine datastore...
-        
+
         if attempt.is_archived:
             self.error(403)
             return
         
-        template.register_template_library('filters.resolve')
-        
-        self.values['attempt'] = attempt
-        self.values['quiz'] = attempt.quiz
-        self.values['quiz_snapshot'] = attempt.snapshot.quiz_entity
-        self.values['questions'] = attempt.snapshot.questions
-        self.values['responses'] = attempt.responses
-        self.output('quiz_attempt.html')
+        view = AttemptView(attempt, self)
+        view.output()
 
 class MyScoreHandler(QuizHandler):
     def get(self, id):

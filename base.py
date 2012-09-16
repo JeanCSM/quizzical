@@ -34,6 +34,33 @@ class BaseHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates', name)
         self.response.out.write(template.render(path, data))
 
+class BaseView():
+    values = {}
+    handler = None
+    template = None
+
+    def __init__(self, handler, template = None):
+        self.handler = handler
+        if template != None:
+            self.template = template
+    
+    def set(key, value):
+        values[key] = value
+    
+    def output(self):
+        defaults = {
+            'is_admin': self.handler.is_admin,
+            'is_logged_in': self.handler.user != None,
+            'user': self.handler.user,
+            'profile': "/user/me/profile",
+            'sign_out': users.create_logout_url('/'),
+            'links': links,
+        }
+        
+        data = dict(defaults.items() + self.values.items())
+        path = os.path.join(os.path.dirname(__file__), 'templates', name)
+        self.handler.response.out.write(template.render(path, data))
+
 class QuizHandler(BaseHandler):
     def fetch(self, id):
         from models import Quiz
