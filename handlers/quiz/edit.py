@@ -153,7 +153,7 @@ def main():
     application = webapp.WSGIApplication([
         ('/quiz/add', AddHandler),
         (r'/quiz/edit/(.*)', EditHandler),
-        (r'/quiz/delete/(.*)', DeleteHandler),
+        #(r'/quiz/delete/(.*)', DeleteHandler),
         (r'/quiz/archive/(.*)', ArchiveHandler),
         (r'/quiz/roster/(.*)', RosterHandler),
         (r'/quiz/archived/(.*)', ArchivedHandler)

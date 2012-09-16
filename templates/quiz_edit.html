@@ -110,11 +110,13 @@
             <span class="help-block">If the box is left unchecked, users can retake this test an infinite number of times.</span>
         </div>
         
+        {% comment %}
         {% if quiz %}
         <div class="clearfix">
             <p><a href="{{ quiz.link_delete }}">Delete</a></p>
         </div>
         {% endif %}
+        {% endcomment %}
     </div>
 </div>
 
