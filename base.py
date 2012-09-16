@@ -44,9 +44,6 @@ class BaseView():
         if template != None:
             self.template = template
     
-    def set(key, value):
-        values[key] = value
-    
     def output(self):
         defaults = {
             'is_admin': self.handler.is_admin,
@@ -58,7 +55,7 @@ class BaseView():
         }
         
         data = dict(defaults.items() + self.values.items())
-        path = os.path.join(os.path.dirname(__file__), 'templates', name)
+        path = os.path.join(os.path.dirname(__file__), 'templates', self.template)
         self.handler.response.out.write(template.render(path, data))
 
 class QuizHandler(BaseHandler):

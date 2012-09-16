@@ -15,16 +15,16 @@ class AttemptView(BaseView):
     template = 'quiz_attempt.html'
     
     def __init__(self, attempt, handler):
-        super(AttemptView, self).__init__(handler);
+        BaseView.__init__(self, handler);
         self.attempt = attempt
         
         template.register_template_library('filters.resolve')
         
-        self.set('attempt', attempt)
-        self.set('quiz', attempt.quiz)
-        self.set('quiz_snapshot', attempt.snapshot.quiz_entity)
-        self.set('questions', attempt.snapshot.questions)
-        self.set('responses', attempt.responses)
+        self.values['attempt'] = attempt
+        self.values['quiz'] = attempt.quiz
+        self.values['quiz_snapshot'] = attempt.snapshot.quiz_entity
+        self.values['questions'] = attempt.snapshot.questions
+        self.values['responses'] = attempt.responses
 
 class TakeHandler(QuizHandler):
     def get(self, id):
