@@ -83,10 +83,17 @@ class DeleteHandler(QuizHandler):
         self.fetch(id)
         self.quiz_entity.is_deleting = True
         self.quiz_entity.put()
-        
-        # TODO: Delete quiz, questions, attempts, scores, attempts, snapshots
-        #       via a couple of mapreduce jobs from cleanup.py
-        
+
+        for model in ['Question', 'Attempt', 'Score', 'Snapshot']:
+            start_map('Delete %s(s)' % model,
+                      'jobs.cleanup.delete',
+                      'google.appengine.ext.mapreduce.input_readers.DatastoreInputReader',
+                      {
+                        'entity_kind': 'models.%s' % model,
+                        'quiz_id': int(id)
+                      });
+
+        self.quiz_entity.delete()
         self.redirect('/')
 
 class ArchiveHandler(QuizHandler):
@@ -101,21 +108,14 @@ class ArchiveHandler(QuizHandler):
         self.output('confirm.html')
 
     def post(self, id):
-        start_map('Archive scores',
-                  'jobs.cleanup.archive',
-                  'google.appengine.ext.mapreduce.input_readers.DatastoreInputReader',
-                  {
-                    'entity_kind': 'models.Score',
-                    'quiz_id': int(id)
-                  });
-
-        start_map('Archive attempts',
-                  'jobs.cleanup.archive',
-                  'google.appengine.ext.mapreduce.input_readers.DatastoreInputReader',
-                  {
-                    'entity_kind': 'models.Attempt',
-                    'quiz_id': int(id)
-                  });
+        for model in ['Score', 'Attempt']:
+            start_map('Archive %s(s)' % model,
+                      'jobs.cleanup.archive',
+                      'google.appengine.ext.mapreduce.input_readers.DatastoreInputReader',
+                      {
+                        'entity_kind': 'models.%s' % model,
+                        'quiz_id': int(id)
+                      });
 
         self.redirect(links.Quiz.roster(int(id)))
 
