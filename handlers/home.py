@@ -35,6 +35,7 @@ class HomeHandler(BaseHandler):
         # Any user can see their own scores
         attempts_query = Attempt.all()
         attempts_query.filter("user =", self.user)
+        attempts_query.filter("is_archived =", False)
         attempts_query.order('-created')
         self.values['attempts'] = attempts_query.fetch(3)
     

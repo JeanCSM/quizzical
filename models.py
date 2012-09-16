@@ -162,17 +162,21 @@ class Score(db.Model):
         #return links.Quiz.my_score(self.quiz.key().id())
     
     @staticmethod
-    def get_for_user(user):
+    def get_for_user(user, hideArchived=True):
         query = db.Query(Score)
         query.filter('user =', user)
+        if hideArchived:
+            query.filter('is_archived =', False)
         
         return query.fetch(200)
     
     @staticmethod
-    def get_for_quiz_user(quiz, user):
+    def get_for_quiz_user(quiz, user, hideArchived=True):
         query = db.Query(Score)
         query.filter('user =', user)
         query.filter('quiz =', quiz)
+        if hideArchived:
+            query.filter('is_archived =', False)
         
         return query.get()
     
@@ -182,10 +186,12 @@ class Score(db.Model):
         else:
             return 0
     
-    def related_attempts(self):
+    def related_attempts(self, hideArchived=True):
         query = db.Query(Attempt)
         query.filter('user =', self.user)
         query.filter('quiz =', self.quiz)
+        if hideArchived:
+            query.filter('is_archived =', False)
         
         return query.fetch(200)
 
