@@ -79,9 +79,10 @@ class DeleteHandler(QuizHandler):
     
     def post(self, id): 
         self.fetch(id)
-        self.quiz_entity.delete()
+        self.quiz_entity.is_deleting = True
+        self.quiz_entity.put()
         
-        # TODO: Delete associated questions
+        # TODO: Delete quiz, questions, attempts, scores, attempts, snapshots
         
         self.redirect('/')
 

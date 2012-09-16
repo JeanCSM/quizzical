@@ -26,7 +26,8 @@ class HomeHandler(BaseHandler):
         self.validate()
         
         # Normal users are restricted to only viewing published quizzes
-        quizzes_query = Quiz.all()    
+        quizzes_query = Quiz.all()
+        quizzes_query.filter("is_deleting =", False)
         if not self.is_admin:
             quizzes_query.filter("is_published =", True)
         self.values['quizzes'] = quizzes_query.fetch(20)
