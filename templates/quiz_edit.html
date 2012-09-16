@@ -1,0 +1,125 @@
+{% extends "quiz_base.html" %}
+
+{% block quiz_before %}
+<form method="post" action="{{ action }}" class="form-stacked quiz-form">
+{% endblock %}
+
+{% block quiz_title_before %}
+<input type="submit" class="btn primary side-btn" value="Save Changes" />
+{% endblock %}
+
+{% block link_quiz_edit %}active{% endblock %}
+
+{% block quiz_content %}
+<div class="row">
+    <div class="span11 columns">
+        {% if not saved and not questions %}
+        <div class="alert-message block-message info">
+            <p>
+                Before you can add any questions to the quiz, you'll first need
+                to save it with a title.  That way, we have something we can
+                reference the questions to.
+            </p>
+        </div>
+        {% endif %}
+
+        {% if saved and not questions %}
+        <div class="alert-message block-message info">
+            <p>
+                There are no questions in this quiz yet.  Why not add one?
+            </p>
+        </div>
+        {% endif %}
+
+        {% if saved and questions %}
+        <ol class="questions">
+            {% for question in questions %}
+            <li class="question">
+                <h3>
+                    {{ question.prompt }}
+                
+                    <span class="action">
+                        <a href="{{ question.link_edit }}" class="edit">Edit</a>
+                    </span>
+                    
+                    <span class="action">
+                        <a href="{{ question.link_delete }}" class="delete">Delete</a>
+                    </span>
+                </h3>
+                
+                <ul class="answers">
+                {% for choice in question.choices %}
+                    <li>
+                        {{ choice }}
+                        {% ifequal forloop.counter question.correct %}
+                        <span class="label success">Correct</span>
+                        {% endifequal %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+
+        {% if saved %}
+        <a href="{{ quiz.link_question_add }}" class="btn">Add Question</a>
+        {% endif %}
+    </div>
+
+    <div class="span5 columns">
+        {{ form.non_field_errors }}
+        
+        <div class="clearfix">
+            <label for="id_prompt">Title</label>
+            {{form.title.errors}}
+            <div class="input">
+                {{form.title}}
+            </div>
+        </div>
+        
+        <div class="clearfix">
+            <label for="id_prompt">Description</label>
+            {{form.prompt.errors}}
+            <div class="input">
+                {{form.prompt}}
+            </div>
+        </div>
+    
+        <div class="clearfix">
+            <label id="published-check">Published</label>
+            {{form.is_published.errors}}
+            <div class="input"><ul class="inputs-list"><li><label>
+                {{form.is_published}}
+                <span>Let non-admins take this quiz.</span>
+            </label></li></div>
+        </div>
+        
+        <div class="clearfix">
+            <label for="id_attempts">Limit Attempts</label>
+            {{form.is_limited.errors}}
+            {{form.attempts.errors}}
+            <div class="input">
+                <div class="input-prepend">
+                    <label class="add-on">
+                        {{form.is_limited}}
+                    </label>
+                    {{form.attempts}}
+                </div>
+            </div>
+            <span class="help-block">If the box is left unchecked, users can retake this test an infinite number of times.</span>
+        </div>
+        
+        {% if quiz %}
+        <div class="clearfix">
+            <p><a href="{{ quiz.link_delete }}">Delete</a></p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block quiz_after %}
+</form>
+{% endblock %}

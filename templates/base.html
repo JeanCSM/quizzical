@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="utf-8" />
+    <title>{% block title %}Quizzical 3{% endblock %}</title>
+    
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap.min-1.3.0.css" />
+    <link rel="stylesheet" href="/static/custom.css" />
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="container">
+                <h3><a href="/">Quizzical</a></h3>
+                
+                <ul id="nav">
+                    <li class="{% block link_home %}{% endblock %}">
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    {% if is_admin %}
+                    <li class="{% block link_users %}{% endblock %}">
+                        <a href="/user/list">Users</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                
+                <ul class="nav secondary-nav">
+                    <li class="{% block link_scores %}{% endblock %}">
+                        <a href="/user/me/scores">My Scores</a>
+                    </li>
+                    <li class="{% block link_profile %}{% endblock %}">
+                        <a href="{{profile}}">{{user}}</a>
+                    </li>
+                    <li><a href="{{sign_out}}">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        {% if flash %}
+        <div class="alert-message info"><p>{{ flash }}</p></div>
+        {% endif %}
+    
+        <div id="before-content">
+        {% block before_content %}{% endblock %}
+        </div>
+        
+        <div id="content">
+        {% block content %}{% endblock %}
+        </div>
+        
+        <div id="footer">
+            <p>Powered by Quizzical 3 on Google App Engine.  Design via Twitter Bootstrap.</p>
+        </div>
+    </div>
+</body>
+</html>

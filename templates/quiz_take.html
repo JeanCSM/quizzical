@@ -1,0 +1,40 @@
+{% extends "quiz_base.html" %}
+
+{% block link_quiz_take %}active{% endblock %}
+
+{% block quiz_content %}
+<div class="row">
+    <div class="span11">
+        <form method="post" action="{{ action }}" class="form-stacked">
+            <ol class="questions">
+                {% for question in questions %}
+                <li class="question">
+                    <h3>{{ question.prompt }}</h3>
+                    
+                    <ul class="answers inputs-list">
+                        {% for choice in question.choices %}
+                        <li>
+                            <input type="radio"
+                                   name="question-{{question.key.id}}"
+                                   value="{{forloop.counter}}" />
+                            <span>{{ choice }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ol>
+        
+            <div class="actions">
+                <input type="submit" class="btn primary" value="Submit" />
+            </div>
+        </form>
+    </div>
+    
+    <div class="span5">
+        <div class="alert-message block-message info">
+            {{ quiz.prompt }}
+        </div>
+    </div>
+</div>
+{% endblock %}

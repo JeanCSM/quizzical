@@ -1,0 +1,52 @@
+body {
+    padding-top: 60px
+}
+
+#id_prompt, #id_title {
+    width: 272px;
+}
+
+.side-btn {
+    float: right;
+}
+
+.pill-header h1 {
+    float: left;
+    margin-right: 20px;
+}
+
+.pill-header .pills {
+    margin: 0;
+}
+
+    .pill-header .pills a {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+.quiz-form {
+    padding: 0;
+}
+
+.action {
+    font-size: 12px;
+}
+
+.actionable .action {
+    visibility: hidden;
+}
+
+.actionable:hover .action {
+    visibility: visible;
+}
+
+.static-modal {
+    position: relative;
+    margin: 0 0 20px 0;
+    top: auto;
+    left: auto;
+}
+
+.modal form {
+    margin-bottom: 0;
+}

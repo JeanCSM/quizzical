@@ -1,0 +1,32 @@
+{% extends "quiz_base.html" %}
+
+{% block link_quiz_my_score %}active{% endblock %}
+
+{% block quiz_content %}
+<div class="row">
+    <div class="span11">
+        <table class="zebra-striped">
+            <thead>
+                <tr>
+                    <th>Score for Attempt</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for attempt in score.related_attempts %}
+                <tr>
+                    <td>{{ attempt.percentage }}%</td>
+                    <td><a href="{{ attempt.link_view }}">Details</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="span5">
+        <h1>{{ score.percentage }}%</h1>
+        <p>Overall</p>
+    </div>
+</div>
+{% endblock %}

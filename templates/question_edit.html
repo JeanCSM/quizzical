@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row"><div class="span8 offset4"><div class="clearfix">
+    <div class="modal static-modal">
+        <div class="modal-header">
+            {% if question %}
+            <h3>Edit Question</h3>
+            {% else %}
+            <h3>Add Question</h3>
+            {% endif %}
+        </div>  
+        
+        <form method="post" action="{{action}}">
+            <div class="modal-body">
+                <div class="clearfix">
+                    {{form.prompt.errors}}
+                    <label for="id_prompt">Prompt</label>
+                    <div class="input">
+                        {{form.prompt}}
+                        <span class="help-block">
+                            <strong>Example:</strong>
+                            What is the meaning of life?
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="clearfix" id="question_editor">
+                    <label for="id_choices">Choices</label>
+                    <div class="input" id="question_choices">
+                        {{form.choices}}
+                        
+                        <span class="help-block">
+                            List answer choices, one per line.
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="clearfix" id="answer">
+                    <label for="id_correct">Correct Answer</label>
+                    <div class="input" id="question_correct">
+                        {{form.correct}}
+                        <span class="help-block">
+                            This is the line number of the correct answer, the first
+                            line being one.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <input type="submit" class="btn submit primary" value="Save" />
+                <a href="{{back}}" class="btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div></div></div>
+{% endblock %}

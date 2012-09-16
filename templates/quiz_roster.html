@@ -1,0 +1,38 @@
+{% extends "quiz_base.html" %}
+
+{% block link_quiz_roster %}active{% endblock %}
+
+{% block quiz_content %}
+<div class="row">
+    <div class="span11">
+        <table class="zebra-striped">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Overall Score</th>
+                    <th>Attempts Used</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score.last_name }}</td>
+                    <td>{{ score.first_name }}</td>
+                    <td>{{ score.percentage }}%</td>
+                    <td>{{ score.attempts }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="span5">
+        <div class="alert-message block-message info">
+            <p>Filtering and searching control will appear here, as soon as
+            Jonathan gets around to implementing them.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
