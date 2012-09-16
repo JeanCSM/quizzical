@@ -28,5 +28,18 @@ indexes:
 
 - kind: Score
   properties:
+  - name: is_archived
+  - name: quiz
+  - name: last_name
+
+- kind: Score
+  properties:
+  - name: is_archived
+  - name: quiz
+  - name: updated
+  - name: last_name
+
+- kind: Score
+  properties:
   - name: quiz
   - name: last_name

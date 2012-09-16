@@ -1,0 +1,38 @@
+{% extends "quiz_base.html" %}
+
+{% block link_quiz_roster %}active{% endblock %}
+
+{% block quiz_content %}
+<p><a href="{{ link_back }}" class="btn">View Current Scores</a></p>
+
+<table class="zebra-striped">
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Overall Score</th>
+            <th>Attempts Used</th>
+            <th>Last Updated</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for score in scores %}
+        <tr>
+            <td>{{ score.last_name }}</td>
+            <td>{{ score.first_name }}</td>
+            <td>{{ score.percentage }}%</td>
+            <td>{{ score.attempts }}</td>
+            <td>{{ score.updated }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">
+                Nothing to see here yet.
+                Head <a href="{{ link_back }}">back</a> and archive some scores.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

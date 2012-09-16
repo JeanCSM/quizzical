@@ -12,6 +12,10 @@ class Quiz:
         return '/quiz/roster/%d' % int(id)
     
     @staticmethod
+    def archived(id):
+        return '/quiz/archived/%d' % int(id)
+    
+    @staticmethod
     def my_score(id):
         return '/quiz/my_score/%d' % int(id)
     

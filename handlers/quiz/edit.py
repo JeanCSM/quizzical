@@ -122,21 +122,41 @@ class ArchiveHandler(QuizHandler):
 class RosterHandler(QuizHandler):
     def get(self, id):
         self.fetch(id)
-        
+
         scores_query = Score.all()
+        scores_query.filter('is_archived =', False)
         scores_query.filter('quiz =', self.quiz_entity)
         scores_query.order('last_name')
+
+        self.values['link_archived'] = links.Quiz.archived(int(id))
+        self.values['link_archive'] = links.Quiz.archive(int(id))
         self.values['scores'] = scores_query.fetch(100)
-        
+
         self.output('quiz_roster.html')
+
+class ArchivedHandler(QuizHandler):
+    def get(self, id):
+        self.fetch(id)
+
+        scores_query = Score.all()
+        scores_query.filter('is_archived =', True)
+        scores_query.filter('quiz =', self.quiz_entity)
+        scores_query.order('updated')
+        scores_query.order('last_name')
+
+        self.values['link_back'] = links.Quiz.roster(int(id))
+        self.values['scores'] = scores_query.fetch(100)
+
+        self.output('quiz_archived.html')
 
 def main():
     application = webapp.WSGIApplication([
         ('/quiz/add', AddHandler),
         (r'/quiz/edit/(.*)', EditHandler),
         (r'/quiz/delete/(.*)', DeleteHandler),
+        (r'/quiz/archive/(.*)', ArchiveHandler),
         (r'/quiz/roster/(.*)', RosterHandler),
-        (r'/quiz/archive/(.*)', ArchiveHandler)
+        (r'/quiz/archived/(.*)', ArchivedHandler)
     ], debug=True)
     util.run_wsgi_app(application)
 

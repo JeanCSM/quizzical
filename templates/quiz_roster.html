@@ -23,15 +23,29 @@
                     <td>{{ score.percentage }}%</td>
                     <td>{{ score.attempts }}</td>
                 </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">
+                        Nothing to see here.
+                        Maybe there's something in the <a href="{{ link_archived }}">archives</a>?
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
+        
+        <p><a href="{{ link_archived }}" class="btn">View Archived Scores</a></p>
     </div>
     
     <div class="span5">
         <div class="alert-message block-message info">
-            <p>Filtering and searching control will appear here, as soon as
-            Jonathan gets around to implementing them.</p>
+            <p>
+                <strong>Done with these scores?</strong>
+                You can archive them.  Admins can still view the scores.
+                Others can't view their detailed quiz responses.
+                Everybody can retake the quiz again.
+            </p>
+            <p><a href="{{ link_archive }}" class="btn primary">Archive Scores</a></p>
         </div>
     </div>
 </div>
